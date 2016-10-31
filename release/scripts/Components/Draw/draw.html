@@ -1,0 +1,11 @@
+<h2>canvas</h2>
+
+<canvas 
+	id="drawCanvas" 
+	style="width:100%;height:300px" 
+	ng-touchstart="$ctrl.onTouchStart($event)"
+	ng-touchend="$ctrl.onTouchEnd($event)"
+	ng-touchmove="$ctrl.onTouchMove($event)"
+	ng-mousedown="$ctrl.onMouseDown($event)"
+	ng-mouseup="$ctrl.onMouseUp($event)"
+	ng-mousemove="$ctrl.onMouseMove($event)"></canvas>

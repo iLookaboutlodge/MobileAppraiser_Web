@@ -1,0 +1,113 @@
+﻿<div id="property">
+
+    <section class="basicInformation">
+        <header>
+            <h2>Basic Property Information</h2>
+            <nav>
+                <ul>
+                    <li><button type="submit" ng-click="$ctrl.showPopup = true">Save</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="sectionContent">
+
+            <div class="basicInfo">
+                <div class="left clear-left">
+                    <label>Pin:</label>
+                    <span>{{$ctrl.newProperty.Pin}}</span>
+                </div>
+                <div class="left clear-left">
+                    <label>Address:</label>
+                    <span>{{$ctrl.newProperty.FullAddress}}</span>
+                </div>
+            </div>
+
+            <div class="basicDetails">
+                <div ng-repeat="detail in $ctrl.newProperty.Data[1]" class="detail">
+                    <label>{{detail.Field.Label}}:</label>
+                    <span ng-show="detail.Field.ReadOnly && detail.Field.Type=='2'">{{detail.Data.Value}}</span>
+                    <span ng-show="detail.Field.ReadOnly && detail.Field.Type=='5'">{{detail.Field.Values[detail.Data.Value].Value}}</span>
+
+                    <input type="text" ng-show="!detail.Field.ReadOnly && detail.Field.Type=='2'" ng-model="$ctrl.newProperty.Data[1][$index].Data.Value" value="{{detail.Data.Value}}" />
+                    <select ng-show="!detail.Field.ReadOnly && detail.Field.Type=='5'" ng-model="$ctrl.newProperty.Data[1][$index].Data.Value" ng-options="item.Id as item.Value for item in detail.Field.Values"></select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="permitsAndExtra left overflow-hidden">
+        <section class="permits left">
+            <header>
+                <h2>Permits</h2>
+            </header>
+            <div class="sectionContent">
+                <table>
+                    <tr>
+                        <td ng-repeat="item in $ctrl.getHeaders($ctrl.newProperty.Permits)">{{item.Field.Label}}</td>
+                    </tr>
+                    <tr ng-repeat="permit in $ctrl.newProperty.Permits">
+                        <td ng-repeat="permitPart in permit">{{permitPart.Data.Value}}</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section class="extra left clear-left">
+            <header>
+                <h2>Extra</h2>
+            </header>
+            <div class="sectionContent">
+                <table>
+                    <tr>
+                        <td ng-repeat="item in $ctrl.getHeaders($ctrl.newProperty.Extra)">{{item.Field.Label}}</td>
+                    </tr>
+                    <tr ng-repeat="extra in $ctrl.newProperty.Extra">
+                        <td ng-repeat="extraPart in extra">{{extraPart.Data.Value}}</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <section class="imageSection">
+        <div class="imgWrapper">
+            <img src="/images/Properties/{{$ctrl.newProperty.Pin}}.jpg" />
+        </div>
+    </section>
+
+    <section class="propertyDetailsSection left clear-left overflow-hidden">
+        <header>
+            <h2>Property Details</h2>
+        </header>
+        <div class="sectionContent">
+            <div class="detailWrapper" ng-repeat="detail in $ctrl.newProperty.Data[2]">
+                <label>{{detail.Field.Label}}</label>
+                <div ng-show="detail.Field.ReadOnly">
+                    <span ng-show="detail.Field.Type=='2'">{{detail.Data.Value}}</span>
+                    <span ng-show="detail.Field.Type=='5'">{{detail.Field.Values[detail.Data.Value].Value}}</span>
+                </div>
+                <div ng-hide="detail.Field.ReadOnly">
+                    <input type="text" ng-model="$ctrl.newProperty.Data[2][$index].Data.Value" ng-show="detail.Field.Type=='2'" value="{{detail.Data.Value}}"/>
+                    <select ng-show="detail.Field.Type=='5'" ng-model="$ctrl.newProperty.Data[2][$index].Data.Value" ng-options="item.Id as item.Value for item in detail.Field.Values"></select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div ng-show="$ctrl.showPopup" class="confirmPopup">
+        <div class="popupBox">
+            <p>
+                Are you sure you want to confirm these details?
+            </p>
+            <p>You will be automatically taken to your next property.</p>
+            <div class="buttons">
+                <button type="submit" ng-click="$ctrl.showPopup = false">Cancel</button>
+                <button type="submit" ng-click="$ctrl.complete();$ctrl.showPopup = false">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

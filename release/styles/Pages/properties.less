@@ -1,0 +1,89 @@
+﻿@import (once) '../base.less';
+@import (once) '../elements.less';
+
+#properties {
+    margin-top: 35px;
+
+    .searchBar {
+        background-color: @orange;
+        padding: 7px 1%;
+        overflow:hidden;
+        width: 100%;
+
+        .searchWrapper{
+            width: 1043px;
+            margin: 0 auto;
+            height: 30px;
+
+            input {
+                border: none;
+                .border-radius(0px, 0px, 5px, 5px);
+                padding: 5px 1%;
+                margin: 0;
+                float:left;
+                height: 100%;
+
+                &:active{
+                    outline: none;
+                    border: none;
+                }
+            }
+
+            span {
+                background-color: #fff;
+                padding: 5px;
+                display:block;
+                float:left;
+                .border-radius(5px, 5px, 0, 0);
+                height: 100%;
+            }
+        }
+    } 
+
+    table, tr, th, td {
+        border: none;
+        margin: 0;
+    }
+
+    .tableWrapper{
+        margin: 20px auto 0 auto;
+        max-width: 1043px;
+        width: 100%;
+    }
+
+    table {
+        margin: 0;
+        border-collapse:collapse;
+        width: 100%;
+
+        .header {
+            background-color: @orange;
+            color: #fff;     
+
+            th {
+                padding: 5px 5px;
+            }
+        }
+
+        td {
+            padding: 10px 15px;
+        }
+
+        tr {
+            &:hover{
+                background: #D0D3D4;
+                cursor: pointer;
+            }
+        }
+
+        .odd {
+            background-color: #E4E7E8;
+        }
+
+        .selected {
+            background-color: #E57F3C;
+            color: #fff;
+        }
+    }
+
+}

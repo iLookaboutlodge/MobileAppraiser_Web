@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" manifest="/manifest.appcache">
+	<head>
+	 	<meta charset="utf-8" />
+	    <title>GVP | Mobile Appraiser</title>
+	    <base href="/" />
+	 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 	<link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+	 	<meta name="apple-mobile-web-app-capable" content="yes" />
+	 	
+	 	<!-- injector:css -->
+	 	<link rel="stylesheet" href="/styles/main.css">
+	 	<!-- endinjector -->
+	</head>
+	<body data-role="page">
+		<navbar></navbar>
+	    <ui-view data-role="content"></ui-view>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCezYydAtsZ1Fz5oklQnupiRohYD0KXQG8"></script>
+
+
+		<script src="_bower.js"></script>
+
+		<!-- injector:js -->
+		<script src="/scripts/services/AuthService.js"></script>
+		<script src="/scripts/services/ImageIndexDBService.js"></script>
+		<script src="/scripts/services/IndexDbService.js"></script>
+		<script src="/scripts/services/PropertyApiService.js"></script>
+		<script src="/scripts/services/PropertyIndexDbService.js"></script>
+		<script src="/scripts/services/PropertyService.js"></script>
+		<script src="/scripts/services/SketchIndexDBService.js"></script>
+		<script src="/scripts/services/UpdateService.js"></script>
+		<script src="/scripts/components/About/about.component.js"></script>
+		<script src="/scripts/components/Draw/draw.js"></script>
+		<script src="/scripts/components/Login/login.component.js"></script>
+		<script src="/scripts/components/Map/map.component.js"></script>
+		<script src="/scripts/components/Nav/navbar.component.js"></script>
+		<script src="/scripts/components/Properties/properties.component.js"></script>
+		<script src="/scripts/components/Property/editProperty.component.js"></script>
+		<script src="/scripts/components/Property/property.component.js"></script>
+		<script src="/scripts/components/Sketch/sketch.component.js"></script>
+		<script src="/scripts/config.js"></script>
+		<script src="/scripts/app.module.js"></script>
+		<script src="/scripts/app.config.js"></script>
+		<script src="/scripts/_templates.js"></script>
+		<!-- endinjector -->
+
+	</body>
+</html>

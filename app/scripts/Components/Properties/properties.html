@@ -1,0 +1,42 @@
+﻿<div id="properties">
+    <div class="searchBar">
+        <div class="searchWrapper">
+            <input type="text" ng-model="searchText"/>
+            <span>
+                <img src="/images/icons-svg/search-black.svg" />
+            </span>
+        </div>
+    </div>
+    <div class="tableWrapper">
+        <table id="MAList_Table">
+            <tr class="header">
+                <th>Property ID</th>
+                <th>Class</th>
+                <th>Neighbourhood</th>
+                <th>Street #</th>
+                <th>Prefix</th>
+                <th>Street Name</th>
+                <th>Type</th>
+                <th>Unit</th>
+                <th>City/Province</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Completed</th>
+            </tr>
+            <tr ng-repeat="property in $ctrl.properties" ng-class-odd="'odd'" ng-click="$ctrl.goToProperty(property.Pin)">
+                <td>{{property.Pin}}</td>
+                <td>{{$ctrl.getPropertyDetail("DOR_Code", property).Value}}</td>
+                <td>{{$ctrl.getPropertyDetail("Nhbd", property)}}</td>
+                <td>{{property.StreetNumber}}</td>
+                <td>{{property.StreetPrefix}}</td>
+                <td>{{property.StreetName}}</td>
+                <td>{{property.StreetType}}</td>
+                <td>{{property.Unit}}</td>
+                <td>{{property.City}}, {{property.Province}}</td>
+                <td>{{$ctrl.getPropertyDetail("Status", property).Value}}</td>
+                <td>{{property.DateReviewed}}</td>
+                <td>{{property.Completed}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

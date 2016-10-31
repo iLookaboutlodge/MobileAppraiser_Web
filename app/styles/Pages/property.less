@@ -1,0 +1,174 @@
+﻿@import (once) '../base.less';
+@import (once) '../elements.less';
+
+#property{
+    margin-top: 40px;
+    padding: 0 2%;
+
+    header {
+        width: 100%;
+        background-color: @orange;
+        overflow:hidden;
+        padding: 5px 1%;
+        
+        h2 {
+            float:left;
+            color: #fff;
+            margin: 5px 0 0 0;
+            padding: 0;
+            font-size: 1.1em;
+        }
+    }
+
+    .sectionContent{
+        padding: 10px 1%;
+        overflow:hidden;
+        width: 100%;
+    }
+
+    .basicInformation {
+        overflow:hidden;
+
+        header{
+            ul {
+                list-style: none;
+                float:right;
+                margin: 0;
+                padding: 0;
+            }
+
+            li {
+                float:left;
+                margin-left: 30px;
+
+                .navigation{
+                    margin-right: 40px;
+                }
+
+                img {
+                    width: 30px;
+                }
+
+                button {
+                    background: #fff;
+                    color: @orange;
+                    border: none;
+                    .border-radius (5px, 5px, 5px, 5px);
+                    height: 30px;
+                    font-weight: bold;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        label {
+                font-weight: bold;
+                margin-right: 5px;
+            }
+
+        .basicInfo, .basicDetails {
+            float:left;
+        }
+
+        .basicInfo{
+            margin-right: 30px;
+            overflow:hidden;
+        }
+        
+        .detail {
+            float: left;
+            margin-right: 30px;            
+        }
+    }
+
+    .permitsAndExtra {
+        width: 50%;
+    }
+    .permits, .extra {
+        width: 100%;
+
+        header {
+            background-color:  #D7DADB;
+            h2 {
+                color: #000;
+                font-size: 0.9em;
+                margin-top: 0;
+            }
+        }
+    }
+
+    .imageSection {
+        width: 49%;
+        float:left;
+        margin-bottom: 10px;
+
+        .imgWrapper{
+            width: 50%;
+            margin: 0 25%;
+            max-height: 250px;
+        }
+        img {
+            height: auto;
+            width: auto;
+            display:block;
+            max-height: 250px;
+        }
+    }
+
+    .propertyDetailsSection {
+        width: 100%;
+
+        label {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .detailWrapper {
+            height: 70px;
+            float:left;
+            margin-right: 20px;
+        }
+    }
+
+    .confirmPopup {
+        background-color: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .popupBox {
+            width: 100%;
+            max-width: 400px;
+            margin: 20% auto 0 auto;
+            background-color: #fff;
+            border: 1px solid @orange;
+            padding: 20px;
+            overflow:hidden;
+
+            button {
+                background-color: @orange;
+                border: 1px solid @orange;
+                color: #fff;
+                margin-left: 10px;
+                .border-radius(5px, 5px, 5px, 5px);
+                padding: 10px 5px;
+                font-weight: bold;
+                &:hover{
+                    color: @orange;
+                    background-color: #fff;
+                    cursor: pointer;
+                }
+            }
+
+            .buttons {
+                float:right;
+                margin-top:15px;
+            }
+        }
+    }
+}
