@@ -1,0 +1,11 @@
+<div id="propertyImages" class="contentWrapper">
+    <div class="imageWrapper">
+    	<span class="helper"></span>
+    	<div class="imageControls">
+	        <i class="fa fa-arrow-left leftArrow" ng-click="$ctrl.previousImage()"></i>
+	        <span class="imageNumber">{{$ctrl.currentImageIndex + 1}} / {{$ctrl.imageUrls.length}}</span>
+	        <i class="fa fa-arrow-right rightArrow" ng-click="$ctrl.nextImage()"></i>
+        </div>
+        <img data-ng-src="{{$ctrl.selectedImage}}"/>
+    </div>
+</div>

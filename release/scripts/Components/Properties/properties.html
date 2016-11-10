@@ -1,39 +1,38 @@
 ﻿<div id="properties">
-    <div class="searchBar">
-        <div class="searchWrapper">
-            <input type="text" ng-model="searchText"/>
-            <span>
-                <img src="/images/icons-svg/search-black.svg" />
-            </span>
-        </div>
+    <div class="searchWrapper">
+        <input type="text" ng-model="$ctrl.filter.$"/>
+        <span>
+            <i class="fa fa-search"></i>
+        </span>
     </div>
+            <div class="filter">
+            <span ng-click="$ctrl.filter.Completed=''" ng-class="{selected: $ctrl.filter.Completed==''}">All</span>
+            <span ng-click="$ctrl.filter.Completed='false'" ng-class="{selected: $ctrl.filter.Completed=='false'}">Not Completed</span>
+            <span ng-click="$ctrl.filter.Completed='true'" ng-class="{selected: $ctrl.filter.Completed=='true'}">Completed</span>
+        </div>
     <div class="tableWrapper">
         <table id="MAList_Table">
             <tr class="header">
                 <th>Property ID</th>
                 <th>Class</th>
-                <th>Neighbourhood</th>
-                <th>Street #</th>
-                <th>Prefix</th>
-                <th>Street Name</th>
-                <th>Type</th>
-                <th>Unit</th>
+                <th>Buildings</th>
+                <th>Nbhd</th>
+                <th>Address</th>
+                <th>Street</th>
                 <th>City/Province</th>
                 <th>Status</th>
                 <th>Date</th>
                 <th>Completed</th>
             </tr>
-            <tr ng-repeat="property in $ctrl.properties" ng-class-odd="'odd'" ng-click="$ctrl.goToProperty(property.Pin)">
-                <td>{{property.Pin}}</td>
-                <td>{{$ctrl.getPropertyDetail("DOR_Code", property).Value}}</td>
-                <td>{{$ctrl.getPropertyDetail("Nhbd", property)}}</td>
-                <td>{{property.StreetNumber}}</td>
-                <td>{{property.StreetPrefix}}</td>
-                <td>{{property.StreetName}}</td>
-                <td>{{property.StreetType}}</td>
-                <td>{{property.Unit}}</td>
-                <td>{{property.City}}, {{property.Province}}</td>
-                <td>{{$ctrl.getPropertyDetail("Status", property).Value}}</td>
+            <tr ng-repeat="property in $ctrl.properties | filter:$ctrl.filter:strict" ng-class-odd="'odd'" ng-click="$ctrl.goToProperty(property.Id)">
+                <td>{{property.Id}}</td>
+                <td>{{property.Type.Dor_CD}}</td>
+                <td>{{property.Buildings.length}}</td>
+                <td>{{property.Details.CD}}</td>
+                <td>{{property.Address.Address}}</td>
+                <td>{{property.Address.FullStreet}}</td>
+                <td>{{property.Address.City}}</td>
+                <td>{{property.Status}}
                 <td>{{property.DateReviewed}}</td>
                 <td>{{property.Completed}}</td>
             </tr>

@@ -5,9 +5,9 @@ aboutComponent.component("draw",
 	scope: {
 
 	},
-	controller: [function() {
+	controller: ['$scope', function($scope) {
 		var vm = this;
-
+		vm.selected = 'draw';
 		var element = document.getElementById('drawCanvas');
 		var canvas = angular.element(element);
 		var ctx = element.getContext('2d');
@@ -18,8 +18,12 @@ aboutComponent.component("draw",
 
 		vm.onMouseDown = function (e) {
 	    	drawing = true;
-			lastPos = getMousePos(element, e);
-			mousePos = lastPos;
+	    	if (vm.selected == 'draw' || lastPos == null){
+				lastPos = mousePos = getMousePos(e);
+			}
+			else {
+				mousePos = getMousePos(e);
+			}
 		};
 
 		vm.onMouseUp = function (e) {
@@ -29,6 +33,15 @@ aboutComponent.component("draw",
 		vm.onMouseMove = function (e) {
 			mousePos = getMousePos(e);
 		};
+
+		vm.selectDraw = function(){
+			vm.selected = 'draw';
+		};
+
+		vm.selectLine = function(){
+			vm.selected = 'line';
+			lastPos = null;
+		}
 
 		// Get the position of the mouse relative to the canvas
 		function getMousePos(mouseEvent) {
@@ -71,11 +84,13 @@ aboutComponent.component("draw",
 
 	        mousePos = getTouchPos(canvas, e);
 			var touch = e.touches[0];
+
 			var mouseEvent = new MouseEvent("mousedown", {
 				clientX: touch.clientX,
 				clientY: touch.clientY
 			});
-			canvas.dispatchEvent(mouseEvent);
+
+			vm.onMouseDown(mouseEvent);
 		};
 
 		vm.onTouchEnd = function (e) {
@@ -84,7 +99,7 @@ aboutComponent.component("draw",
 			}
 
 			var mouseEvent = new MouseEvent("mouseup", {});
-			canvas.dispatchEvent(mouseEvent);
+			vm.onMouseUp(mouseEvent);
 		};
 
 		vm.onTouchMove = function (e) {
@@ -97,11 +112,11 @@ aboutComponent.component("draw",
 				clientX: touch.clientX,
 				clientY: touch.clientY
 			});
-	  		canvas.dispatchEvent(mouseEvent);
+	  		vm.onMouseMove(mouseEvent);
 		};
 
 		// Get the position of a touch relative to the canvas
-		function getTouchPos(touchEvent) {
+		function getTouchPos(canvas, touchEvent) {
 			var rect = element.getBoundingClientRect();
 
 			var scaleX = canvas[0].width / rect.width;

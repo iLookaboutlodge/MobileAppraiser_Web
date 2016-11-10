@@ -30,7 +30,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: {
-          '<%= config.app %>/index.html': ['<%= config.app %>/scripts/services/**/*.js','<%= config.app %>/scripts/components/**/*.js','<%= config.app %>/scripts/config.js', '<%= config.app %>/scripts/app.module.js', '<%= config.app %>/scripts/app.config.js', '<%= config.app %>/scripts/_templates.js']
+          '<%= config.app %>/index.html': ['<%= config.app %>/scripts/libs/**/*.js','<%= config.app %>/scripts/services/**/*.js','<%= config.app %>/scripts/components/**/*.js','<%= config.app %>/scripts/config.js', '<%= config.app %>/scripts/app.module.js', '<%= config.app %>/scripts/app.config.js', '<%= config.app %>/scripts/_templates.js']
         }
       },
       html: {
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
 
     watch: {
       css: {
-        files: ['<%= config.app %>/styles/**/*.less'],
+        files: ['<%= config.app %>/styles/**/**/*.less'],
         tasks: ['less', 'injector:css']
       },
       js: {
@@ -101,7 +101,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'http://192.168.80.170:31132'
+            apiEndpoint: 'http://dev-ma.ilookabout.com'
           }
         }
       }

@@ -2,67 +2,184 @@
 @import (once) '../elements.less';
 
 #property{
-    margin-top: 40px;
+    margin-top: 10px;
     padding: 0 2%;
 
     header {
         width: 100%;
-        background-color: @orange;
         overflow:hidden;
-        padding: 5px 1%;
         
-        h2 {
+        h1 {
             float:left;
-            color: #fff;
+            color: @grey;
             margin: 5px 0 0 0;
             padding: 0;
-            font-size: 1.1em;
+            font-size: 1.6em;
+
+            span {
+                color: @lightGrey;
+                font-size: 0.7em;
+            }
+        }
+
+        a {
+            float:right; 
+            font-size: 2em;
+            color: @orange;
         }
     }
 
-    .sectionContent{
-        padding: 10px 1%;
-        overflow:hidden;
+    .tabs {
         width: 100%;
-    }
-
-    .basicInformation {
+        margin-top: 20px;
+        max-width: 70%;
+        float:left;
         overflow:hidden;
 
-        header{
+        nav {
             ul {
                 list-style: none;
-                float:right;
-                margin: 0;
                 padding: 0;
+                margin: 0;
             }
 
             li {
+                width: 200px;
+                color: @grey;
+                padding: 5px 10px;
+                text-align: center;
+                font-size: 1.2em;
                 float:left;
-                margin-left: 30px;
+                
 
-                .navigation{
-                    margin-right: 40px;
+                &.left {
+                    border-top: 1px solid @lightGrey;
+                    border-radius: 5px 0 0 0;
+                    border-left: 1px solid @lightGrey;
                 }
 
-                img {
-                    width: 30px;
+                &.middle {
+                    border-top: 1px solid @lightGrey;
+                    border-right: 1px solid @lightGrey;
+                    border-left: 1px solid @lightGrey;
                 }
 
-                button {
-                    background: #fff;
-                    color: @orange;
-                    border: none;
-                    .border-radius (5px, 5px, 5px, 5px);
-                    height: 30px;
-                    font-weight: bold;
-
-                    &:hover {
-                        cursor: pointer;
-                    }
+                &.right {
+                    border-top: 1px solid @lightGrey;
+                    border-left: 1px solid @lightGrey;
+                    border-right: 1px solid @lightGrey;
+                    border-radius: 0 5px 0 0;
                 }
             }
         }
+
+        .selected {
+            background-color: @green;
+            color: #fff;
+            border: 1px solid @green;
+        }
+
+        .tab {
+            clear:left;
+            border: 1px solid @lightGrey;
+            padding: 10px 5%;
+            margin: 10px auto;
+            max-width: 100%;
+            overflow:hidden;
+            position: relative;
+
+            .innerTab {
+                margin:0 auto;
+                position:relative;
+                text-align: center;
+                overflow:hidden;
+                position:relative;
+                height: 70%;
+            }
+
+            .leftArrow, .rightArrow {
+                font-size: 50px;
+                color: @orange;
+            }
+
+            .leftArrow {
+                float:left;
+            }
+
+            .rightArrow {
+                float:right;
+            }
+        }
+    }
+
+    .imageWrapper {
+        height: 100%;
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
+        display:inline-block;
+    }
+
+    .imageControls {
+        overflow:hidden;
+        margin-bottom: 10px;
+    }
+
+    .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    .imageNumber {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: @grey;
+        display:inline-block;
+        margin-top: 9px;
+    }
+
+    img {
+        vertical-align: middle;
+        height: auto;
+        width: auto;
+        max-width: 100%;
+    }
+
+    // .imageWrapper{
+    //     overflow:hidden;
+    //     margin: 0 auto;
+    //     text-align: center;
+
+    //     img {
+    //         height: auto;
+    //         width: auto;
+    //         display:block;
+    //         width: 100%;
+    //         margin: 0 auto;
+    //     }
+    // }
+
+
+    .basicInformation {
+        overflow:hidden;
+        float:left;
+        padding-left: 5%;
+        width: 30%;
+        margin-top: 54px;
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            
+            li {
+                margin: 0;
+                padding: 0;
+            }
+        }
+
 
         label {
                 font-weight: bold;
@@ -82,93 +199,92 @@
             float: left;
             margin-right: 30px;            
         }
-    }
 
-    .permitsAndExtra {
-        width: 50%;
-    }
-    .permits, .extra {
-        width: 100%;
-
-        header {
-            background-color:  #D7DADB;
-            h2 {
-                color: #000;
-                font-size: 0.9em;
-                margin-top: 0;
-            }
-        }
-    }
-
-    .imageSection {
-        width: 49%;
-        float:left;
-        margin-bottom: 10px;
-
-        .imgWrapper{
-            width: 50%;
-            margin: 0 25%;
-            max-height: 250px;
-        }
-        img {
-            height: auto;
-            width: auto;
-            display:block;
-            max-height: 250px;
-        }
-    }
-
-    .propertyDetailsSection {
-        width: 100%;
-
-        label {
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
-
-        .detailWrapper {
-            height: 70px;
+        .buttons {
+            clear:left;
+            margin-top: 45px;
             float:left;
-            margin-right: 20px;
-        }
-    }
 
-    .confirmPopup {
-        background-color: rgba(0, 0, 0, 0.7);
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
+            a {
+                text-decoration: none;
 
-        .popupBox {
-            width: 100%;
-            max-width: 400px;
-            margin: 20% auto 0 auto;
-            background-color: #fff;
-            border: 1px solid @orange;
-            padding: 20px;
-            overflow:hidden;
-
-            button {
-                background-color: @orange;
+                border: none;
+                margin: 20px 0;
+                padding: 5px 15px;
+                .border-radius (5px, 5px, 5px, 5px);
                 border: 1px solid @orange;
-                color: #fff;
-                margin-left: 10px;
-                .border-radius(5px, 5px, 5px, 5px);
-                padding: 10px 5px;
                 font-weight: bold;
-                &:hover{
-                    color: @orange;
-                    background-color: #fff;
+                clear:both;
+                display:block;
+                vertical-align: middle;
+                text-align: center;
+
+                &:hover {
                     cursor: pointer;
                 }
             }
 
-            .buttons {
-                float:right;
-                margin-top:15px;
+            .directions {
+                color: @orange;
+                background: #fff;
             }
+
+            .viewPropertyCard, .complete {
+                color: #fff;
+                background: @orange;
+            }
+
+            .complete {
+                font-size: 1.2em;
+                margin-top: 50px;
+                text-transform: capitalize; 
+            }
+        }
+    }
+
+    .notes {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .note {
+            padding: 20px 0 0 0;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+
+            .nameWrapper {
+                overflow:hidden;
+            }
+
+            .user {
+                float:left;
+                font-size: 1.2em;
+                color: @grey;
+                display:block;
+                font-weight: bold;
+            }
+
+            .date {
+                float:right;
+                font-size: 1.2em;
+                color: @grey;
+                display:block;
+            }
+
+            .noteText {
+                clear:both;
+                width: 100%;
+                font-size: 1.2em;
+                color: @grey;
+                display:block;
+                text-align: left;
+                margin-top: 10px;
+            }
+        }
+
+        .note + .note {
+            border-top: 1px solid @lightGrey;
         }
     }
 }

@@ -2,43 +2,55 @@
 @import (once) '../elements.less';
 
 #properties {
-    margin-top: 35px;
+    max-width: 1043px;
+    margin: 35px auto 0 auto;
 
-    .searchBar {
-        background-color: @orange;
-        padding: 7px 1%;
+    .searchWrapper {
+        margin: 0 auto;
+        height: 30px;
+        border: 1px solid @lightGreen;
+        float: left;
         overflow:hidden;
-        width: 100%;
+        border-radius:5px;
+        padding: 3px 10px;
 
-        .searchWrapper{
-            width: 1043px;
-            margin: 0 auto;
-            height: 30px;
+        input {
+            width: 200px;
+            border: none;
+            .border-radius(0px, 0px, 5px, 5px);
+            padding: 5px 1%;
+            margin: 0;
+            float:left;
+            height: 100%;
 
-            input {
+            &:active{
+                outline: none;
                 border: none;
-                .border-radius(0px, 0px, 5px, 5px);
-                padding: 5px 1%;
-                margin: 0;
-                float:left;
-                height: 100%;
-
-                &:active{
-                    outline: none;
-                    border: none;
-                }
-            }
-
-            span {
-                background-color: #fff;
-                padding: 5px;
-                display:block;
-                float:left;
-                .border-radius(5px, 5px, 0, 0);
-                height: 100%;
             }
         }
-    } 
+
+        i {
+            display:block;
+            float:left;
+            color: @lightGreen;
+            margin-top: 3px;
+        }
+    }
+
+
+    .filter {
+        float:right;
+        span {
+            margin-left: 30px;
+            font-size: 1.2em;
+            color: @lightGrey;
+        }
+
+        span.selected {
+            color: @orange;
+        }
+    }
+    
 
     table, tr, th, td {
         border: none;
@@ -47,8 +59,10 @@
 
     .tableWrapper{
         margin: 20px auto 0 auto;
-        max-width: 1043px;
         width: 100%;
+        clear:left;
+        margin-top: 10px;
+        float:left;
     }
 
     table {
@@ -57,7 +71,7 @@
         width: 100%;
 
         .header {
-            background-color: @orange;
+            background-color: @green;
             color: #fff;     
 
             th {
@@ -70,19 +84,16 @@
         }
 
         tr {
+            border-bottom: 2px solid @lightGrey;
+             
             &:hover{
                 background: #D0D3D4;
                 cursor: pointer;
             }
         }
 
-        .odd {
-            background-color: #E4E7E8;
-        }
-
         .selected {
-            background-color: #E57F3C;
-            color: #fff;
+            background-color: @lightGreen;
         }
     }
 

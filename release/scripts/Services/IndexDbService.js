@@ -1,22 +1,26 @@
 angular.module('indexDB',[])
 	.factory('indexDBService', function($window, $q){
 		var factory = {};
-		var indexedDB = $window.indexDB;
+		var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 		var setUp = false;
 		var db = null;
-		var version = 1;
+		var version = 3;
 		var dbName = "mobileAppraiserData";
-
-		var propertiesStore = {name: "properties", properties: {keyPath: "Pin"}, indexes: []};
+		var objectStores = [];
+		
+		var propertiesStore = {name: "properties", properties: {keyPath: "Id"}, indexes: []};
 		propertiesStore.indexes.push({name: "Completed", column: "Completed", properties: {unique: false}});
+		objectStores.push(propertiesStore);
 
 		var imageStore = {name: "images", properties: {keyPath: "id", autoIncrement:true}, indexes: []};
 		imageStore.indexes.push({name: "propertyId", column: "propertyId", properties: {unique: false}});
-		var objectStores = [];
-
-		objectStores.push(propertiesStore);
 		objectStores.push(imageStore);
 
+		var sketchStore = {name: "sketches", properties: {keyPath: ["propertyId", "buildingId"]}, indexes: []};
+		sketchStore.indexes.push({name: "propertyId", column: "propertyId", properties: {unique: false}});
+		sketchStore.indexes.push({name: "propertyBuilding", column: ["propertyId", "buildingId"], properties: {unique: true}});
+		objectStores.push(sketchStore);
+		
 		var dbOpenPromise;
 
 		//PRIVATE METHODS
@@ -61,11 +65,12 @@ angular.module('indexDB',[])
 			    var openRequest = window.indexedDB.open(dbName, version);
 
 			   	openRequest.onerror = function(e){
-			   		console.log("Error opening db", e);
+			   		//console.log("Error opening db", e);
 			   		dbOpenPromise.reject(e.toString());
 			   	};
 
 			    openRequest.onupgradeneeded = function(e){
+			    	console.log('onupgradeneeded');
 			    	var thisDb = e.target.result;
 
 			    	for (var i = 0; i < objectStores.length; i++){
@@ -101,7 +106,7 @@ angular.module('indexDB',[])
 					deferred.reject("indexDB is not open");
 				}
 				else {
-					var trans = db.transaction([store], "readwrite");
+					var trans = db.transaction(store, "readwrite");
 					var objectStore = trans.objectStore(store);
 					var request = objectStore.add(value);
 
@@ -110,7 +115,7 @@ angular.module('indexDB',[])
 					}
 
 					request.onerror = function(e){
-						console.log(e);
+						//console.log(e);
 					    deferred.reject(e);
 					}
 				}
@@ -132,7 +137,7 @@ angular.module('indexDB',[])
 					deferred.reject("indexDB is not open");
 				}
 				else {
-					var trans = db.transaction([store], "readwrite");
+					var trans = db.transaction(store, "readwrite");
 					var objectStore = trans.objectStore(store);
 					var request = objectStore.put(value);
 
@@ -141,7 +146,7 @@ angular.module('indexDB',[])
 					}
 
 					request.onerror = function(e){
-						console.log(e);
+						//console.log(e);
 					    deferred.reject(e);
 					}
 				}
@@ -159,7 +164,7 @@ angular.module('indexDB',[])
 	  	var deferred = $q.defer();
 	  	factory.open().then(
 	  		function(){
-			  	var trans = db.transaction([store], "readwrite");
+			  	var trans = db.transaction(store, "readwrite");
 				var objectStore = trans.objectStore(store);
 
 				var request = objectStore.get(id);
@@ -191,7 +196,8 @@ angular.module('indexDB',[])
 	  	factory.open().then(
 	  		function(){
 	  			var results = [];
-			  	var trans = db.transaction([store], "readwrite");
+	  			console.log('store',store);
+			  	var trans = db.transaction(store, "readwrite");
 				var objectStore = trans.objectStore(store);
 				var storeIndex = objectStore.index(index);
 				
@@ -199,7 +205,7 @@ angular.module('indexDB',[])
 				.onsuccess = function(e){
 					var cursor = e.target.result;
 
-					if(cursor){
+					if(cursor) {
 						results.push(cursor.primaryKey);
 						cursor.continue();
 					}
@@ -218,12 +224,12 @@ angular.module('indexDB',[])
 	  	factory.open().then(
 	  		function(){
 
-				var trans = db.transaction([store]);
+				var trans = db.transaction(store);
 				var objectStore = trans.objectStore(store);
 				var request = objectStore.getAll();
 
 			  	request.onerror = function(e){
-			  		console.log(e);
+			  		//console.log(e);
 			  		deferred.reject(e.toString());
 			  	}
 
@@ -242,13 +248,13 @@ angular.module('indexDB',[])
 	  	var deferred = $q.defer();
 	  	factory.open().then(
 	  		function(){
-			  	var trans = db.transaction([store], "readwrite");
+			  	var trans = db.transaction(store, "readwrite");
 				var objectStore = trans.objectStore(store);
 
 				var request = objectStore.get(id);
 			  	
 			  	request.onerror = function(e){
-			  		console.log(e);
+			  		//console.log(e);
 			  		deferred.reject(e.toString());
 			  	}
 
@@ -272,13 +278,13 @@ angular.module('indexDB',[])
 	  	var deferred = $q.defer();
 	  	factor.open().then(
 	  		function(){
-	  			var trans = db.transaction([store], "readwrite");
+	  			var trans = db.transaction(store, "readwrite");
 	  			var objectStore = trans.objectStore(store);
 
 	  			var request = objectStore.delete(id);
 
 	  			request.onerror = function(e){
-	  				console.log(e);
+	  				//console.log(e);
 	  				deferred.reject(e.toString());
 	  			}
 

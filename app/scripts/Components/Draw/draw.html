@@ -1,8 +1,7 @@
-<h2>canvas</h2>
-
+<i class="fa fa-pencil draw" ng-click="$ctrl.selectDraw()" ng-class="{selected: $ctrl.selected == 'draw'}"></i>
+<i class="fa fa-pencil-square-o join" ng-click="$ctrl.selectLine()" ng-class="{selected: $ctrl.selected == 'line'}"></i>
 <canvas 
-	id="drawCanvas" 
-	style="width:100%;height:300px" 
+	id="drawCanvas"
 	ng-touchstart="$ctrl.onTouchStart($event)"
 	ng-touchend="$ctrl.onTouchEnd($event)"
 	ng-touchmove="$ctrl.onTouchMove($event)"

@@ -1,30 +1,10 @@
-﻿<nav role="navigation" id="navigation">
-    <header>
-        <ul ng-show="$ctrl.loggedIn()" class="topRightNav">
-            <li>
-                <a href="#" ng-click="$ctrl.goToProperty()">
-                    <img src="/images/property_icon.png"/>
-                </a>
-            </li>
-            <li>
-                <a href="#" ng-click="$ctrl.goToSketch()">
-                    <img src="/images/sketch_icon.png"/>
-                </a>
-            </li>
-            <li>
-                <a class="propertyNavigation" href="https://www.google.com/maps/dir/current+location/{{$ctrl.property.FullAddress}}" target="_blank">
-                    <img src="/images/icons-png/direction2.png"/>
-                </a>
-            </li>
-            <li><img src="/images/icons-svg/user-black.svg"/></li>
-            <li><a href="#" class="hamburger" ng-click="$ctrl.goToProperties()"><img src="/images/hamburger_menu.png"/></a></li>
-        </ul>
-        <div class="logoWrapper">
-            <img class="logo" src="/images/iLOOKABOUT_logo.png">
-        </div>
-        <div>
-            <h3 ng-show="$ctrl.updating" class="blink">Updating Data</h3>
-            <h3 ng-show="!$ctrl.online" class="blink">No Internet Connection<h3>
-        </div>
-    </header>
-</nav>
+﻿<div class="logoWrapper">
+    <img class="logo" src="/images/iLOOKABOUT_logo.png">
+</div>
+<div class="iconWrapper">
+	<i ng-show="!$ctrl.online" class="fa fa-wifi wifi"></i>
+    <i ng-show="!$ctrl.online" class="fa fa-exclamation noInternet"></i>
+	
+	<i ng-show="$ctrl.updating" class="fa fa-refresh fa-spin dataUpdateIcon updating"></i>
+	<i ng-show="!$ctrl.updating" class="fa fa-refresh dataUpdateIcon notUpdating" ng-click="$ctrl.update()"></i>    
+</div>

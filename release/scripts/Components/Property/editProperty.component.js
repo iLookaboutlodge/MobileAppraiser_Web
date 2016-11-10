@@ -2,50 +2,123 @@
 propertyComponent.component('editproperty',
 {
 	templateUrl: 'Property/editProperty.html',
-	controller: ['$stateParams', '$scope', 'propertyService', function ($stateParams, $scope, propertyService) {
+	controller: ['$state', '$stateParams', '$scope', '$rootScope', 'propertyService', function ($state, $stateParams, $scope, $rootScope, propertyService) {
 
-	    var vm = this;
+		var vm = this;
 
-	    vm.propertyId = $stateParams.id;
+		var setTab = function(tab){
+	    	vm.selectedTab = tab;
+	    };
 
-	    vm.getDetail = function (detail) {
-	        for (var i = 0; i < vm.property.Data.length; i++) {
-	            if (vm.property.Data[i].FieldId == detail.Id) {
-	                return vm.property.Data[i].Value;
-	            }
+	    vm.goToBuildingTab = function() {
+	    	setTab("building");
+	    	$state.go("editproperty.selectbuilding");
+	    };
+
+	    vm.goToPropertyTab = function(){
+	    	setTab("property");
+	    	$state.go("editproperty.propertytab.details");
+	    };
+
+	    vm.goToProperty = function(){
+	    	$state.go("property", {id: vm.propertyId});
+	    };
+
+	    var dataURIBufferArray = function (dataURI) {
+        // convert base64/URLEncoded data component to raw binary data held in a string
+	        var byteString;
+	        if (dataURI.split(',')[0].indexOf('base64') >= 0)
+	            byteString = atob(dataURI.split(',')[1]);
+	        else
+	            byteString = unescape(dataURI.split(',')[1]);
+
+	        // separate out the mime component
+	        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+	        // write the bytes of the string to a typed array
+	        var ia = new Uint8Array(byteString.length);
+	        for (var i = 0; i < byteString.length; i++) {
+	            ia[i] = byteString.charCodeAt(i);
 	        }
-	        console.log('not found:', detail.Label);
-	        return null;
-	    }
 
-	    vm.getHeaders = function(value) {
-	        if (value)
-	            return value[Object.keys(value)[0]];
+	        return ia;
+    	};
 
-	        return null;
-	    }
+	    vm.upload = function(file){
+	    	var reader = new FileReader();
 
-        vm.complete = function () {
+			reader.onload = function(){
+				var buffer = dataURIBufferArray(reader.result);
+				propertyService.addImage(vm.propertyId, buffer).then(
+		    		function(newImage){
+		    			$rootScope.imageUploaded = new Date();
+		    		}
+	    		);
+			}
 
-            for (var i = 0; i < vm.newProperty.Data["1"].length; i++) {
-                if (vm.newProperty.Data["1"][i].Field.Id == 72) {
-                    vm.newProperty.Data["1"][i].Data.Value = "4";
-                }
-            };
+	    	reader.readAsDataURL(file);
 
-            var date = new Date();
-            var time = ((date.getHours() < 10) ? "0" : "") + date.getHours() + ":" + ((date.getMinutes() < 10) ? "0" : "") + date.getMinutes();
-            vm.newProperty.DateReviewed = date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + time;
-            vm.next();
-        }
+	    	// console.log(file);
+	    	// propertyService.addImage(vm.propertyId, file).then(
+	    	// 	function(newImage){
+	    	// 		$rootScope.imageUploaded = new Date();
+	    	// 	}
+    		// );
+	    };
 
-        function init () {
-            return propertyService.get(vm.propertyId)
-                .then(function (result) {
-                    vm.newProperty = result;
-                });
-        }
-         
-        init();
+	    vm.goToNextBuilding = function(){
+	    	propertyService.getNextBuilding(vm.property, vm.buildingId).then(function(nextBuilding){
+	    		$state.go('editproperty.buildingtab.sketch', {buildingid: nextBuilding.Id});
+	    	});
+	    };
+
+	    vm.goToPreviousBuilding = function(){
+	    	propertyService.getPreviousBuilding(vm.property, vm.buildingId).then(function(previousBuilding){
+	    		$state.go('editproperty.buildingtab.sketch', {buildingid: previousBuilding.Id});
+	    	});
+	    };
+
+	    vm.saveNote = function(){
+	    	if(vm.buildingId != null && vm.buildingId != undefined){
+	    		propertyService.getBuilding(vm.propertyId, vm.buildingId).then(
+	    			function(building){
+	    				building.Notes.push({User: 'Joe Bloggs', Date: new Date(), Note: vm.newNote});
+    					propertyService.updateBuilding(vm.propertyId, building).then(function(){
+    						vm.newNote = '';
+	    					vm.showPopup = false;
+	    					$rootScope.noteAdded = new Date();
+    					});
+	    			});
+	    	}
+	    	else {
+	    		propertyService.get(vm.propertyId).then(function(property){
+	    			property.Notes.push({User: 'Joe Bloggs', Date: new Date(), Note: vm.newNote});
+	    				propertyService.update(property).then(function(){
+	    				vm.newNote = '';
+	    				vm.showPopup = false;
+	    				$rootScope.noteAdded = new Date();
+	    			});
+	    		});
+	    	}
+	    };
+
+	    var init = function() {
+	    	vm.propertyId = $stateParams.id;
+	    	vm.buildingId = $stateParams.buildingid;
+	    	setTab("building");
+
+	    	$scope.$on('$stateChangeSuccess', function(){
+	    		vm.buildingId = $stateParams.buildingid;
+	    	});
+	    	
+	    	propertyService.get(vm.propertyId)
+            .then(
+            	function (result) {
+                	vm.property = result;
+            	}
+        	);
+	    };
+
+	    init();
 	}]
 });

@@ -5,122 +5,69 @@ navbar{
     overflow:hidden;
 }
 
-blink, .blink {
-  -webkit-animation: blink 1s step-end infinite;
-  -moz-animation: blink 1s step-end infinite;
-  -o-animation: blink 1s step-end infinite;
-  animation: blink 1s step-end infinite;
-}
-
-@-webkit-keyframes blink {
-  67% { opacity: 0  }
-}
-
-@-moz-keyframes blink {
-  67% { opacity: 0 }
-}
-
-@-o-keyframes blink {
-  67% { opacity: 0 }
-}
-
-@keyframes blink {
-  67% { opacity: 0 }
+footer {
+  position: fixed;
+  bottom: 0;
+  padding: 5px;
+  background-color: #fff;
+  border-top: 1px solid @lightGrey;
+  display:block;
+  width: 100%;
 }
 
 #navigation{
+    
     overflow:hidden;
-
-    header{
-        padding: 10px 2%;
-    }
-
+    
     .logoWrapper {
-        margin-top:10px;
-        max-width: 300px;
-    }
+      float:left;
+      max-width: 200px;
+      display:block;
+      overflow:hidden;
 
-    .logo {
-        float:left;
+      .logo {
         width:100%;
+        display:block;
+      }
     }
 
-    .topRightNav {
-        margin-top: 10px;
-        list-style: none;
-        float:right;
+    .iconWrapper {
+      float:right;
+      overflow:hidden;
+      min-width: 60px;
 
-        li {
-            float:left;
+      .dataUpdateIcon {
+
+        font-size: 2.5em;
+        padding: 0 10px;
+      
+        &.updating {
+          color: @lightGrey;
         }
 
-        a {
-            display:block;
-            width: 45px;
-            margin-left: 20px;
-        }
+        &.notUpdating {
+          color: @orange;
 
-        img {
-            width: 100%;
-        }
-    }
-}
-#sideMenu{ 
-    
-     padding-top: 20px;
-        margin-top: 0;
-        width: 200px;
-        border-right: 1px solid lightGrey;
-        height: 100%;
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.9);
-        top: 0;
-        left: 0;
-        z-index: 9999;
-    .hideButton {
-        width: 28px;
-        float: right;
-        margin-right: 20px;
-
-        &:hover{
+          &:hover {
             cursor: pointer;
+          }
         }
+      }
+
+      .wifi, .noInternet {
+        color: @lightGrey;
+      }
+
+      .wifi {
+        font-size: 2.5em;
+      }
+
+      .noInternet {
+        margin-left: -10px;
+      }
+
     }
 
-    ul { 
-        margin-top: 50px;
-        list-style: none;
-       
     
-        li {
-            margin-bottom: 20px;
-            width: 100px;
-        }
-
-        a {
-            color: #000;
-            text-decoration: none;
-            font-size: 0.9em;
-            font-weight: bold;
-            overflow:hidden;
-            display:block;
-
-            &:hover {
-                opacity: 0.5;
-            }
-        }
-
-
-        span {
-            display:block;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        img {
-            max-width: 50px;
-            display: block;
-            margin: 0 auto;
-        }
-    }
 }
+

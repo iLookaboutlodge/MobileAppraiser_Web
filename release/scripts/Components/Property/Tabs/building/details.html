@@ -1,0 +1,86 @@
+<table class="listTable">
+	<tr>
+		<td class="label">
+			Class
+		</td>
+		<td class="value text-left">
+			<select ng-model="$ctrl.building.BuildingProperty.Class" ng-options="x for x in $ctrl.classes">
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			Style
+		</td>
+		<td class="value text-left">
+			<select ng-model="$ctrl.building.BuildingProperty.Style" ng-options="x for x in $ctrl.styles">
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			Type
+		</td>
+		<td class="value text-left">
+			<select ng-model="$ctrl.building.BuildingProperty.Type_" ng-options="x for x in $ctrl.types">
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			AYB
+		</td>
+		<td class="value text-left">
+			{{$ctrl.building.BuildingProperty.AYB}}
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			EYB
+		</td>
+		<td class="value text-left">
+			{{$ctrl.building.BuildingProperty.EYB}}
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			EFF Base Rate
+		</td>
+		<td class="value text-left">
+			{{$ctrl.building.BuildingProperty.EffBaseRate}}
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			% Good
+		</td>
+		<td class="value text-left">
+			{{$ctrl.building.BuildingProperty.PercentageGood}}
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			Quality
+		</td>
+		<td class="value text-left">
+		<select ng-model="$ctrl.building.BuildingProperty.Quality" ng-options="x for x in $ctrl.qualities">
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			Quality Index
+		</td>
+		<td class="value text-left">
+			{{$ctrl.building.BuildingProperty.QualityIndex}}
+		</td>
+	</tr>
+	<tr>
+		<td class="label">
+			Replacement Cost New
+		</td>
+		<td class="value text-left">
+			{{$ctrl.building.BuildingProperty.ReplacementCostNew}}
+		</td>
+	</tr>
+</table>

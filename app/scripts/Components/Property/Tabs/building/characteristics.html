@@ -1,0 +1,60 @@
+<div class="editableTablePage">
+	<div class="tableWrapper">
+		<div class="tableControl">
+			<i class="fa fa-plus addButton" ng-click="$ctrl.addRow()"></i>
+			<span ng-show="$ctrl.selectedIndex != null && $ctrl.selectedIndex != 'undefined'" class="rowControl">
+				<a href="#" ng-click="$ctrl.editRow()">Edit</a>
+				<a href="#" ng-click="$ctrl.removeRow()">Remove</a>
+			</span>
+		</div>
+		<table class="defaultTable">
+			<tr class="header">
+				<th>Code</th>
+				<th>Description</th>
+				<th>Notes</th>
+				<th>Percentage</th>
+			</tr>
+			<tr class="content" 
+				ng-repeat="characteristic in $ctrl.building.BuildingCharacteristics" ng-click="$ctrl.selectRow($index)"
+				ng-class="{selected: $ctrl.selectedIndex == $index}">
+				<td>{{characteristic.Code}}</td>
+				<td>{{characteristic.Description}}</td>
+				<td>{{characteristic.Note}}</td>
+				<td>{{characteristic.Percentage}}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div class="popUpWrapper" ng-show="$ctrl.showPopup">
+	<div class="popup">
+		<a href="#" class="fa fa-times-circle-o closeButton" ng-click="$ctrl.showPopup = false"></a>
+		<div class="contents">
+			<div class="elementWrapper">
+				<label>Description</label>
+				<select 
+					ng-model="$ctrl.newDescription"
+					ng-options="x for x in $ctrl.descriptions"
+					ng-change="$ctrl.updateNotes()"
+					></select>
+			</div>
+
+			<div class="elementWrapper">
+				<label>Note</label>
+				<select 
+					ng-model="$ctrl.newNote"
+					ng-options="x.note for x in $ctrl.notes track by x.note"
+					></select>
+			</div>
+
+			<div class="elementWrapper">
+				<label>Percentage</label>
+				<input ng-model="$ctrl.newPercentage" type="number" min="0" max="100"/>
+			</div>
+		</div>
+		<div class="buttonWrapper">
+			<a href="#" class="cancel"  ng-click="$ctrl.showPopup = false">Cancel</a>
+			<a href="#" class="save" ng-click="$ctrl.saveNewCharacteristic()">Save</a>
+		</div>
+	</div>
+</div>

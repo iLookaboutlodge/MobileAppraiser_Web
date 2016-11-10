@@ -36,6 +36,117 @@ angular.module('app').config(['$stateProvider', '$locationProvider', '$httpProvi
         }
     };
 
+    var selectbuilding = {
+        name: 'editproperty.selectbuilding',
+        template: '<selectbuilding></selectbuilding>',
+        url: '/buildings'
+    };
+
+    var buildingTab = {
+        name: 'editproperty.buildingtab',
+        template: '<buildingtab></buildingtab>',
+        url: '/building/{buildingid}',
+        params: {
+            buildingid: null
+        }
+    };
+
+    var buildingSketch = {
+        name: 'editproperty.buildingtab.sketch',
+        template: '<buildingsketch></buildingsketch>',
+        url: '/sketch'
+    };
+
+    var buildingDetails = {
+        name: 'editproperty.buildingtab.details',
+        template: '<buildingdetails></buildingdetails>',
+        url: '/details'
+    };
+
+    var buildingCharacteristics = {
+        name: 'editproperty.buildingtab.characteristics',
+        template: '<buildingcharacteristics></buildingcharacteristics>',
+        url: '/characteristics'
+    };
+
+    var buildingInterior = {
+        name: 'editproperty.buildingtab.interior',
+        template: '<buildinginterior></buildinginterior>',
+        url: '/interior'
+    };
+
+    var buildingDepreciation = {
+        name: 'editproperty.buildingtab.depreciation',
+        template: '<buildingdepreciation></buildingdepreciation>',
+        url: '/depreciation'
+    };
+
+    var buildingAreas = {
+        name: 'editproperty.buildingtab.areas',
+        template: '<buildingareas></buildingareas>',
+        url: '/areas'
+    };
+
+    var buildingExtraFeatures = {
+        name: 'editproperty.buildingtab.extrafeatures',
+        template: '<buildingextrafeatures></buildingextrafeatures>',
+        url: '/extrafeatures'
+    };
+
+    var buildingNotes = {
+        name: 'editproperty.buildingtab.notes',
+        template: '<buildingnotes></buildingnotes>',
+        url: '/notes'
+    };
+
+    var propertyTab = {
+        name: 'editproperty.propertytab',
+        template: '<propertyTab></propertyTab>',
+        url: '/property'
+    };
+
+    var propertyDetails = {
+        name: 'editproperty.propertytab.details',
+        template: '<propertydetails></propertydetails>',
+        url: '/details'
+    };
+
+    var propertyImages = {
+        name: 'editproperty.propertytab.images',
+        template: '<propertyimages></propertyimages>',
+        url: '/images'
+    };
+
+    var propertyPermits = {
+        name: 'editproperty.propertytab.permits',
+        template: '<propertypermits></propertypermits>',
+        url: '/permits'
+    };
+
+    var propertySales = {
+        name: 'editproperty.propertytab.sales',
+        template: '<propertysales></propertysales>',
+        url: '/sales'
+    };
+
+    var propertyLand = {
+        name: 'editproperty.propertytab.land',
+        template: '<propertyland></propertyland>',
+        url: '/land'
+    };
+
+    var propertyInspections = {
+        name: 'editproperty.propertytab.inspections',
+        template: '<propertyinspections></propertyinspections>',
+        url: '/inspections'
+    };
+
+    var propertyNotes = {
+        name: 'editproperty.propertytab.notes',
+        template: '<propertynotes></propertynotes>',
+        url: '/notes'
+    };
+
     var property = {
         name: 'property',
         url: '/property/{id}',
@@ -87,4 +198,24 @@ angular.module('app').config(['$stateProvider', '$locationProvider', '$httpProvi
     $stateProvider.state(main);
     $stateProvider.state(map);
     $stateProvider.state(sketch);
+
+    $stateProvider.state(buildingTab);
+    $stateProvider.state(selectbuilding);
+    $stateProvider.state(buildingDetails);
+    $stateProvider.state(buildingSketch);
+    $stateProvider.state(buildingCharacteristics);
+    $stateProvider.state(buildingInterior);
+    $stateProvider.state(buildingAreas);
+    $stateProvider.state(buildingDepreciation);
+    $stateProvider.state(buildingExtraFeatures);
+    $stateProvider.state(buildingNotes);
+
+    $stateProvider.state(propertyTab);
+    $stateProvider.state(propertyDetails);
+    $stateProvider.state(propertyImages);
+    $stateProvider.state(propertyPermits);
+    $stateProvider.state(propertySales);
+    $stateProvider.state(propertyLand);
+    $stateProvider.state(propertyInspections);
+    $stateProvider.state(propertyNotes);
 }]);

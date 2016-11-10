@@ -1,0 +1,43 @@
+<table class="listTable">
+	<tr>
+		<td class="label">Address</td>
+		<td class="value text-left">{{$ctrl.property.Address.Address}}</td>
+	</tr>
+	<tr>
+		<td class="label">Area</td>
+		<td class="value text-left">{{$ctrl.property.Details.Description}}</td>
+	</tr>
+	<tr>
+		<td class="label">Owner</td>
+		<td class="value text-left">{{$ctrl.property.Owner.Name}},
+		{{$ctrl.property.Owner.AddressLine1}}, 
+		{{$ctrl.property.Owner.AddressLine2}},
+		{{$ctrl.property.Owner.City}},
+		{{$ctrl.property.Owner.State}},
+		{{$ctrl.property.Owner.Zip}}</td>
+	</tr>
+	<tr>
+		<td class="label">Type</td>
+		<td class="value text-left">{{$ctrl.property.Type.Description}}</td>
+	</tr>
+	<tr>
+		<td class="label">CR Flag</td>
+		<td class="value text-left">{{$ctrl.property.Type.CR_Flag}}</td>
+	</tr>
+	<tr>
+		<td class="label">DOR CD</td>
+		<td class="value text-left">{{$ctrl.property.Type.Dor_CD}}</td>
+	</tr>
+	<tr>
+		<td class="label">Building Adj</td>
+		<td class="value text-left">{{$ctrl.property.Details.BuildingAdj}}</td>
+	</tr>
+	<tr>
+		<td class="label">CD</td>
+		<td class="value text-left">{{$ctrl.property.Details.CD}}</td>
+	</tr>
+	<tr>
+		<td class="label">Legal</td>
+		<td class="value text-left legal">{{$ctrl.property.Legal}}</td>
+	</tr>
+</table>

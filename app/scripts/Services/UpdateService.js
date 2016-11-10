@@ -25,6 +25,7 @@ angular.module('update',['property'])
 					propertyService.sendCompletedPropertiesToServer()
 					.then(propertyService.fetchNewPropertiesFromServer)
 					.then(propertyService.fetchfrontImagesFromServer)
+					.then(propertyService.fetchSketchesFromServer)
 					.then(updateScopeAndPromise);
 				}
 

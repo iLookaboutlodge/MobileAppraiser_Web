@@ -1,0 +1,13 @@
+<div>
+    <ul id="secondaryNavigation" class="buildingNavigation">
+        <li ng-click="$ctrl.goToSketch()" ng-class="{selected: $ctrl.selectedTab=='sketch'}">Sketch</li>
+        <li ng-click="$ctrl.goToDetails()" ng-class="{selected: $ctrl.selectedTab=='details'}">Details</li>
+        <li ng-click="$ctrl.goToCharacteristics()" ng-class="{selected: $ctrl.selectedTab=='characteristics'}">Characteristics</li>
+        <li ng-click="$ctrl.goToInterior()" ng-class="{selected: $ctrl.selectedTab=='interior'}">Interior</li>
+        <li ng-click="$ctrl.goToDepreciation()" ng-class="{selected: $ctrl.selectedTab=='depreciation'}">Depreciation</li>
+        <li ng-click="$ctrl.goToAreas()" ng-class="{selected: $ctrl.selectedTab=='areas'}">Sub-Area</li>
+        <li ng-click="$ctrl.goToExtraFeatures()" ng-class="{selected: $ctrl.selectedTab=='extraFeatures'}">Ex-Features</li>
+        <li ng-click="$ctrl.goToNotes()" ng-class="{selected: $ctrl.selectedTab=='notes'}">Notes</li>
+    </ul>
+   <ui-view></ui-view>
+</div>

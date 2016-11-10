@@ -1,0 +1,93 @@
+.editableTablePage{
+	text-align:center;
+	margin-top: 30px;
+
+	.tableWrapper {
+		display:inline-block;
+	}
+	.tableControl {
+		
+		.addButton {
+			float:left;
+			color: @orange;
+			font-size: 1.5em;
+		}
+
+		.rowControl {
+			float:right;
+
+			a {
+				text-decoration: none;
+				color: @orange;
+				font-size: 1.2em;
+				margin-left: 20px;
+			}
+		}
+	}
+
+	.defaultTable {
+
+		margin: 30px auto 0 auto;
+		border:none;
+		border-collapse: collapse;
+
+		.header {
+			color: @green;
+			font-weight: bold;
+			font-size: 1.4em;
+			padding: 15px 15px;
+		}	
+
+		th, td {
+			border-bottom: 1px solid @lightGrey;
+			padding: 15px 20px
+		}
+
+		.content {
+			font-size: 1.2em;
+			color: @grey;
+			text-align: center;
+		}
+
+		.selected {
+			background-color: @grey;
+			color: #fff;
+		}
+	}
+}
+
+
+.listTable {
+		margin: 30px auto;
+
+		td {
+			padding: 10px 15px;
+			color: @grey;
+		}
+
+		.label {
+			text-align: right;
+			font-size: 1.2em;
+			font-weight: bold;
+		}
+
+		.value {
+			font-size: 1.2em;
+		}	
+
+		.text-left {
+			text-align:left;
+		}
+
+		.text-center {
+			text-align:center;
+		}
+
+		.legal {
+			max-width: 300px;
+		}
+
+		select {
+			color: @grey;
+		}
+}

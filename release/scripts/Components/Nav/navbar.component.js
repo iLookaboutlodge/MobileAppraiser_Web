@@ -1,9 +1,9 @@
-﻿var navbarComponent = angular.module('navbarModule', ['auth', 'property']);
+﻿var navbarComponent = angular.module('navbarModule', ['auth', 'property', 'update']);
 
 navbarComponent.component('navbar',
 {
     templateUrl: 'Nav/navbar.html',
-    controller: ['$scope', '$rootScope', 'authService', '$state', 'propertyService', function ($scope, $rootScope, authService, $state, propertyService) {
+    controller: ['$scope', '$rootScope', 'authService', '$state', 'propertyService','updateService', function ($scope, $rootScope, authService, $state, propertyService, updateService) {
         var vm = this;
 
         vm.goToMap = function () {
@@ -35,14 +35,17 @@ navbarComponent.component('navbar',
             $state.go("login");
         }
 
+        vm.update = function(){
+            if ($rootScope.online){
+                updateService.update();
+            }
+        }
+
 
         $rootScope.$watch('updating', function(){
-            console.log('updating changed');
-            console.log('updating in ctrl: ', $rootScope.updating);
             vm.updating = $rootScope.updating;
         });
         $rootScope.$watch('online', function(){
-            console.log('online changed');
             vm.online = $rootScope.online;
         });
     }]

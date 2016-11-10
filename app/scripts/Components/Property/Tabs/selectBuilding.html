@@ -1,0 +1,9 @@
+<div id="selectBuilding" class="contentWrapper">
+	<ul ng-repeat="item in $ctrl.buildings">
+		<li ng-click="$ctrl.goToBuilding(item.buildingId)">
+			<span>Building {{item.buildingId}}</span>	
+			<img data-ng-src="{{item.url}}"/>
+			
+		</li>
+	</ul>
+</div>

@@ -9,24 +9,30 @@
 	 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	 	
 	 	<!-- injector:css -->
+	 	<link rel="stylesheet" href="/styles/font-awesome.min.css">
 	 	<link rel="stylesheet" href="/styles/main.css">
 	 	<!-- endinjector -->
 	</head>
 	<body data-role="page">
-		<navbar></navbar>
-	    <ui-view data-role="content"></ui-view>
+
+	    	<ui-view data-role="content"></ui-view>
+    	</div>
+    	<footer>
+    		<navbar id="navigation"></navbar>
+		</footer>	    
+
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCezYydAtsZ1Fz5oklQnupiRohYD0KXQG8"></script>
-
-
 		<script src="_bower.js"></script>
 
 		<!-- injector:js -->
+		<script src="/scripts/libs/IndexedDB-getAll-shim.js"></script>
 		<script src="/scripts/services/AuthService.js"></script>
 		<script src="/scripts/services/ImageIndexDBService.js"></script>
 		<script src="/scripts/services/IndexDbService.js"></script>
 		<script src="/scripts/services/PropertyApiService.js"></script>
 		<script src="/scripts/services/PropertyIndexDbService.js"></script>
 		<script src="/scripts/services/PropertyService.js"></script>
+		<script src="/scripts/services/SketchIndexDBService.js"></script>
 		<script src="/scripts/services/UpdateService.js"></script>
 		<script src="/scripts/components/About/about.component.js"></script>
 		<script src="/scripts/components/Draw/draw.js"></script>
@@ -34,6 +40,24 @@
 		<script src="/scripts/components/Map/map.component.js"></script>
 		<script src="/scripts/components/Nav/navbar.component.js"></script>
 		<script src="/scripts/components/Properties/properties.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/building/areas.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/building/characteristics.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/building/depreciation.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/building/details.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/building/extraFeatures.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/building/interior.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/building/notes.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/building/sketch.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/buildingTab.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/property/details.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/property/images.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/property/inspections.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/property/land.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/property/notes.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/property/permits.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/property/sales.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/propertyTab.component.js"></script>
+		<script src="/scripts/components/Property/Tabs/selectBuilding.component.js"></script>
 		<script src="/scripts/components/Property/editProperty.component.js"></script>
 		<script src="/scripts/components/Property/property.component.js"></script>
 		<script src="/scripts/components/Sketch/sketch.component.js"></script>

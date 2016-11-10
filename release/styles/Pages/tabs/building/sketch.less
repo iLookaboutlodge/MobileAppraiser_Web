@@ -1,0 +1,58 @@
+.traverse {
+	width: 20%;
+	float:left;
+	margin-top: 100px;
+	padding: 0 10px;
+	word-wrap:break-word;
+	text-align: left;
+	font-size: 1.2em;
+	color: @grey;
+}
+
+#sketchContainer {
+	position: relative;
+	clear:both;
+	width: 100%;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+
+	img {
+		height:100%; 
+		width:auto;
+	}
+
+	#drawCanvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 80%;
+		margin-left: 20%;
+		height: 100%;
+		border: 1px solid @lightGrey;
+	}
+
+
+}
+
+	.draw {
+		display: block;
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		font-size: 2em;
+		color: @lightGrey;
+	}
+
+	.join {
+		display:block;
+		position: absolute;
+		top: 20px;
+		left: 60px;
+		font-size: 2.7em;
+		color: @lightGrey;
+	}
+
+	.selected {
+		color: @orange;
+	}

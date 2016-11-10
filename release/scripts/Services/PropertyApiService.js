@@ -30,7 +30,7 @@
             factory.getProperty = function(propertyId) {
                 return $http({
                     method: 'GET',
-                    url: ENV.apiEndpoint + "/api/propertydetails/GetProperty?propertyId=" + propertyId
+                    url: ENV.apiEndpoint + "/api/propertydetails/GetProperty_v2?propertyId=" + propertyId
                 }).then(function(response){
                     return response.data;
                 });
@@ -61,13 +61,14 @@
                 $http({
                     method: 'GET',
                     url: url,
-                    responseType: 'blob'
+                    responseType: 'arraybuffer'
                 }).then(
                     function(response){
                         deferred.resolve(response.data)
                     },
                     function(e){
-                        deferred.reject(e);
+                        console.log(e);
+                        deferred.resolve();
                     }
                 );
 

@@ -1,0 +1,31 @@
+<div id="notes">
+	<div class="notesWrapper">
+		<a href="#" class="fa fa-plus addButton" ng-click="$ctrl.showPopup = true"></a>
+		<ul>
+			<li ng-repeat="note in $ctrl.property.Notes | orderBy:'-Date' track by $index">
+				<div class="nameWrapper">
+					<span class="user">{{note.User}}</span>
+					<span class="date">{{$ctrl.getDate(note.Date)}}</span>
+				</div>
+				<p class="note">{{note.Note}}</p>
+				<span class="remove" ng-click="$ctrl.remove(note)">Remove</span>
+			</li>
+		</ul>
+	<div>
+</div>
+
+<div class="popUpWrapper" ng-show="$ctrl.showPopup">
+	<div class="popup">
+		<a href="#" class="fa fa-times-circle-o closeButton" ng-click="$ctrl.showPopup = false; $ctrl.newNote = ''"></a>
+		<div class="contents">
+			<div class="elementWrapper">
+				<label>Note</label>
+				<textarea ng-model="$ctrl.newNote" type="text"></textarea>
+			</div>
+		</div>
+		<div class="buttonWrapper">
+			<a href="#" class="cancel"  ng-click="$ctrl.showPopup = false; $ctrl.newNote = ''">Cancel</a>
+			<a href="#" class="save" ng-click="$ctrl.saveNote()">Save</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+<div class="editableTablePage">
+	<div class="tableWrapper">
+		<table class="defaultTable">
+			<tr class="header">
+				<th>Date</th>
+				<th>IN</th>
+				<th>OR Inst No.</th>
+				<th>QU</th>
+				<th>RE</th>
+				<th>Sale Price</th>
+				<th>VI</th>
+			</tr>
+			<tr class="content" 
+				ng-repeat="sale in $ctrl.property.Sales">
+				<td>{{$ctrl.getDate(sale.Date)}}</td>
+				<td>{{sale.IN}}</td>
+				<td>{{sale.ORInstNo}}</td>
+				<td>{{sale.QU}}</td>
+				<td>{{sale.RE}}</td>
+				<td>{{sale.SalePrice}}</td>
+				<td>{{sale.VI}}</td>
+			</tr>
+		</table>
+	</div>
+</div>

@@ -534,127 +534,71 @@ template {
 navbar {
   overflow: hidden;
 }
-blink,
-.blink {
-  -webkit-animation: blink 1s step-end infinite;
-  -moz-animation: blink 1s step-end infinite;
-  -o-animation: blink 1s step-end infinite;
-  animation: blink 1s step-end infinite;
-}
-@-webkit-keyframes blink {
-  67% {
-    opacity: 0;
-  }
-}
-@-moz-keyframes blink {
-  67% {
-    opacity: 0;
-  }
-}
-@-o-keyframes blink {
-  67% {
-    opacity: 0;
-  }
-}
-@keyframes blink {
-  67% {
-    opacity: 0;
-  }
+footer {
+  position: fixed;
+  bottom: 0;
+  padding: 5px;
+  background-color: #fff;
+  border-top: 1px solid #D1D1D1;
+  display: block;
+  width: 100%;
 }
 #navigation {
   overflow: hidden;
 }
-#navigation header {
-  padding: 10px 2%;
-}
 #navigation .logoWrapper {
-  margin-top: 10px;
-  max-width: 300px;
-}
-#navigation .logo {
   float: left;
-  width: 100%;
-}
-#navigation .topRightNav {
-  margin-top: 10px;
-  list-style: none;
-  float: right;
-}
-#navigation .topRightNav li {
-  float: left;
-}
-#navigation .topRightNav a {
+  max-width: 200px;
   display: block;
-  width: 45px;
-  margin-left: 20px;
+  overflow: hidden;
 }
-#navigation .topRightNav img {
+#navigation .logoWrapper .logo {
   width: 100%;
+  display: block;
 }
-#sideMenu {
-  padding-top: 20px;
-  margin-top: 0;
-  width: 200px;
-  border-right: 1px solid lightGrey;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.9);
-  top: 0;
-  left: 0;
-  z-index: 9999;
-}
-#sideMenu .hideButton {
-  width: 28px;
+#navigation .iconWrapper {
   float: right;
-  margin-right: 20px;
+  overflow: hidden;
+  min-width: 60px;
 }
-#sideMenu .hideButton:hover {
+#navigation .iconWrapper .dataUpdateIcon {
+  font-size: 2.5em;
+  padding: 0 10px;
+}
+#navigation .iconWrapper .dataUpdateIcon.updating {
+  color: #D1D1D1;
+}
+#navigation .iconWrapper .dataUpdateIcon.notUpdating {
+  color: #ba6126;
+}
+#navigation .iconWrapper .dataUpdateIcon.notUpdating:hover {
   cursor: pointer;
 }
-#sideMenu ul {
-  margin-top: 50px;
-  list-style: none;
+#navigation .iconWrapper .wifi,
+#navigation .iconWrapper .noInternet {
+  color: #D1D1D1;
 }
-#sideMenu ul li {
-  margin-bottom: 20px;
-  width: 100px;
+#navigation .iconWrapper .wifi {
+  font-size: 2.5em;
 }
-#sideMenu ul a {
-  color: #000;
-  text-decoration: none;
-  font-size: 0.9em;
-  font-weight: bold;
-  overflow: hidden;
-  display: block;
-}
-#sideMenu ul a:hover {
-  opacity: 0.5;
-}
-#sideMenu ul span {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-}
-#sideMenu ul img {
-  max-width: 50px;
-  display: block;
-  margin: 0 auto;
+#navigation .iconWrapper .noInternet {
+  margin-left: -10px;
 }
 #properties {
-  margin-top: 35px;
+  max-width: 1043px;
+  margin: 35px auto 0 auto;
 }
-#properties .searchBar {
-  background-color: #ba6126;
-  padding: 7px 1%;
-  overflow: hidden;
-  width: 100%;
-}
-#properties .searchBar .searchWrapper {
-  width: 1043px;
+#properties .searchWrapper {
   margin: 0 auto;
   height: 30px;
+  border: 1px solid #59C2AB;
+  float: left;
+  overflow: hidden;
+  border-radius: 5px;
+  padding: 3px 10px;
 }
-#properties .searchBar .searchWrapper input {
+#properties .searchWrapper input {
+  width: 200px;
   border: none;
   -webkit-border-top-right-radius: 0px;
   -webkit-border-bottom-right-radius: 0px;
@@ -676,31 +620,26 @@ blink,
   float: left;
   height: 100%;
 }
-#properties .searchBar .searchWrapper input:active {
+#properties .searchWrapper input:active {
   outline: none;
   border: none;
 }
-#properties .searchBar .searchWrapper span {
-  background-color: #fff;
-  padding: 5px;
+#properties .searchWrapper i {
   display: block;
   float: left;
-  -webkit-border-top-right-radius: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  -webkit-border-bottom-left-radius: 0;
-  -webkit-border-top-left-radius: 0;
-  -moz-border-radius-topright: 5px;
-  -moz-border-radius-bottomright: 5px;
-  -moz-border-radius-bottomleft: 0;
-  -moz-border-radius-topleft: 0;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  -moz-background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  height: 100%;
+  color: #59C2AB;
+  margin-top: 3px;
+}
+#properties .filter {
+  float: right;
+}
+#properties .filter span {
+  margin-left: 30px;
+  font-size: 1.2em;
+  color: #D1D1D1;
+}
+#properties .filter span.selected {
+  color: #ba6126;
 }
 #properties table,
 #properties tr,
@@ -711,8 +650,10 @@ blink,
 }
 #properties .tableWrapper {
   margin: 20px auto 0 auto;
-  max-width: 1043px;
   width: 100%;
+  clear: left;
+  margin-top: 10px;
+  float: left;
 }
 #properties table {
   margin: 0;
@@ -720,7 +661,7 @@ blink,
   width: 100%;
 }
 #properties table .header {
-  background-color: #ba6126;
+  background-color: #2A7665;
   color: #fff;
 }
 #properties table .header th {
@@ -729,92 +670,153 @@ blink,
 #properties table td {
   padding: 10px 15px;
 }
+#properties table tr {
+  border-bottom: 2px solid #D1D1D1;
+}
 #properties table tr:hover {
   background: #D0D3D4;
   cursor: pointer;
 }
-#properties table .odd {
-  background-color: #E4E7E8;
-}
 #properties table .selected {
-  background-color: #E57F3C;
-  color: #fff;
-}
-#sketch {
-  margin-top: 20px;
-}
-#sketch img {
-  max-width: 800px;
-  width: 100%;
-  display: block;
-  margin: 0 auto;
-  padding: 0 1%;
+  background-color: #59C2AB;
 }
 #property {
-  margin-top: 40px;
+  margin-top: 10px;
   padding: 0 2%;
 }
 #property header {
   width: 100%;
-  background-color: #ba6126;
   overflow: hidden;
-  padding: 5px 1%;
 }
-#property header h2 {
+#property header h1 {
   float: left;
-  color: #fff;
+  color: #5E5E5E;
   margin: 5px 0 0 0;
   padding: 0;
-  font-size: 1.1em;
+  font-size: 1.6em;
 }
-#property .sectionContent {
-  padding: 10px 1%;
-  overflow: hidden;
+#property header h1 span {
+  color: #D1D1D1;
+  font-size: 0.7em;
+}
+#property header a {
+  float: right;
+  font-size: 2em;
+  color: #ba6126;
+}
+#property .tabs {
   width: 100%;
+  margin-top: 20px;
+  max-width: 70%;
+  float: left;
+  overflow: hidden;
+}
+#property .tabs nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#property .tabs nav li {
+  width: 200px;
+  color: #5E5E5E;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 1.2em;
+  float: left;
+}
+#property .tabs nav li.left {
+  border-top: 1px solid #D1D1D1;
+  border-radius: 5px 0 0 0;
+  border-left: 1px solid #D1D1D1;
+}
+#property .tabs nav li.middle {
+  border-top: 1px solid #D1D1D1;
+  border-right: 1px solid #D1D1D1;
+  border-left: 1px solid #D1D1D1;
+}
+#property .tabs nav li.right {
+  border-top: 1px solid #D1D1D1;
+  border-left: 1px solid #D1D1D1;
+  border-right: 1px solid #D1D1D1;
+  border-radius: 0 5px 0 0;
+}
+#property .tabs .selected {
+  background-color: #2A7665;
+  color: #fff;
+  border: 1px solid #2A7665;
+}
+#property .tabs .tab {
+  clear: left;
+  border: 1px solid #D1D1D1;
+  padding: 10px 5%;
+  margin: 10px auto;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+#property .tabs .tab .innerTab {
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  height: 70%;
+}
+#property .tabs .tab .leftArrow,
+#property .tabs .tab .rightArrow {
+  font-size: 50px;
+  color: #ba6126;
+}
+#property .tabs .tab .leftArrow {
+  float: left;
+}
+#property .tabs .tab .rightArrow {
+  float: right;
+}
+#property .imageWrapper {
+  height: 100%;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+}
+#property .imageControls {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#property .helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+#property .imageNumber {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #5E5E5E;
+  display: inline-block;
+  margin-top: 9px;
+}
+#property img {
+  vertical-align: middle;
+  height: auto;
+  width: auto;
+  max-width: 100%;
 }
 #property .basicInformation {
   overflow: hidden;
+  float: left;
+  padding-left: 5%;
+  width: 30%;
+  margin-top: 54px;
 }
-#property .basicInformation header ul {
+#property .basicInformation ul {
   list-style: none;
-  float: right;
+  padding: 0;
+  margin: 0;
+}
+#property .basicInformation ul li {
   margin: 0;
   padding: 0;
-}
-#property .basicInformation header li {
-  float: left;
-  margin-left: 30px;
-}
-#property .basicInformation header li .navigation {
-  margin-right: 40px;
-}
-#property .basicInformation header li img {
-  width: 30px;
-}
-#property .basicInformation header li button {
-  background: #fff;
-  color: #ba6126;
-  border: none;
-  -webkit-border-top-right-radius: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  -webkit-border-top-left-radius: 5px;
-  -moz-border-radius-topright: 5px;
-  -moz-border-radius-bottomright: 5px;
-  -moz-border-radius-bottomleft: 5px;
-  -moz-border-radius-topleft: 5px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-  -moz-background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  height: 30px;
-  font-weight: bold;
-}
-#property .basicInformation header li button:hover {
-  cursor: pointer;
 }
 #property .basicInformation label {
   font-weight: bold;
@@ -832,73 +834,16 @@ blink,
   float: left;
   margin-right: 30px;
 }
-#property .permitsAndExtra {
-  width: 50%;
-}
-#property .permits,
-#property .extra {
-  width: 100%;
-}
-#property .permits header,
-#property .extra header {
-  background-color: #D7DADB;
-}
-#property .permits header h2,
-#property .extra header h2 {
-  color: #000;
-  font-size: 0.9em;
-  margin-top: 0;
-}
-#property .imageSection {
-  width: 49%;
+#property .basicInformation .buttons {
+  clear: left;
+  margin-top: 45px;
   float: left;
-  margin-bottom: 10px;
 }
-#property .imageSection .imgWrapper {
-  width: 50%;
-  margin: 0 25%;
-  max-height: 250px;
-}
-#property .imageSection img {
-  height: auto;
-  width: auto;
-  display: block;
-  max-height: 250px;
-}
-#property .propertyDetailsSection {
-  width: 100%;
-}
-#property .propertyDetailsSection label {
-  font-weight: bold;
-  margin-bottom: 2px;
-}
-#property .propertyDetailsSection .detailWrapper {
-  height: 70px;
-  float: left;
-  margin-right: 20px;
-}
-#property .confirmPopup {
-  background-color: rgba(0, 0, 0, 0.7);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-#property .confirmPopup .popupBox {
-  width: 100%;
-  max-width: 400px;
-  margin: 20% auto 0 auto;
-  background-color: #fff;
-  border: 1px solid #ba6126;
-  padding: 20px;
-  overflow: hidden;
-}
-#property .confirmPopup .popupBox button {
-  background-color: #ba6126;
-  border: 1px solid #ba6126;
-  color: #fff;
-  margin-left: 10px;
+#property .basicInformation .buttons a {
+  text-decoration: none;
+  border: none;
+  margin: 20px 0;
+  padding: 5px 15px;
   -webkit-border-top-right-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
@@ -914,17 +859,68 @@ blink,
   -moz-background-clip: padding-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 10px 5px;
+  border: 1px solid #ba6126;
   font-weight: bold;
+  clear: both;
+  display: block;
+  vertical-align: middle;
+  text-align: center;
 }
-#property .confirmPopup .popupBox button:hover {
-  color: #ba6126;
-  background-color: #fff;
+#property .basicInformation .buttons a:hover {
   cursor: pointer;
 }
-#property .confirmPopup .popupBox .buttons {
+#property .basicInformation .buttons .directions {
+  color: #ba6126;
+  background: #fff;
+}
+#property .basicInformation .buttons .viewPropertyCard,
+#property .basicInformation .buttons .complete {
+  color: #fff;
+  background: #ba6126;
+}
+#property .basicInformation .buttons .complete {
+  font-size: 1.2em;
+  margin-top: 50px;
+  text-transform: capitalize;
+}
+#property .notes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#property .notes .note {
+  padding: 20px 0 0 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+#property .notes .note .nameWrapper {
+  overflow: hidden;
+}
+#property .notes .note .user {
+  float: left;
+  font-size: 1.2em;
+  color: #5E5E5E;
+  display: block;
+  font-weight: bold;
+}
+#property .notes .note .date {
   float: right;
-  margin-top: 15px;
+  font-size: 1.2em;
+  color: #5E5E5E;
+  display: block;
+}
+#property .notes .note .noteText {
+  clear: both;
+  width: 100%;
+  font-size: 1.2em;
+  color: #5E5E5E;
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+}
+#property .notes .note + .note {
+  border-top: 1px solid #D1D1D1;
 }
 #mapPage {
   margin-top: 40px;
@@ -986,4 +982,472 @@ blink,
   height: 500px;
   margin-bottom: 10px;
   margin-top: 20px;
+}
+#editProperty header.propertyLocation {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 2%;
+}
+#editProperty header.propertyLocation h1 {
+  float: left;
+  color: #5E5E5E;
+  margin: 5px 0 0 0;
+  padding: 0;
+  font-size: 1.6em;
+}
+#editProperty header.propertyLocation h1 span {
+  color: #D1D1D1;
+  font-size: 0.7em;
+}
+#editProperty header.propertyLocation nav {
+  float: right;
+  overflow: hidden;
+}
+#editProperty header.propertyLocation ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+  float: right;
+}
+#editProperty header.propertyLocation ul li {
+  float: left;
+  padding-left: 40px;
+}
+#editProperty header.propertyLocation ul li:hover {
+  cursor: pointer;
+}
+#editProperty header.propertyLocation .homeButton {
+  font-size: 3em;
+  color: #ba6126;
+}
+#editProperty header.propertyLocation .camera {
+  font-size: 2.1em;
+  margin-top: 10px;
+  color: #59C2AB;
+}
+#editProperty header.propertyLocation .note {
+  font-size: 2.1em;
+  margin-top: 10px;
+  color: #59C2AB;
+}
+#editProperty .buildingTitle {
+  text-align: center;
+}
+#editProperty .buildingTitle span {
+  color: #5E5E5E;
+  font-size: 1.5em;
+}
+#editProperty .buildingTitle .leftArrow,
+#editProperty .buildingTitle .rightArrow {
+  color: #ba6126;
+  margin: 0 20px 2px 20px;
+  font-size: 1.5em;
+}
+#editProperty .contentWrapper {
+  clear: left;
+  overflow: hidden;
+  border-top: 1px solid #D1D1D1;
+  padding: 10px 2%;
+}
+#selectBuilding {
+  clear: left;
+  overflow: hidden;
+  border-top: 1px solid #D1D1D1;
+  padding: 10px 2%;
+}
+#selectBuilding ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #5E5E5E;
+  font-weight: bold;
+}
+#selectBuilding li {
+  width: 100%;
+  max-width: 33%;
+  float: left;
+  padding-right: 2%;
+  padding-left: 2%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+#selectBuilding li:hover {
+  cursor: pointer;
+}
+#selectBuilding li img {
+  width: 100%;
+}
+#selectBuilding li span {
+  text-align: center;
+  display: block;
+  padding: 5px 0;
+}
+#primaryNavigation {
+  float: left;
+  background-color: #fff;
+  color: #2A7665;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  clear: right;
+}
+#primaryNavigation li {
+  float: left;
+  border-left: 1px solid #D1D1D1;
+  border-right: 1px solid #D1D1D1;
+  border-top: 1px solid #D1D1D1;
+  padding: 10px 20px;
+  font-size: 1.2em;
+}
+#primaryNavigation li.selected {
+  background-color: #2A7665;
+  color: #fff;
+  border: 1px solid #2A7665;
+  cursor: pointer;
+  font-weight: bold;
+}
+#secondaryNavigation {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+  clear: left;
+  font-size: 1em;
+}
+#secondaryNavigation li {
+  float: left;
+  border: 1px solid #2A7665;
+  background-color: #2A7665;
+  padding: 15px 15px;
+  color: #fff;
+  text-align: center;
+}
+#secondaryNavigation li.selected {
+  text-decoration: underline;
+  cursor: pointer;
+}
+#secondaryNavigation.buildingNavigation li {
+  width: 12.5%;
+}
+#secondaryNavigation.propertyTabNavigation li {
+  width: 14.2857%;
+}
+#notes {
+  padding: 30px 5%;
+}
+#notes .notesWrapper {
+  max-width: 650px;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+#notes .addButton {
+  float: left;
+  color: #ba6126;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+#notes ul {
+  clear: both;
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0 0;
+  width: 100%;
+}
+#notes ul li {
+  overflow: hidden;
+}
+#notes ul li + li {
+  border-top: 1px solid #D1D1D1;
+  padding-top: 30px;
+  margin-top: 5px;
+}
+#notes .user {
+  float: left;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #5E5E5E;
+}
+#notes .date {
+  float: right;
+  font-size: 1.2em;
+  color: #5E5E5E;
+}
+#notes .nameWrapper {
+  overflow: hidden;
+}
+#notes p {
+  clear: both;
+  margin-top: 20px;
+  width: 100%;
+  fon-size: 1.2em;
+  color: #5E5E5E;
+}
+#notes .remove {
+  float: right;
+  color: #ba6126;
+  font-size: 1.2em;
+}
+.popUpWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  padding: 0 5%;
+}
+.popUpWrapper .closeButton {
+  float: right;
+  font-size: 1.5em;
+  color: #ba6126;
+  text-decoration: none;
+}
+.popUpWrapper .popup {
+  background-color: #fff;
+  border: 1px solid #D1D1D1;
+  border-radius: 5px 5px 5px 5px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 10% auto 0 auto;
+  overflow: hidden;
+}
+.popUpWrapper .contents {
+  overflow: hidden;
+  margin-top: 20px;
+}
+.popUpWrapper .cancel {
+  float: left;
+  font-size: 1.1em;
+  color: #ba6126;
+  text-decoration: none;
+  margin-top: 5px;
+}
+.popUpWrapper .save {
+  background-color: #ba6126;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 5px 50px;
+  float: right;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.popUpWrapper label {
+  color: #5E5E5E;
+  font-weight: bold;
+  min-width: 150px;
+  text-align: left;
+  font-size: 1.2em;
+  padding-right: 20px;
+  display: block;
+  width: 100%;
+}
+.popUpWrapper select,
+.popUpWrapper input,
+.popUpWrapper textarea {
+  color: #5E5E5E;
+  padding: 5px 10px;
+  font-size: 1.2em;
+  width: 400px;
+  clear: left;
+  display: inline-block;
+}
+.popUpWrapper textarea {
+  height: 120px;
+}
+.popUpWrapper .elementWrapper {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden;
+}
+.popUpWrapper .buttonWrapper {
+  margin-top: 50px;
+}
+#propertyImages {
+  height: 70%;
+  overflow: hidden;
+  text-align: center;
+}
+#propertyImages .leftArrow,
+#propertyImages .rightArrow {
+  font-size: 50px;
+  color: #ba6126;
+}
+#propertyImages .leftArrow {
+  float: left;
+}
+#propertyImages .rightArrow {
+  float: right;
+}
+#propertyImages .imageWrapper {
+  height: 100%;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+}
+#propertyImages .imageControls {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#propertyImages .helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+#propertyImages .imageNumber {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #5E5E5E;
+  display: inline-block;
+  margin-top: 9px;
+}
+#propertyImages img {
+  vertical-align: middle;
+  max-width: 100%;
+}
+.traverse {
+  width: 20%;
+  float: left;
+  margin-top: 100px;
+  padding: 0 10px;
+  word-wrap: break-word;
+  text-align: left;
+  font-size: 1.2em;
+  color: #5E5E5E;
+}
+#sketchContainer {
+  position: relative;
+  clear: both;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+#sketchContainer img {
+  height: 100%;
+  width: auto;
+}
+#sketchContainer #drawCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  margin-left: 20%;
+  height: 100%;
+  border: 1px solid #D1D1D1;
+}
+.draw {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 2em;
+  color: #D1D1D1;
+}
+.join {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  font-size: 2.7em;
+  color: #D1D1D1;
+}
+.selected {
+  color: #ba6126;
+}
+#buildingDetails table {
+  margin: 30px auto;
+}
+#buildingDetails table td {
+  padding: 15px 15px;
+  color: #5E5E5E;
+}
+#buildingDetails table .label {
+  text-align: right;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+#buildingDetails table .value {
+  font-size: 1.2em;
+}
+.editableTablePage {
+  text-align: center;
+  margin-top: 30px;
+}
+.editableTablePage .tableWrapper {
+  display: inline-block;
+}
+.editableTablePage .tableControl .addButton {
+  float: left;
+  color: #ba6126;
+  font-size: 1.5em;
+}
+.editableTablePage .tableControl .rowControl {
+  float: right;
+}
+.editableTablePage .tableControl .rowControl a {
+  text-decoration: none;
+  color: #ba6126;
+  font-size: 1.2em;
+  margin-left: 20px;
+}
+.editableTablePage .defaultTable {
+  margin: 30px auto 0 auto;
+  border: none;
+  border-collapse: collapse;
+}
+.editableTablePage .defaultTable .header {
+  color: #2A7665;
+  font-weight: bold;
+  font-size: 1.4em;
+  padding: 15px 15px;
+}
+.editableTablePage .defaultTable th,
+.editableTablePage .defaultTable td {
+  border-bottom: 1px solid #D1D1D1;
+  padding: 15px 20px;
+}
+.editableTablePage .defaultTable .content {
+  font-size: 1.2em;
+  color: #5E5E5E;
+  text-align: center;
+}
+.editableTablePage .defaultTable .selected {
+  background-color: #5E5E5E;
+  color: #fff;
+}
+.listTable {
+  margin: 30px auto;
+}
+.listTable td {
+  padding: 10px 15px;
+  color: #5E5E5E;
+}
+.listTable .label {
+  text-align: right;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.listTable .value {
+  font-size: 1.2em;
+}
+.listTable .text-left {
+  text-align: left;
+}
+.listTable .text-center {
+  text-align: center;
+}
+.listTable .legal {
+  max-width: 300px;
+}
+.listTable select {
+  color: #5E5E5E;
 }

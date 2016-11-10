@@ -1,0 +1,17 @@
+<div class="editableTablePage">
+	<div class="tableWrapper">
+		<table class="defaultTable">
+			<tr class="header">
+				<th>Status</th>
+				<th>Total</th>
+				<th>Year</th>
+			</tr>
+			<tr class="content" 
+				ng-repeat="permit in $ctrl.property.Permits">
+				<td>{{permit.Status}}</td>
+				<td>{{permit.Total}}</td>
+				<td>{{permit.Year}}</td>
+			</tr>
+		</table>
+	</div>
+</div>

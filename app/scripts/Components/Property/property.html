@@ -1,73 +1,102 @@
 ﻿<div id="property">
-    <!-- <input type="file" accept="image/*" capture="camera"> -->
-<!--     <form ng-app="fileUpload" ng-controller="MyCtrl" name="form">
-  Single Image with validations
-  <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
-    ngf-resize="{width: 100, height: 100}">Select</div>
-  <button type="submit" ng-click="$ctrl.submit()">submit</button>
-</form> -->
+     <header>
+        <h1>
+            {{$ctrl.newProperty.Address.UnitNumber}} {{$ctrl.newProperty.Address.FullStreet}}, <span>{{$ctrl.newProperty.Address.City}} {{$ctrl.newProperty.Address.Zip}}</span>
+        </h1>
+        <a href="#" ng-click="$ctrl.goToProperties()"><i class="fa fa-bars"></i></a></span>
+    </header>
 
-    <div ngf-select="$ctrl.upload($file)">Upload of file select</div>
-    <ul>
-        <li ng-repeat="item in $ctrl.imageUrls track by $index">
-            <img data-ng-src="{{item}}" style="max-width: 300px"/>
-        </li>
-    </ul>
+<section class="tabs">
 
-    <div>
-        <h2>Sketch</h2>
-        <img src="{{$ctrl.newProperty.SketchUrl}}"/>
-        <draw></draw>
-
+    <nav>
+        <ul>
+            <li class="imagesTabHeader left" ng-click="$ctrl.selectedTab=1" ng-class="{selected: $ctrl.selectedTab==1}">Images</li>
+            <li class="sketchesTabHeader middle" ng-click="$ctrl.selectedTab=2" ng-class="{selected:$ctrl.selectedTab==2}">Sketches</li>
+            <li class="notesTabHeader right" ng-click="$ctrl.selectedTab=3" ng-class="{selected:$ctrl.selectedTab==3}">Notes</li>
+        </ul>
+    </nav>
+    <div class="tab" ng-show="$ctrl.selectedTab == 1">
+        <div class="innerTab">
+            <div class="imageWrapper">
+                <span class="helper"></span>
+                <div class="imageControls" ng-show="$ctrl.imageUrls.length > 1">
+                    <i class="fa fa-arrow-left leftArrow" ng-click="$ctrl.previousImage()"></i>
+                    <span class="imageNumber">{{$ctrl.currentImageIndex + 1}} / {{$ctrl.imageUrls.length}}</span>
+                    <i class="fa fa-arrow-right rightArrow" ng-click="$ctrl.nextImage()"></i>
+                </div>
+                <img data-ng-src="{{$ctrl.selectedImage}}" style="max-height:{{$ctrl.imageHeight}}px"/>
+            </div>
+        </div>
     </div>
+    <div class="tab" ng-show="$ctrl.selectedTab == 2">
+        <div class="innerTab">
+            <div class="imageWrapper">
+                <span class="helper"></span>
+                <div class="imageControls" ng-show="$ctrl.sketches.length > 1">
+                    <i class="fa fa-arrow-left leftArrow" ng-click="$ctrl.previousSketch()"></i>
+                     <span class="imageNumber">Building {{$ctrl.selectedSketch.buildingId}}</span>
+                    <i class="fa fa-arrow-right rightArrow" ng-click="$ctrl.nextSketch()"></i>
+                </div>
+                <img data-ng-src="{{$ctrl.selectedSketch.url}}" style="max-height:{{$ctrl.imageHeight}}px"/>
+            </div>
+        </div>
+    </div>
+    <div class="tab" ng-show="$ctrl.selectedTab == 3">
+        <div class="innerTab">
+            <ul class="notes">
+                <li class="note" ng-repeat="note in $ctrl.newProperty.Notes | orderBy:'Date' ">
+                    <div class="nameWrapper">
+                        <span class="user">{{note.User}}</span>
+                        <span class="date">{{$ctrl.getDate(note.Date)}}</span>
+                    </div>
+                    <p class="noteText">{{note.Note}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
 
+<!--   <draw></draw> -->
+    
     <section class="basicInformation">
-        <header>
-            <h2>Basic Property Information</h2>
-            <nav>
-                <ul>
-                    <li>
-                        <button type="submit" ng-click="$ctrl.goToEditProperty()">
-                            Edit
-                        </button>
-                    </li>
-                    <li>
-                        <button type="submit" ng-click="$ctrl.setPropertyToComplete()">
-                            Complete
-                        </button>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-
-        <div class="sectionContent">
 
             <div class="basicInfo">
                 <div class="left clear-left">
-                    <label>Pin:</label>
-                    <span>{{$ctrl.newProperty.Pin}}</span>
+                    <label>Id:</label>
+                    <span>{{$ctrl.newProperty.Id}}</span>
                 </div>
                 <div class="left clear-left">
-                    <label>Address:</label>
-                    <span>{{$ctrl.newProperty.FullAddress}}</span>
+                    <label>Type:</label>
+                    <span>{{$ctrl.newProperty.Type.Description}}</span>
+                </div>
+                <div class="left clear-left">
+                    <label>Buildings: </label>
+                    <span>{{$ctrl.newProperty.Buildings.length}}</span>
+                </div>
+                <div class="left clear-left">
+                    <label>Owner:</label>
+                    <ul>
+                        <li><span>{{$ctrl.newProperty.Owner.Name}}</span></li>
+                        <li><span>{{$ctrl.newProperty.Owner.AddressLine1}}</span></li>
+                    </ul>
                 </div>
             </div>
 
+            <div class="buttons">
 
-        </div>
-    </section>
+                    <a href="https://www.google.com/maps/dir/current+location/{{$ctrl.newProperty.Address.Address}}" target="_blank" class="directions">
+                        Directions
+                    </a>
 
-    <section class="imageSection">
-        <div class="imgWrapper">
-            <img src="/images/Properties/{{$ctrl.newProperty.Pin}}.jpg" />
-        </div>
-    </section>
-
-    <section class="sketchSection">
-        <div class="sketchWrapper">
-            <img src="{{$ctrl.newProperty.SketchUrl}}" />
-        </div>
+                    <a href="#" class="viewPropertyCard" ng-click="$ctrl.goToEditProperty()">
+                        View Property Card
+                    </a>
+       
+                    <a href="#" class="complete" ng-click="$ctrl.setPropertyToComplete()">
+                        Complete
+                    </a>
+        
+            </div>
     </section>
 </div>
 

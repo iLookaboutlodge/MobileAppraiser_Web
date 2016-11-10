@@ -1,0 +1,37 @@
+#selectBuilding {
+	clear:left;
+	overflow: hidden;
+	border-top: 1px solid @lightGrey;
+	padding: 10px 2%;
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		color: @grey;
+		font-weight: bold;
+	}
+
+	li {
+		width: 100%;
+		max-width: 33%;
+		float:left;
+		padding-right: 2%;
+		padding-left: 2%;
+		overflow:hidden;
+		border: 1px solid #ccc; 
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		img {
+			width: 100%;
+		}
+		span {
+			text-align: center;
+			display:block;
+			padding: 5px 0;
+		}
+	}
+}
