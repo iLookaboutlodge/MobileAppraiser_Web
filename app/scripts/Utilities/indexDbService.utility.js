@@ -1,5 +1,5 @@
-angular.module('indexDB',[])
-	.factory('indexDBService', function($window, $q){
+angular.module('utilities')
+	.factory('indexDBUtility', function($window, $q){
 		var factory = {};
 		var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 		var setUp = false;
@@ -65,7 +65,6 @@ angular.module('indexDB',[])
 			    var openRequest = window.indexedDB.open(dbName, version);
 
 			   	openRequest.onerror = function(e){
-			   		//console.log("Error opening db", e);
 			   		dbOpenPromise.reject(e.toString());
 			   	};
 
@@ -115,7 +114,6 @@ angular.module('indexDB',[])
 					}
 
 					request.onerror = function(e){
-						//console.log(e);
 					    deferred.reject(e);
 					}
 				}
@@ -146,7 +144,6 @@ angular.module('indexDB',[])
 					}
 
 					request.onerror = function(e){
-						//console.log(e);
 					    deferred.reject(e);
 					}
 				}
@@ -196,7 +193,6 @@ angular.module('indexDB',[])
 	  	factory.open().then(
 	  		function(){
 	  			var results = [];
-	  			console.log('store',store);
 			  	var trans = db.transaction(store, "readwrite");
 				var objectStore = trans.objectStore(store);
 				var storeIndex = objectStore.index(index);

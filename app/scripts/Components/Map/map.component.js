@@ -1,4 +1,4 @@
-var mapComponent = angular.module('mapModule', ['property']);
+var mapComponent = angular.module('components');
 
 mapComponent.component('map',
 {

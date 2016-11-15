@@ -1,4 +1,4 @@
-var buildingDepreciationComponent = angular.module('buildingDepreciationModule', ['property']);
+var buildingDepreciationComponent = angular.module('components');
 buildingDepreciationComponent.component('buildingdepreciation',
 {
 	templateUrl: 'Property/Tabs/building/depreciation.html',

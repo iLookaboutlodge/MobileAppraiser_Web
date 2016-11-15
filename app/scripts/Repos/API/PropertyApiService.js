@@ -1,10 +1,5 @@
-﻿angular.module('propertyApi', ['config'])
-    .config(['$httpProvider', function ($httpProvider) {    
-        $httpProvider.defaults.useXDomain = true;    
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-        delete $httpProvider.defaults.headers.common['Origin'];
-    }])
-    .factory('propertyApiService', ['$http','$q','ENV',
+﻿angular.module('repos')
+    .factory('propertyApiRepo', ['$http','$q','ENV',
         function($http, $q, ENV) {
             var factory = {};
             var _properties;

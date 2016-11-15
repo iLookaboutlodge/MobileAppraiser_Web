@@ -1,4 +1,4 @@
-﻿var propertyComponent = angular.module('editPropertyModule', ['property']);
+﻿var propertyComponent = angular.module('components');
 propertyComponent.component('editproperty',
 {
 	templateUrl: 'Property/editProperty.html',

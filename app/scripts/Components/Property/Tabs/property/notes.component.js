@@ -1,23 +1,15 @@
-var propertyNotesComponent = angular.module('propertyNotesModule', ['property']);
+var propertyNotesComponent = angular.module('components');
 propertyNotesComponent.component('propertynotes',
 {
 	templateUrl: 'Property/Tabs/property/notes.html',
-	controller: ['$stateParams', '$scope', '$rootScope', 'propertyService', function ($stateParams, $scope, $rootScope, propertyService) {
+	controller: ['$stateParams', '$scope', '$rootScope', 'propertyService','dateUtility', function ($stateParams, $scope, $rootScope, propertyService, dateUtility) {
 	    
 	    var vm = this;
 		vm.propertyId = $stateParams.id;
 	    vm.showPopup = false;
 
-		var monthNames = [
-		  "January", "February", "March",
-		  "April", "May", "June", "July",
-		  "August", "September", "October",
-		  "November", "December"
-		];
-
 		vm.getDate = function(date) {
-    		var dateObj = new Date(date);
-    		return dateObj.getDate() + '-' + monthNames[dateObj.getMonth()] + '-' + dateObj.getFullYear();
+    		return dateUtility.getDate(date);
     	};
 
     	vm.saveNote = function(){

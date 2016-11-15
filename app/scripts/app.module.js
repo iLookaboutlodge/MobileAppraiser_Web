@@ -1,49 +1,14 @@
 ﻿var app = angular.module('app',
     [
         "ui.router",
-        'ngCookies',
-        "auth",
-        "property",
-        "loginModule",
-        "navbarModule",
-        "propertiesModule",
-        "aboutModule",
-        "propertyModule",
-        "editPropertyModule",
-        "buildingTabModule",
-        "selectBuildingModule",
-        "buildingSketchModule",
-        "buildingDetailsModule",
-        "buildingAreasModule",
-        "buildingCharacteristicsModule",
-        "buildingDepreciationModule",
-        "buildingExtraFeaturesModule",
-        "buildingInteriorModule",
-        "buildingNotesModule",
-        "propertyTabModule",
-        "propertyDetailsModule",
-        "propertyImagesModule",
-        "propertyPermitsModule",
-        "propertyNotesModule",
-        "propertyLandModule",
-        "propertyInspectionsModule",
-        "propertySalesModule",
-        "mapModule",
-        "sketchModule",
-        "drawModule",
-        "config",
-        "property",
-        "propertyApi",
-        "propertyIndexDB",
-        "imageIndexDB",
-        "sketchIndexDB",
-        "indexDB",
-        "update",
-        "ngFileUpload",
-        "ngTouch"
+        "components",
+        "services",
+        "repos",
+        "utilities",
+        "filters"
     ])
     .run([
-        "$window", "$rootScope", "$location", "$cookieStore", "indexDBService", "updateService", function($window, $rootScope, $location, $cookieStore, indexDBService, updateService) {
+        "$window", "$rootScope", "$location", "$cookieStore", "updateService", function($window, $rootScope, $location, $cookieStore, updateService) {
             
             $rootScope.online = navigator.onLine;
 
@@ -62,11 +27,6 @@
                     updateService.update();
                 })
             }, false);
-            
-
-            // indexDBService.open().then(function(){
-            //     propertyService.updatePropertyList();
-            // });
 
             $rootScope.globals = $cookieStore.get('globals') || {};
             if (!$rootScope.globals || !$rootScope.globals.currentUser) {

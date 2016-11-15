@@ -1,23 +1,23 @@
-angular.module('propertyIndexDB', ['indexDB'])
-    .factory('propertyIndexDBService', ['$q', 'indexDBService',
-        function($q, indexDBService) {
+angular.module('repos')
+    .factory('propertyDBRepo', ['$q', 'indexDBUtility',
+        function($q, indexDBUtility) {
             var factory = {};
             var _properties;
             var store = "properties";
  
             factory.getAll = function() {
-                return indexDBService.getAll(store);
-            }
+                return indexDBUtility.getAll(store);
+            };
 
             factory.get = function(id) {
-                return indexDBService.get(store, id);
-            }
+                return indexDBUtility.get(store, id);
+            };
 
             factory.getMultiple = function(ids){
                 var promises = [];
                 console.log('iddines:', ids);
 
-                for(var i =0; i < ids.length; i++){
+                for(var i =0; i < ids.length; i++) {
                     promises.push(factory.get(ids[i]));
                 }
 
@@ -26,27 +26,27 @@ angular.module('propertyIndexDB', ['indexDB'])
                         console.log('listofimage: ', result);
                     }
                 );
-            }
+            };
 
             factory.update = function(property) {
-                return indexDBService.put(store, property);
-            }
+                return indexDBUtility.put(store, property);
+            };
 
             factory.exists = function(id) {
-                return indexDBService.exists(store, id);
-            }
+                return indexDBUtility.exists(store, id);
+            };
 
             factory.add = function(property) {
-                return indexDBService.add(store, property);
-            }
+                return indexDBUtility.add(store, property);
+            };
 
             factory.getCompleted = function() {
-                return indexDBService.getByIndex(store, "Completed", "true");
-            }
+                return indexDBUtility.getByIndex(store, "Completed", "true");
+            };
 
             factory.delete = function(id) {
-                return indexDBService.delete(store, id);
-            }
+                return indexDBUtility.delete(store, id);
+            };
 
             return factory;
         }]);

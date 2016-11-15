@@ -1,4 +1,4 @@
-var propertyTabComponent = angular.module('propertyTabModule', []);
+var propertyTabComponent = angular.module('components');
 propertyTabComponent.component('propertytab',
 {
 	templateUrl: 'Property/Tabs/propertyTab.html',

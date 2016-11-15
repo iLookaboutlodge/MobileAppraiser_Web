@@ -1,21 +1,13 @@
-var propertySalesComponent = angular.module('propertySalesModule', ['property']);
+var propertySalesComponent = angular.module('components');
 propertySalesComponent.component('propertysales',
 {
 	templateUrl: 'Property/Tabs/property/sales.html',
-	controller: ['$stateParams', '$scope', 'propertyService', function ($stateParams, $scope, propertyService) {
+	controller: ['$stateParams', '$scope', 'propertyService','dateUtility', function ($stateParams, $scope, propertyService, dateUtility) {
 	    var vm = this;
 	    vm.propertyId = $stateParams.id;
 
-		var monthNames = [
-		  "January", "February", "March",
-		  "April", "May", "June", "July",
-		  "August", "September", "October",
-		  "November", "December"
-		];
-
 		vm.getDate = function(date) {
-    		var dateObj = new Date(date);
-    		return dateObj.getDate() + '-' + monthNames[dateObj.getMonth()] + '-' + dateObj.getFullYear();
+    		return dateUtility.getDate(date);
     	};
 
      	propertyService.get(vm.propertyId)

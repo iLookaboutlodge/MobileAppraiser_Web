@@ -1,5 +1,5 @@
-﻿angular.module('auth', [])
-    .factory('authService',['$rootScope', '$cookieStore',
+﻿angular.module('utilities')
+    .factory('authUtility',['$rootScope', '$cookieStore',
         function ($rootScope, $cookieStore) {
             var factory = {};
 
@@ -16,7 +16,6 @@
             factory.clearCredentials = function() {
                 $rootScope.globals = {};
                 $cookieStore.remove('globals');
-
             };
 
             factory.IsLoggedIn = function() {

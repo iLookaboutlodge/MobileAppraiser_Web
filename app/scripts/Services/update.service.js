@@ -1,4 +1,4 @@
-angular.module('update',['property'])
+angular.module('services')
 	.factory('updateService', ['$q', '$rootScope', 'propertyService',
 		function($q, $rootScope,  propertyService){
 			var factory = {};

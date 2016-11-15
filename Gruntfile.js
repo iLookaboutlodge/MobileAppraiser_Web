@@ -30,7 +30,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: {
-          '<%= config.app %>/index.html': ['<%= config.app %>/scripts/libs/**/*.js','<%= config.app %>/scripts/services/**/*.js','<%= config.app %>/scripts/components/**/*.js','<%= config.app %>/scripts/config.js', '<%= config.app %>/scripts/app.module.js', '<%= config.app %>/scripts/app.config.js', '<%= config.app %>/scripts/_templates.js']
+          '<%= config.app %>/index.html': ['<%= config.app %>/scripts/libs/**/*.js', '<%= config.app %>/scripts/Utilities/utilities.module.js','<%= config.app %>/scripts/Utilities/**/*.js','<%= config.app %>/scripts/Filters/filters.module.js','<%= config.app %>/scripts/Filters/**/*.js','<%= config.app %>/scripts/Repos/repos.module.js','<%= config.app %>/scripts/Repos/**/*.js','<%= config.app %>/scripts/services/services.module.js','<%= config.app %>/scripts/services/**/*.js','<%= config.app %>/scripts/components/components.module.js','<%= config.app %>/scripts/components/**/*.js','<%= config.app %>/scripts/config.js', '<%= config.app %>/scripts/app.module.js', '<%= config.app %>/scripts/app.config.js', '<%= config.app %>/scripts/_templates.js']
         }
       },
       html: {
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
         tasks: ['less', 'injector:css']
       },
       js: {
-        files: ['<%= config.app %>/scripts/**.js'],
+        files: ['<%= config.app %>/scripts/**/*.js'],
         tasks: ['less', 'injector:js']
       },
       html: {

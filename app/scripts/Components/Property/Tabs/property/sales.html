@@ -12,7 +12,7 @@
 			</tr>
 			<tr class="content" 
 				ng-repeat="sale in $ctrl.property.Sales">
-				<td>{{$ctrl.getDate(sale.Date)}}</td>
+				<td>{{sale.Date | dateString}}</td>
 				<td>{{sale.IN}}</td>
 				<td>{{sale.ORInstNo}}</td>
 				<td>{{sale.QU}}</td>

@@ -1,4 +1,4 @@
-var buildingTabComponent = angular.module('buildingTabModule', ['property']);
+var buildingTabComponent = angular.module('components');
 buildingTabComponent.component('buildingtab',
 {
 	templateUrl: 'Property/Tabs/buildingTab.html',

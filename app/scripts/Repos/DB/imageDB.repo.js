@@ -1,16 +1,16 @@
- angular.module('imageIndexDB', ['indexDB'])
-    .factory('imageIndexDBService', ['$q', 'indexDBService',
-        function($q, indexDBService) {
+ angular.module('repos')
+    .factory('imageDBRepo', ['$q', 'indexDBUtility',
+        function($q, indexDBUtility) {
             var factory = {};
             var _properties;
             var store = "images";
  
             factory.getAll = function() {
-                return indexDBService.getAll(store);
+                return indexDBUtility.getAll(store);
             };
 
             factory.get = function(id) {
-                return indexDBService.get(store, id);
+                return indexDBUtility.get(store, id);
             };
 
             factory.getMultiple = function(ids){
@@ -24,17 +24,17 @@
             };
 
             factory.update = function(property) {
-                return indexDBService.put(store, property);
+                return indexDBUtility.put(store, property);
             };
 
             factory.exists = function(id) {
-                return indexDBService.exists(store, id);
+                return indexDBUtility.exists(store, id);
             };
 
             factory.add = function(propertyid, id, data, imageType) {
                 var deferred = $q.defer();
 
-                indexDBService.add(store, {propertyId: propertyid, id: id, date: new Date(), arrayBuffer: data, imageType: imageType})
+                indexDBUtility.add(store, {propertyId: propertyid, id: id, date: new Date(), arrayBuffer: data, imageType: imageType})
                     .then(
                         function(item){
                             deferred.resolve(item);
@@ -49,11 +49,11 @@
             };
 
             factory.getForProperty = function(propertyId) {
-                return indexDBService.getByIndex(store, "propertyId", propertyId);
+                return indexDBUtility.getByIndex(store, "propertyId", propertyId);
             };
 
             factory.delete = function(id) {
-                return indexDBService.delete(store, id);
+                return indexDBUtility.delete(store, id);
             };
 
             return factory;

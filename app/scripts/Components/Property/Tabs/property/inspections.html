@@ -7,7 +7,7 @@
 			{{$ctrl.property.Inspections.SiteReviewBy}}
 		</td>
 		<td class="value text-left"> 
-			{{$ctrl.getDate($ctrl.property.Inspections.SiteReviewDate)}}
+			{{$ctrl.property.Inspections.SiteReviewDate | dateString}}
 		</td>
 	</tr>
 		<tr>
@@ -18,7 +18,7 @@
 			{{$ctrl.property.Inspections.PermitBy}}
 		</td>
 		<td class="value text-left"> 
-			{{$ctrl.getDate($ctrl.property.Inspections.PermitDate)}}
+			{{$ctrl.property.Inspections.PermitDate | dateString}}
 		</td>
 	</tr>
 	<tr>
@@ -29,7 +29,7 @@
 			{{$ctrl.property.Inspections.ValueBy}}
 		</td>
 		<td class="value text-left"> 
-			{{$ctrl.getDate($ctrl.property.Inspections.ValueDate)}}
+			{{$ctrl.property.Inspections.ValueDat | dateString}}
 		</td>
 	</tr>
 
@@ -41,7 +41,7 @@
 			{{$ctrl.property.Inspections.SalesBy}}
 		</td>
 		<td class="value text-left"> 
-			{{$ctrl.getDate($ctrl.property.Inspections.SalesDate)}}
+			{{$ctrl.property.Inspections.SalesDate | dateString}}
 		</td>
 	</tr>
 
@@ -53,7 +53,7 @@
 			{{$ctrl.property.Inspections.AerialBy}}
 		</td>
 		<td class="value text-left"> 
-			{{$ctrl.getDate($ctrl.property.Inspections.AerialDate)}}
+			{{$ctrl.property.Inspections.AerialDate | dateString}}
 		</td>
 	</tr>
 	<tr>
@@ -64,7 +64,7 @@
 			{{$ctrl.property.Inspections.ExBy}}
 		</td>
 		<td class="value text-left"> 
-			{{$ctrl.getDate($ctrl.property.Inspections.ExDate)}}
+			{{$ctrl.property.Inspections.ExDate | dateString}}
 		</td>
 	</tr>
 </table>

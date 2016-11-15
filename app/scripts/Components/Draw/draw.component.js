@@ -1,4 +1,4 @@
-var drawComponent = angular.module("drawModule", ["ngTouch"]);
+var drawComponent = angular.module("components");
 aboutComponent.component("draw",
 {
 	templateUrl: 'Draw/draw.html',

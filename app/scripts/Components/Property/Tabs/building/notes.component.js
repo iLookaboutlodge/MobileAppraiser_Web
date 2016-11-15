@@ -1,24 +1,16 @@
-var buildingNotesComponent = angular.module('buildingNotesModule', ['property']);
+var buildingNotesComponent = angular.module('components');
 buildingNotesComponent.component('buildingnotes',
 {
 	templateUrl: 'Property/Tabs/building/notes.html',
-	controller: ['$stateParams', '$state', '$rootScope', 'propertyService', function ($stateParams, $state, $rootScope, propertyService) {
+	controller: ['$stateParams', '$state', '$rootScope', 'propertyService','dateUtility', function ($stateParams, $state, $rootScope, propertyService, dateUtility) {
 
 	    var vm = this;
 		vm.propertyId = $stateParams.id;
 	    vm.buildingId = $stateParams.buildingid;
 	    vm.showPopup = false;
 
-		var monthNames = [
-		  "January", "February", "March",
-		  "April", "May", "June", "July",
-		  "August", "September", "October",
-		  "November", "December"
-		];
-
 		vm.getDate = function(date) {
-    		var dateObj = new Date(date);
-    		return dateObj.getDate() + '-' + monthNames[dateObj.getMonth()] + '-' + dateObj.getFullYear();
+    		return dateUtility.getDate(date);
     	};
 
     	vm.saveNote = function(){
@@ -43,8 +35,6 @@ buildingNotesComponent.component('buildingnotes',
         }
 
     	$rootScope.$watch('noteAdded', function(){
-            //should show loading screen here
-            console.log('noteAdded watch kicked off');
             init();
         });
 

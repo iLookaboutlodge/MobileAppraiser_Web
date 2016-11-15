@@ -1,8 +1,8 @@
-﻿var propertyComponent = angular.module('propertyModule', ['property', 'ngFileUpload']);
+﻿var propertyComponent = angular.module('components');
 propertyComponent.component('property',
 {
 	templateUrl: 'Property/property.html',
-	controller: ['$window','$stateParams', '$scope', '$state', '$rootScope', '$window', 'propertyService', 'Upload', function ($window, $stateParams, $scope, $state, $rootScope, $window, propertyService, Upload) {
+	controller: ['$window','$stateParams', '$scope', '$state', '$rootScope', '$window', 'propertyService', 'imageService', 'sketchService', 'dateUtility', function ($window, $stateParams, $scope, $state, $rootScope, $window, propertyService, imageService, sketchService, dateUtility) {
 
 	    var vm = this;
 	    vm.currentImageIndex = 0;
@@ -42,32 +42,19 @@ propertyComponent.component('property',
 	    }
 
 	    var getImages = function(){
-	    	propertyService.getImagesForProperty(vm.propertyId).then(function(imageUrls){
+	    	imageService.getImagesForProperty(vm.propertyId).then(function(imageUrls){
         		vm.imageUrls = imageUrls.sort(function(a,b){a.date - b.date;});
         		setImage(0);
         	});
 	    };
 
 	    var getSketches  = function(){
-	    	propertyService.getSketchesForProperty(vm.propertyId).then(
+	    	sketchService.getSketchesForProperty(vm.propertyId).then(
 	    		function(sketches){
 	    			vm.sketches = sketches;
 	    			vm.selectedSketch = sketches[0];
     		});
 	    };
-
-		var monthNames = [
-		  "January", "February", "March",
-		  "April", "May", "June", "July",
-		  "August", "September", "October",
-		  "November", "December"
-		];
-
-		vm.getDate = function(date) {
-    		var dateObj = new Date(date);
-    		return dateObj.getDate() + '-' + monthNames[dateObj.getMonth()] + '-' + dateObj.getFullYear();
-    	};
-
 
 	    vm.goToEditProperty = function() {
 	        $state.go("editproperty.selectbuilding", {id: vm.propertyId});
@@ -83,7 +70,7 @@ propertyComponent.component('property',
 	    }
 
 	    vm.upload = function(file){
-	    	propertyService.addImage(vm.propertyId, file).then(
+	    	imageService.addImage(vm.propertyId, file).then(
 	    		function(){
 	    			getImages();
 	    		}
