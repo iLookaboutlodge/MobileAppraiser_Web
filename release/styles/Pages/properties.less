@@ -2,8 +2,38 @@
 @import (once) '../elements.less';
 
 #properties {
-    max-width: 1043px;
-    margin: 35px auto 0 auto;
+
+    .tabs {
+       overflow:hidden;
+       width: 100%;
+       border-bottom: 1px solid @lightGrey;
+
+       span {
+            max-width: 200px;
+            padding: 10px 20px;
+            color: @green;
+            display: block;
+            float:left;
+            font-weight: bold;
+            &.selected {
+                background-color: @green;
+                color: #fff;
+            }
+       }
+
+       span + span {
+            border-left: 1px solid @lightGrey;
+       }
+
+       :last-child {
+            border-right: 1px solid @lightGrey;
+       }
+    }
+
+    .pageWrapper {
+        max-width: 1043px;
+        margin: 35px auto 0 auto;
+    }
 
     .searchWrapper {
         margin: 0 auto;
@@ -37,27 +67,12 @@
         }
     }
 
-
-    .filter {
-        float:right;
-        span {
-            margin-left: 30px;
-            font-size: 1.2em;
-            color: @lightGrey;
-        }
-
-        span.selected {
-            color: @orange;
-        }
-    }
-    
-
     table, tr, th, td {
         border: none;
         margin: 0;
     }
 
-    .tableWrapper{
+    .tableWrapper {
         margin: 20px auto 0 auto;
         width: 100%;
         clear:left;
@@ -65,6 +80,19 @@
         float:left;
     }
 
+    .secondaryButton {
+        color: #fff;
+        background-color: @lightGreen;
+        padding: 7px 10px;
+        border-radius: 5px;
+    }
+
+    .showHideMap {
+        float:right;
+        color: @orange;
+        font-size: 1.5em;
+    }
+       
     table {
         margin: 0;
         border-collapse:collapse;
@@ -84,16 +112,16 @@
         }
 
         tr {
-            border-bottom: 2px solid @lightGrey;
-             
-            &:hover{
-                background: #D0D3D4;
-                cursor: pointer;
-            }
+            border-bottom: 2px solid @lightGrey;           
         }
 
         .selected {
             background-color: @lightGreen;
+        }
+
+        .fa.view {
+            color: @orange;
+            font-size: 1.2em;
         }
     }
 

@@ -1,8 +1,8 @@
-var propertyImagesComponent = angular.module('propertyImagesModule', ['property']);
+var propertyImagesComponent = angular.module('components');
 propertyImagesComponent.component('propertyimages',
 {
 	templateUrl: 'Property/Tabs/property/images.html',
-	controller: ['$stateParams', '$scope', '$rootScope', '$q', 'propertyService', function ($stateParams, $scope, $rootScope, $q, propertyService) {
+	controller: ['$stateParams', '$scope', '$rootScope', '$q', 'imageService', function ($stateParams, $scope, $rootScope, $q, imageService) {
 
 	    var vm = this;
 	    vm.currentImageIndex = 0;
@@ -39,7 +39,7 @@ propertyImagesComponent.component('propertyimages',
 	    var getImages = function(){
 	    	var deferred = $q.defer();
 
-	    	propertyService.getImagesForProperty(vm.propertyId).then(function(imageUrls){
+	    	imageService.getImagesForProperty(vm.propertyId).then(function(imageUrls){
         		vm.imageUrls = imageUrls.sort(function(a,b){a.date-b.date});
         		setImage();
         		deferred.resolve();
@@ -49,6 +49,11 @@ propertyImagesComponent.component('propertyimages',
 	    };
 
 	    var setImage = function(index) {
+	    	
+	    	if(!index){
+	    		index = 0;
+	    	}
+
 	    	vm.currentImageIndex = index;
 	    	vm.selectedImage = vm.imageUrls[vm.currentImageIndex];
 	    };

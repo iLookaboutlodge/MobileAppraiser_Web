@@ -1,9 +1,9 @@
-﻿var navbarComponent = angular.module('navbarModule', ['auth', 'property', 'update']);
+﻿var navbarComponent = angular.module('components');
 
 navbarComponent.component('navbar',
 {
     templateUrl: 'Nav/navbar.html',
-    controller: ['$scope', '$rootScope', 'authService', '$state', 'propertyService','updateService', function ($scope, $rootScope, authService, $state, propertyService, updateService) {
+    controller: ['$scope', '$rootScope', 'authUtility', '$state', 'propertyService','updateService', function ($scope, $rootScope, authUtility, $state, propertyService, updateService) {
         var vm = this;
 
         vm.goToMap = function () {
@@ -27,11 +27,11 @@ navbarComponent.component('navbar',
         }
 
         vm.loggedIn = function() {
-            return authService.IsLoggedIn();
+            return authUtility.IsLoggedIn();
         }
 
         vm.logOut = function () {
-            authService.clearCredentials();
+            authUtility.clearCredentials();
             $state.go("login");
         }
 

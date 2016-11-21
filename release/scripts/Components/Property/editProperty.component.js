@@ -1,4 +1,4 @@
-﻿var propertyComponent = angular.module('editPropertyModule', ['property']);
+﻿var propertyComponent = angular.module('components');
 propertyComponent.component('editproperty',
 {
 	templateUrl: 'Property/editProperty.html',
@@ -57,13 +57,6 @@ propertyComponent.component('editproperty',
 			}
 
 	    	reader.readAsDataURL(file);
-
-	    	// console.log(file);
-	    	// propertyService.addImage(vm.propertyId, file).then(
-	    	// 	function(newImage){
-	    	// 		$rootScope.imageUploaded = new Date();
-	    	// 	}
-    		// );
 	    };
 
 	    vm.goToNextBuilding = function(){

@@ -584,7 +584,30 @@ footer {
 #navigation .iconWrapper .noInternet {
   margin-left: -10px;
 }
-#properties {
+#properties .tabs {
+  overflow: hidden;
+  width: 100%;
+  border-bottom: 1px solid #D1D1D1;
+}
+#properties .tabs span {
+  max-width: 200px;
+  padding: 10px 20px;
+  color: #2A7665;
+  display: block;
+  float: left;
+  font-weight: bold;
+}
+#properties .tabs span.selected {
+  background-color: #2A7665;
+  color: #fff;
+}
+#properties .tabs span + span {
+  border-left: 1px solid #D1D1D1;
+}
+#properties .tabs :last-child {
+  border-right: 1px solid #D1D1D1;
+}
+#properties .pageWrapper {
   max-width: 1043px;
   margin: 35px auto 0 auto;
 }
@@ -630,17 +653,6 @@ footer {
   color: #59C2AB;
   margin-top: 3px;
 }
-#properties .filter {
-  float: right;
-}
-#properties .filter span {
-  margin-left: 30px;
-  font-size: 1.2em;
-  color: #D1D1D1;
-}
-#properties .filter span.selected {
-  color: #ba6126;
-}
 #properties table,
 #properties tr,
 #properties th,
@@ -654,6 +666,17 @@ footer {
   clear: left;
   margin-top: 10px;
   float: left;
+}
+#properties .secondaryButton {
+  color: #fff;
+  background-color: #59C2AB;
+  padding: 7px 10px;
+  border-radius: 5px;
+}
+#properties .showHideMap {
+  float: right;
+  color: #ba6126;
+  font-size: 1.5em;
 }
 #properties table {
   margin: 0;
@@ -673,12 +696,12 @@ footer {
 #properties table tr {
   border-bottom: 2px solid #D1D1D1;
 }
-#properties table tr:hover {
-  background: #D0D3D4;
-  cursor: pointer;
-}
 #properties table .selected {
   background-color: #59C2AB;
+}
+#properties table .fa.view {
+  color: #ba6126;
+  font-size: 1.2em;
 }
 #property {
   margin-top: 10px;
@@ -922,66 +945,17 @@ footer {
 #property .notes .note + .note {
   border-top: 1px solid #D1D1D1;
 }
-#mapPage {
-  margin-top: 40px;
-  padding: 0 2%;
-}
-#mapPage .basicInformation {
-  overflow: hidden;
-}
-#mapPage .basicInformation header {
-  width: 100%;
-  background-color: #ba6126;
-  overflow: hidden;
-  padding: 5px 1%;
-}
-#mapPage .basicInformation header h2 {
-  float: left;
-  color: #fff;
-  margin: 5px 0 0 0;
-  padding: 0;
-  font-size: 1.1em;
-}
-#mapPage .basicInformation header ul {
-  list-style: none;
-  float: right;
-  margin: 0;
-  padding: 0;
-}
-#mapPage .basicInformation header li {
-  float: left;
-  margin-left: 30px;
-}
-#mapPage .basicInformation header img {
-  width: 30px;
-}
-#mapPage .basicInformation .sectionContent {
-  padding: 10px 1%;
-  overflow: hidden;
-  width: 100%;
-}
-#mapPage .basicInformation label {
-  font-weight: bold;
-  margin-right: 5px;
-}
-#mapPage .basicInformation .basicInfo,
-#mapPage .basicInformation .basicDetails {
-  float: left;
-}
-#mapPage .basicInformation .basicInfo {
-  margin-right: 30px;
-  overflow: hidden;
-}
-#mapPage .basicInformation .detail {
-  float: left;
-  margin-right: 30px;
-}
 #mapPage #map {
   width: 100%;
-  z-index: 10;
   height: 500px;
-  margin-bottom: 10px;
-  margin-top: 20px;
+  position: relative;
+}
+#mapPage .angular-google-map-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 #editProperty header.propertyLocation {
   width: 100%;

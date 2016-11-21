@@ -61,7 +61,7 @@ propertyComponent.component('property',
 	    }
 
 	    vm.setPropertyToComplete = function() {
-	    	vm.newProperty.Completed = "true";
+	    	vm.newProperty.WorkStatus = "complete";
 	    	propertyService.update(vm.newProperty).then(
 	    		function(){
 	    			$state.go("properties");

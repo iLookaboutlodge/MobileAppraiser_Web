@@ -1,4 +1,4 @@
-var buildingCharacteristicsComponent = angular.module('buildingCharacteristicsModule', ['property']);
+var buildingCharacteristicsComponent = angular.module('components');
 buildingCharacteristicsComponent.component('buildingcharacteristics',
 {
 	templateUrl: 'Property/Tabs/building/characteristics.html',

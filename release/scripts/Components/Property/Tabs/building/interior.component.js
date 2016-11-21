@@ -1,4 +1,4 @@
-var buildingInteriorComponent = angular.module('buildingInteriorModule', ['property']);
+var buildingInteriorComponent = angular.module('components');
 buildingInteriorComponent.component('buildinginterior',
 {
 	templateUrl: 'Property/Tabs/building/interior.html',

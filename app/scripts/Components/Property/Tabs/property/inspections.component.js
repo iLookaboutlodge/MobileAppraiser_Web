@@ -7,10 +7,6 @@ propertyInspectionsComponent.component('propertyinspections',
        	var vm = this;
     	vm.propertyId = $stateParams.id;
 
-    	vm.getDate = function(date) {
-    		return dateUtility.getDate(date);
-    	};
-
      	propertyService.get(vm.propertyId)
         .then(
         	function (result) {

@@ -1,39 +1,19 @@
 ﻿<div id="mapPage">
-    <section class="basicInformation">
-        <header>
-            <h2>Basic Property Information</h2>
-            <nav>
-                <ul>
-                    <li><a href="#" ng-click="$ctrl.previous()"><img src="/images/icons-svg/arrow-l-white.svg" /></a></li>
-                    <li><a href="#" ng-click="$ctrl.next()"><img src="/images/icons-svg/arrow-r-white.svg" /></a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <div class="sectionContent">
-            <div class="basicInfo">
-                <div class="left clear-left">
-                    <label>Pin:</label>
-                    <span>{{$ctrl.property.Pin}}</span>
-                </div>
-                <div class="left clear-left">
-                    <label>Address:</label>
-                    <span>{{$ctrl.property.FullAddress}}</span>
-                </div>
-            </div>
-
-            <div class="basicDetails">
-                <div ng-repeat="detail in $ctrl.property.Data[1]" class="detail">
-                    <label>{{detail.Field.Label}}:</label>
-                    <span ng-show="detail.Field.ReadOnly && detail.Field.Type=='2'">{{detail.Data.Value}}</span>
-                    <span ng-show="detail.Field.ReadOnly && detail.Field.Type=='5'">{{detail.Field.Values[detail.Data.Value].Value}}</span>
-
-                    <input type="text" ng-show="!detail.Field.ReadOnly && detail.Field.Type=='2'" ng-model="$ctrl.property.Data[1][$index].Data.Value" value="{{detail.Data.Value}}" />
-                    <select ng-show="!detail.Field.ReadOnly && detail.Field.Type=='5'" ng-model="$ctrl.newProperty.Data[1][$index].Data.Value" ng-options="item.Id as item.Value for item in detail.Field.Values"></select>
-                </div>
-            </div>
-        </div>
-
-    </section>
-    <div id="map"></div>
+    <div id="map">
+    	<ui-gmap-google-map bounds="map.bounds" center="$ctrl.currentPosition" zoom="12">
+    		<ui-gmap-markers
+    			models="$ctrl.filteredProperties"
+    			idKey="'Id'"
+    			coords="'Coords'"
+    			options="'markerOptions'"
+    			control="$ctrl.markerControl"
+    			fit="true">
+    		</ui-gmap-markers>
+    		<ui-gmap-marker
+    			idKey="19999"
+    			coords='$ctrl.currentPositionMarker.coords'
+    			options='$ctrl.currentPositionMarker.markerOptions'>
+    		</ui-gmap-marker>
+    	</ui-gmap-google-map>
+    </div>
 </div>

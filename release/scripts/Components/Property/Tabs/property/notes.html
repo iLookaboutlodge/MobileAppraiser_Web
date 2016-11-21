@@ -5,7 +5,7 @@
 			<li ng-repeat="note in $ctrl.property.Notes | orderBy:'-Date' track by $index">
 				<div class="nameWrapper">
 					<span class="user">{{note.User}}</span>
-					<span class="date">{{$ctrl.getDate(note.Date)}}</span>
+					<span class="date">{{note.Date | dateString}}</span>
 				</div>
 				<p class="note">{{note.Note}}</p>
 				<span class="remove" ng-click="$ctrl.remove(note)">Remove</span>

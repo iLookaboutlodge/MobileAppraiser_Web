@@ -47,7 +47,7 @@
                 <li class="note" ng-repeat="note in $ctrl.newProperty.Notes | orderBy:'Date' ">
                     <div class="nameWrapper">
                         <span class="user">{{note.User}}</span>
-                        <span class="date">{{$ctrl.getDate(note.Date)}}</span>
+                        <span class="date">{{note.Date | dateString}}</span>
                     </div>
                     <p class="noteText">{{note.Note}}</p>
                 </li>

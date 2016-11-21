@@ -1,8 +1,8 @@
-var propertyComponent = angular.module('selectBuildingModule', ['property']);
+var propertyComponent = angular.module('components');
 propertyComponent.component('selectbuilding',
 {
 	templateUrl: 'Property/Tabs/selectBuilding.html',
-	controller: ['$state', '$stateParams', '$scope', 'propertyService', function ($state, $stateParams, $scope, propertyService) {
+	controller: ['$state', '$stateParams', '$scope', 'sketchService', function ($state, $stateParams, $scope, sketchService) {
 
 	    var vm = this;
         
@@ -13,7 +13,7 @@ propertyComponent.component('selectbuilding',
         function init () {
             vm.propertyid = $stateParams.id;
 
-            propertyService.getSketchesForProperty(vm.propertyid).then(function(result){
+            sketchService.getSketchesForProperty(vm.propertyid).then(function(result){
                 if(result.length == 1){
                     $state.go("editproperty.buildingtab.sketch", {buildingid: result[0].buildingId});
                 }

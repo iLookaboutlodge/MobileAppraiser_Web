@@ -9,10 +9,6 @@ buildingNotesComponent.component('buildingnotes',
 	    vm.buildingId = $stateParams.buildingid;
 	    vm.showPopup = false;
 
-		vm.getDate = function(date) {
-    		return dateUtility.getDate(date);
-    	};
-
     	vm.saveNote = function(){
     		vm.building.Notes.push({User: 'Joe Bloggs', Date: new Date(), Note: vm.newNote});
     		propertyService.updateBuilding(vm.propertyId, vm.building);

@@ -2,7 +2,7 @@ var loginComponent = angular.module('components');
 loginComponent.component('login',
 {
     templateUrl: 'Login/login.html',
-    controller: ['authService', '$state', function(authService, $state) {
+    controller: ['authUtility', '$state', function(authUtility, $state) {
         var vm = this;
 
         authUtility.clearCredentials();

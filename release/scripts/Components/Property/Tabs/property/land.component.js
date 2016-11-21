@@ -1,4 +1,4 @@
-var propertyLandComponent = angular.module('propertyLandModule', ['property']);
+var propertyLandComponent = angular.module('components');
 propertyLandComponent.component('propertyland',
 {
 	templateUrl: 'Property/Tabs/property/land.html',

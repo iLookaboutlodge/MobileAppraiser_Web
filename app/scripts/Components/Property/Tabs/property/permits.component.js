@@ -7,10 +7,6 @@ propertyPermitsComponent.component('propertypermits',
 	    var vm = this;
 	    vm.propertyId = $stateParams.id;
 
-		vm.getDate = function(date) {
-    		dateUtility.getDate(date);
-    	};
-
      	propertyService.get(vm.propertyId)
         .then(
         	function (result) {

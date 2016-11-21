@@ -1,5 +1,6 @@
 <i class="fa fa-pencil draw" ng-click="$ctrl.selectDraw()" ng-class="{selected: $ctrl.selected == 'draw'}"></i>
-<i class="fa fa-pencil-square-o join" ng-click="$ctrl.selectLine()" ng-class="{selected: $ctrl.selected == 'line'}"></i>
+<i class="fa fa-window-minimize join" ng-click="$ctrl.selectLine()" ng-class="{selected: $ctrl.selected == 'line'}"></i>
+<i class="fa fa-pencil-square-o join" ng-click="$ctrl.selectSquare()" ng-class="{selected: $ctrl.selected == 'square'}"></i>
 <canvas 
 	id="drawCanvas"
 	ng-touchstart="$ctrl.onTouchStart($event)"
