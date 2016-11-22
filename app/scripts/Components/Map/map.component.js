@@ -1,52 +1,66 @@
 var mapComponent = angular.module('components');
 
-mapComponent.component('map',
+mapComponent.component('mapcomponent',
 {
     templateUrl: './scripts/components/Map/map.html',
     bindings: {
         'properties': '=',
         'filter': '='
     },
-    controller: ['$scope', '$state', '$window', '$q', '$filter', function ($scope, $state, $window, $q, $filter) {
+    controller: ['$scope', '$state', '$window', '$q', '$filter','NgMap', function ($scope, $state, $window, $q, $filter, NgMap) {
         var vm = this;
-        $scope.map = { zoom: 8, bounds:{southwest:{}, northeast:{}}};
-        vm.currentPositionMarker = {};
-        vm.filteredProperties = vm.properties;
-        vm.markerControl = {};
+        
 
         navigator.geolocation.getCurrentPosition(function(position){
-            vm.currentPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+            vm.currentLocation = position.coords;
+            vm.currentCoords = [position.coords.latitude, position.coords.longitude]
         });
 
-        var updateLabels = function(){
-            for(var i = 0; i < vm.filteredProperties.length; i++){
-                var newMarker = {
-                    label: {
-                        text: (i + 1).toString()
-                    }
-                };
-                vm.filteredProperties[i].markerOptions = newMarker;
-                //var marker = ;//.getChildMarkers().get(vm.filteredProperties[i]);
-            }
-        };
-
-
-        var setLabels = function(){
-            console.log('changing labels');
-            for(var i = 0; i < vm.filteredProperties.length; i++){
-                console.log(i + 1);
-                vm.filteredProperties[i].markerOptions = {
-                    label: {
-                        text: (i + 1).toString()
-                    }
-                };
-            }
-        };
-
-        var applyFilter = function() {
+        NgMap.getMap().then(function(map){
             vm.filteredProperties = $filter('filter')(vm.properties, vm.filter, true);
-            setLabels();
-            updateLabels();
+            
+            setBounds(map);
+            setWaypoints();
+
+            vm.origin = vm.currentCoords[0] + "," + vm.currentCoords[1];
+            vm.destination = vm.currentCoords[0] + "," + vm.currentCoords[1];
+        });
+
+        vm.getRoute = function(){
+            if(vm.startLoc && vm.startLoc != ""){
+                vm.origin = vm.startLoc;
+            }
+            else {
+                vm.origin = vm.currentCoords[0] + "," + vm.currentCoords[1];
+            }
+
+            if(vm.endLoc && vm.endLoc != ""){
+                console.log(vm.endLoc);
+                vm.destination = vm.endLoc;
+            }
+            else {
+                vm.destination = vm.currentCoords[0] + "," + vm.currentCoords[1];
+            }
+        };
+
+        var filterProperties = function(){
+            vm.filteredProperties = $filter('filter')(vm.properties, vm.filter, true);
+        };
+
+        var setWaypoints = function(){
+            $scope.wayPoints  = [];
+            for(var i = 0; i < vm.filteredProperties.length; i++){
+                var obj = { 
+                        location: vm.filteredProperties[i].Address.Address
+                    };
+                $scope.wayPoints.push(obj);            
+            }
+        };
+
+        var setBounds = function(map) {
+            var bounds = getBounds();
+            map.setCenter(bounds.getCenter());
+            map.fitBounds(bounds);
         };
 
         var getBounds = function(){
@@ -56,79 +70,23 @@ mapComponent.component('map',
                 bound.extend(new google.maps.LatLng(vm.filteredProperties[i].Location.Latitude, vm.properties[i].Location.Longitude));
             }
 
+            bound.extend(new google.maps.LatLng(vm.currentLocation.latitude, vm.currentLocation.longitude));
+
             return bound;
-        }
-
-        var setBounds = function() {
-            var bounds = getBounds();
-            var northEast = bounds.getNorthEast();
-            var southWest = bounds.getSouthWest();
-
-            $scope.map.bounds.northeast = {
-                latitude: northEast.lat(),
-                longitude: northEast.lng()
-            };
-
-            $scope.map.bounds.southwest = {
-                latitude: southWest.lat(),
-                longitude: southWest.lng()
-            }
-            console.log('bounds: ', $scope.map.bounds);
         };
 
-        var getCurrentLocationMarker = function() {
-            if(navigator.geolocation){
-
-                navigator.geolocation.getCurrentPosition(function(position){
-                    console.log(position);
-
-                    vm.currentPositionMarker.coords = {latitude: position.coords.latitude, longitude: position.coords.longitude};
-                    vm.currentPositionMarker.markerOptions = {
-                        icon: {
-                            url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2A7665"
-                        }
-                    };
-                    console.log(vm.currentPositionMarker);
-                });
-            }
-        }
-
-        var setMap = function(){
-            $scope.map.center = getCenter();
-            console.log('center: ', $scope.map.center);
-        };
-
+       
         $scope.$on('propertiesChanged', function(){
-            console.log('properties changed');
-            applyFilter();  
-            setBounds();
-            var markers = vm.markerControl.getGMarkers();
-            for(var i =0; i < markers.length; i++){
-                console.log('changing marker Options');
-                var newMarker = markers[i];
-                newMarker.model.markerOptions = 
-                {
-                    label: {
-                        text: (i + 1).toString()
-                    }
-                };
-
-                markers[i] = newMarker;
-            }
-            console.log(vm.markerControl.getGMarkers());
-            if(!vm.filteredProperties){
-                return;
-            }
+            filterProperties();
+            setWaypoints();
         });
 
-        var init = function(){
-            applyFilter();
-            setBounds();
-
-            getCurrentLocationMarker();
+        var init = function() {
+            $scope.wayPoints = [];
         };
 
-        init();
+
+        // init();
 
         // vm.markers = [];
         // vm.map;
@@ -212,27 +170,24 @@ mapComponent.component('map',
             // return marker;
         // }
 
-        // $scope.$on("propertiesChanged", function(event, options){
-        //         console.log('properties changed');
-        //         if(!vm.map) {
-        //              vm.map = new google.maps.Map(document.getElementById('map'));
-        //         }
+        $scope.$on("propertiesChanged", function(event, options){
+                console.log('properties changed');
 
-        //         if(vm.properties) {
-        //             console.log('here2');
-        //             vm.map.setOptions(mapOptions());
-        //             //removeMarkersNotValid();
-        //             //addMarkers();
+                if(vm.properties) {
+                    // console.log('here2');
+                    // vm.map.setOptions(mapOptions());
+                    // //removeMarkersNotValid();
+                    // //addMarkers();
 
-        //             console.log(vm.markers);
-        //             //vm.map = new google.maps.Map(document.getElementById('map'), mapOptions(vm.properties));
+                    // console.log(vm.markers);
+                    //vm.map = new google.maps.Map(document.getElementById('map'), mapOptions(vm.properties));
                     
-        //             // for (var i = 0; i < vm.properties.length; i++) {
-        //             //     vm.markers.push(createMarker(vm.properties[i]));
-        //             // }
-        //         }
-        //        //animateMarker(vm.property.Pin);
-        // });
+                    // for (var i = 0; i < vm.properties.length; i++) {
+                    //     vm.markers.push(createMarker(vm.properties[i]));
+                    // }
+                }
+               //animateMarker(vm.property.Pin);
+        });
 
         return this;
     }]
