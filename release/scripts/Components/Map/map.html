@@ -1,19 +1,24 @@
 ﻿<div id="mapPage">
-    <div id="map">
-    	<ui-gmap-google-map bounds="map.bounds">
-    		<ui-gmap-markers
-    			models="$ctrl.filteredProperties"
-    			idKey="'Id'"
-    			coords="'Coords'"
-    			options="'markerOptions'"
-    			fit="true"
-    			refresh="myGoogleMap">
-    		</ui-gmap-markers>
-    		<ui-gmap-marker
-    			idKey="19999"
-    			coords='$ctrl.currentPositionMarker.coords'
-    			options='$ctrl.currentPositionMarker.markerOptions'>
-    		</ui-gmap-marker>
-    	</ui-gmap-google-map>
+    <div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyCezYydAtsZ1Fz5oklQnupiRohYD0KXQG8">
+<ng-map center="[-25,131]" zoom="12">
+    		<!-- <marker ng-repeat="property in $ctrl.properties | filter: $ctrl.filter : true" position="{{property.Location.Latitude}},{{property.Location.Longitude}}"></marker> -->
+			<directions
+				travel-mode="DRIVING"
+				waypoints="{{wayPoints}}"
+				origin="{{$ctrl.origin}}"
+				destination="{{$ctrl.destination}}"
+				optimize-waypoints="true"
+				callback="{{$ctrl.responseCallback}}">
+			</directions>
+    	</ng-map>
     </div>
+    <div>
+    	<label>Start</label>
+    	<input ng-model="$ctrl.startLoc" type="text" placeholder="Current Location"/>
+    </div>
+    <div>
+    	<label>End</label>
+    	<input ng-model="$ctrl.endLoc" type="text" placeholder="Current Location" ng-change=""/>
+    </div>
+    <button ng-click="$ctrl.getRoute()">Get Route</button>
 </div>

@@ -16,7 +16,7 @@ mapComponent.component('mapcomponent',
             vm.currentCoords = [position.coords.latitude, position.coords.longitude]
         });
 
-        NgMap.getMap().then(function(map){
+        NgMap.getMap().then(function(map) {
             vm.filteredProperties = $filter('filter')(vm.properties, vm.filter, true);
             
             setBounds(map);
@@ -27,20 +27,24 @@ mapComponent.component('mapcomponent',
         });
 
         vm.getRoute = function(){
-            if(vm.startLoc && vm.startLoc != ""){
+            if(vm.startLoc && vm.startLoc != "") {
                 vm.origin = vm.startLoc;
             }
             else {
                 vm.origin = vm.currentCoords[0] + "," + vm.currentCoords[1];
             }
 
-            if(vm.endLoc && vm.endLoc != ""){
+            if(vm.endLoc && vm.endLoc != "") {
                 console.log(vm.endLoc);
                 vm.destination = vm.endLoc;
             }
             else {
                 vm.destination = vm.currentCoords[0] + "," + vm.currentCoords[1];
             }
+        };
+
+        vm.responseCallback = function(response) {
+            console.log('it worked!', response);
         };
 
         var filterProperties = function(){

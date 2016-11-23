@@ -6,5 +6,5 @@ var app = angular.module('components',[
         "services",
         "repos",
         "utilities",
-        "uiGmapgoogle-maps"
+        "ngMap"
     ]);
