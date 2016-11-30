@@ -8,12 +8,15 @@
         "filters"
     ])
     .run([
-        "$window", "$rootScope", "$location", "$cookieStore", "updateService", function($window, $rootScope, $location, $cookieStore, updateService) {
+        "$window", "$rootScope", "$location", "$cookieStore", "$state", "updateService", function($window, $rootScope, $location, $cookieStore, $state, updateService) {
             
             $rootScope.online = navigator.onLine;
 
-            updateService.update();
+            $rootScope.$on('$stateChangeSuccess', function (event, current, previous) {
+                $rootScope.pagetitle = current.title;
+            });
 
+            updateService.update();
 
             $window.addEventListener("offline", function(){
                 $rootScope.$apply(function(){
@@ -34,6 +37,13 @@
                     $location.path("/login");
                 }
             }
+
+            $rootScope.$on('$stateChangeStart', function(evt, to, params) {
+              if (to.redirectTo) {
+                evt.preventDefault();
+                $state.go(to.redirectTo, params, {location: 'replace'})
+              }
+            });
         }
     ]);
 

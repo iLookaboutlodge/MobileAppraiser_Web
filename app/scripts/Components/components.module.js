@@ -5,6 +5,5 @@ var app = angular.module('components',[
         "ngTouch",
         "services",
         "repos",
-        "utilities",
-        "ngMap"
+        "utilities"
     ]);

@@ -16,6 +16,7 @@ html {
   -webkit-text-size-adjust: 100%;
   /* 3 */
   box-sizing: border-box;
+  height: 100%;
 }
 *,
 *:before,
@@ -28,7 +29,10 @@ html {
  * Remove the margin in all browsers (opinionated).
  */
 body {
-  margin: 0;
+  margin: 0 0 50px;
+  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 /**
  * Add the correct display in IE 9-.
@@ -535,13 +539,14 @@ navbar {
   overflow: hidden;
 }
 footer {
-  position: fixed;
+  position: absolute;
+  left: 0;
   bottom: 0;
   padding: 5px;
   background-color: #fff;
   border-top: 1px solid #D1D1D1;
-  display: block;
   width: 100%;
+  height: 50px;
 }
 #navigation {
   overflow: hidden;
@@ -584,6 +589,13 @@ footer {
 #navigation .iconWrapper .noInternet {
   margin-left: -10px;
 }
+#pageContent {
+  height: 100%;
+  margin-bottom: 50px;
+}
+#properties {
+  height: 100%;
+}
 #properties .tabs {
   overflow: hidden;
   width: 100%;
@@ -611,97 +623,171 @@ footer {
   max-width: 1043px;
   margin: 35px auto 0 auto;
 }
-#properties .searchWrapper {
-  margin: 0 auto;
-  height: 30px;
-  border: 1px solid #59C2AB;
-  float: left;
-  overflow: hidden;
-  border-radius: 5px;
-  padding: 3px 10px;
+#properties .selectedPropertyWrapper {
+  padding: 10px;
 }
-#properties .searchWrapper input {
-  width: 200px;
-  border: none;
-  -webkit-border-top-right-radius: 0px;
-  -webkit-border-bottom-right-radius: 0px;
-  -webkit-border-bottom-left-radius: 5px;
-  -webkit-border-top-left-radius: 5px;
-  -moz-border-radius-topright: 0px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-bottomleft: 5px;
-  -moz-border-radius-topleft: 5px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-  -moz-background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  padding: 5px 1%;
-  margin: 0;
-  float: left;
-  height: 100%;
+#properties .selectedPropertyWrapper .back {
+  color: #2A7665;
+  display: block;
 }
-#properties .searchWrapper input:active {
-  outline: none;
-  border: none;
+#properties .selectedPropertyWrapper .address {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 20px 0 10px;
+  display: block;
 }
-#properties .searchWrapper i {
+#properties .selectedPropertyWrapper img {
+  width: 100%;
+}
+#properties .selectedPropertyWrapper label {
+  width: 30%;
   display: block;
   float: left;
-  color: #59C2AB;
-  margin-top: 3px;
+  text-align: right;
+  padding-right: 10px;
+  font-weight: bold;
 }
-#properties table,
-#properties tr,
-#properties th,
-#properties td {
-  border: none;
+#properties .selectedPropertyWrapper ul {
+  padding: 0;
   margin: 0;
+  list-style: none;
 }
-#properties .tableWrapper {
-  margin: 20px auto 0 auto;
-  width: 100%;
-  clear: left;
-  margin-top: 10px;
+#properties .selectedPropertyWrapper li {
+  padding: 10px 0;
+  overflow: hidden;
+}
+#properties .selectedPropertyWrapper li span {
+  display: block;
   float: left;
+  width: 70%;
+  border-left: 1px solid #D1D1D1;
+  padding-left: 10px;
 }
-#properties .secondaryButton {
-  color: #fff;
-  background-color: #59C2AB;
-  padding: 7px 10px;
-  border-radius: 5px;
-}
-#properties .showHideMap {
-  float: right;
-  color: #ba6126;
-  font-size: 1.5em;
-}
-#properties table {
-  margin: 0;
-  border-collapse: collapse;
-  width: 100%;
-}
-#properties table .header {
+#properties .selectedPropertyWrapper .button {
+  margin-top: 20px;
+  text-decoration: none;
   background-color: #2A7665;
   color: #fff;
+  padding: 5px 0;
+  border-radius: 5px;
+  width: 40%;
+  display: block;
+  text-align: center;
 }
-#properties table .header th {
-  padding: 5px 5px;
+#properties .selectedPropertyWrapper .button.left {
+  float: left;
+  margin-left: 5%;
 }
-#properties table td {
-  padding: 10px 15px;
+#properties .selectedPropertyWrapper .button.right {
+  float: right;
+  margin-right: 5%;
 }
-#properties table tr {
-  border-bottom: 2px solid #D1D1D1;
+#properties #scheduledPropertiesPage {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 89px;
 }
-#properties table .selected {
-  background-color: #59C2AB;
+#properties #scheduledPropertiesPage .mapContainer {
+  margin-left: 250px;
+  overflow: hidden;
+  height: 100%;
 }
-#properties table .fa.view {
-  color: #ba6126;
+#properties #scheduledPropertiesPage #map {
+  width: 100%;
+  height: 100%;
+}
+#properties #scheduledPropertiesPage .sideColumn {
+  float: left;
+  width: 350px;
+  height: 100%;
+  border-right: 1px solid #D1D1D1;
+}
+#properties #scheduledPropertiesPage .sideColumn h2 {
+  margin: 20px 10px 10px 10px;
+  color: #2A7665;
+  border-bottom: 1px solid #D1D1D1;
+}
+#properties #scheduledPropertiesPage .sideColumn .location {
+  background-color: #2A7665;
+  overflow: hidden;
+}
+#properties #scheduledPropertiesPage .sideColumn .location .row {
+  padding-top: 10px;
+  overflow: hidden;
+}
+#properties #scheduledPropertiesPage .sideColumn .location input {
+  border: none;
+  border-bottom: 1px solid #fff;
+  padding: 5px 5px 2px 10px;
+  color: #fff;
+  background-color: #2A7665;
   font-size: 1.2em;
+  float: left;
+  width: 300px;
+}
+#properties #scheduledPropertiesPage .sideColumn .location i {
+  float: left;
+  color: #fff;
+  font-size: 1.3em;
+  width: 30px;
+  margin-left: 10px;
+}
+#properties #scheduledPropertiesPage .sideColumn .location .update {
+  border-radius: 5px;
+  margin: 10px;
+  color: #fff;
+  background-color: #ba6126;
+  padding: 5px 10px;
+  font-size: 1.2em;
+  width: 330px;
+  border: none;
+  outline: none;
+}
+#properties #scheduledPropertiesPage .sideColumn .propertyList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#properties #scheduledPropertiesPage .sideColumn .propertyList li {
+  padding: 0;
+  margin: 10px;
+  border-bottom: 1px solid #D1D1D1;
+  padding-bottom: 10px;
+  overflow: hidden;
+}
+#properties #scheduledPropertiesPage .sideColumn .propertyList article {
+  overflow: hidden;
+  position: relative;
+}
+#properties #scheduledPropertiesPage .sideColumn .propertyList article header {
+  font-weight: bold;
+  width: 15px;
+  background-color: #2A7665;
+  color: #fff;
+  height: 100%;
+  text-align: center;
+  position: absolute;
+}
+#properties #scheduledPropertiesPage .sideColumn .propertyList article header div {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: -4px;
+}
+#properties #scheduledPropertiesPage .sideColumn .propertyList article header:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+#properties #scheduledPropertiesPage .sideColumn .propertyList article .marker {
+  color: #2A7665;
+}
+#properties #scheduledPropertiesPage .sideColumn .propertyList article span {
+  margin-left: 25px;
+  display: block;
+}
+#properties #scheduledPropertiesPage .sideColumn .propertyList article .address {
+  font-weight: bold;
 }
 #property {
   margin-top: 10px;

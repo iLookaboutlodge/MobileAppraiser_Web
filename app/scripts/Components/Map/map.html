@@ -1,24 +1,30 @@
 ﻿<div id="mapPage">
-    <div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyCezYydAtsZ1Fz5oklQnupiRohYD0KXQG8">
-<ng-map center="[-25,131]" zoom="12">
-    		<!--  <marker ng-repeat="property in $ctrl.properties | filter: $ctrl.filter : true" position="{{property.Location.Latitude}},{{property.Location.Longitude}}"></marker>  -->
-			<directions
-				travel-mode="DRIVING"
-				waypoints="{{wayPoints}}"
-				origin="{{$ctrl.origin}}"
-				destination="{{$ctrl.destination}}"
-				optimize-waypoints="true"
-				callback="{{$ctrl.responseCallback}}">
-			</directions>
-    	</ng-map>
+    <div id="map">
+    	<directions 
+     		map='$ctrl.map'
+    		waypoints='$ctrl.waypoints' 
+    		directionscallback='$ctrl.directionscallback(routes)'
+    		origin='$ctrl.origin'
+    		destination='$ctrl.destination'
+    		waypointoptimized='true'
+    		travelmode="DRIVING"
+    		>	
+		</directions>
+		<distances
+			map='$ctrl.map'
+			origin="$ctrl.origin"
+			destinations='$ctrl.destinations'
+			distancescallback = '$ctrl.distancescallback(distances)'
+			travelmode="DRIVING"
+		></distances>
     </div>
     <div>
     	<label>Start</label>
-    	<input ng-model="$ctrl.startLoc" type="text" placeholder="Current Location"/>
+    	<input ng-model="$ctrl.startLoc" type="text" placeholder="Current Location" />
     </div>
     <div>
     	<label>End</label>
-    	<input ng-model="$ctrl.endLoc" type="text" placeholder="Current Location" ng-change=""/>
+    	<input ng-model="$ctrl.endLoc" type="text" placeholder="Current Location" />
     </div>
     <button ng-click="$ctrl.getRoute()">Get Route</button>
 </div>

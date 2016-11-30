@@ -1,0 +1,30 @@
+<div id="scheduledPropertiesPage">
+    <div ng-show="$ctrl.filteredPropertiesExist()">
+        <h2>You currently have no scheduled properties to view.</h2>
+        <p>To schedule a property, click below and select the properties you want to view.</p>
+        <button ng-click="$ctrl.goToUnscheduled()">View Unscheduled properties</button>
+    </div>
+    <div class="sideColumn">
+        <scheduledpropertylist
+            ng-if="$ctrl.showList"
+            properties="$ctrl.filteredProperties"
+            onpropertyselected="$ctrl.propertyselected(property)"
+            updatelocation="$ctrl.updatelocation(start, end)"
+            >
+        </scheduledpropertylist>
+
+        <scheduledproperty
+            ng-if="!$ctrl.showList"
+            property='$ctrl.selectedProperty'
+            selectProperty='$ctrl.toList()'
+            back='$ctrl.tolist()'
+            >
+        </scheduledproperty>
+    </div>
+    <scheduledmap
+        properties='$ctrl.filteredProperties'
+        start='$ctrl.start'
+        end='$ctrl.end'
+        directionscallback='$ctrl.directionscallback(routes)'
+    ></scheduledmap>
+</div>

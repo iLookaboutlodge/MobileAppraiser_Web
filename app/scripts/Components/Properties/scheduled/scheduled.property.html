@@ -1,0 +1,31 @@
+<div class="selectedPropertyWrapper">
+    <a href="#" ng-click="$ctrl.back()" class="back">
+        < back
+    </a>
+    <span class="address">{{$ctrl.property.Address.Address}}</span>
+    <img src="{{$ctrl.propertyImages[0]}}">
+    <ul>
+        <li>
+            <label>Type</label>
+            <span>{{$ctrl.property.Type.Description}}</span>
+        </li>
+        <li>
+            <label>Buildings</label>
+            <span>{{$ctrl.property.Buildings.length}}</span>
+        </li>
+        <li>
+            <label>Owner</label>
+            <span>{{$ctrl.property.Owner.Name}}</span>
+        </li>
+        <li>
+            <label>Owner Address</label>
+            <span>{{$ctrl.property.Owner.AddressLine1}}</span>
+            <span>{{$ctrl.property.Owner.City}}</span>
+        </li>
+    </ul>
+
+    <div>
+        <a href="https://www.google.com/maps/dir/current+location/{{$ctrl.property.Address.Address}}" class="left button" target="_blank">Directions</a>
+        <a href="#" class="right button" ng-click="$ctrl.goToProperty($ctrl.property.Id)">View Property</a>
+    </div>
+</div>

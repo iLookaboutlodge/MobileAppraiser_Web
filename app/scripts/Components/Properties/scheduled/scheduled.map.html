@@ -1,0 +1,11 @@
+<div class="mapContainer">
+    <directions 
+        ng-if="$ctrl.propertiesExist()" 
+        waypoints="$ctrl.waypoints" 
+        directionscallback="$ctrl.directionscallback(routes)" 
+        origin="$ctrl.origin" 
+        destination="$ctrl.destination" 
+        waypointoptimized="true" 
+        travelmode="DRIVING">
+    </directions>
+</div>

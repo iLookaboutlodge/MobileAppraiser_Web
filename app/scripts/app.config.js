@@ -21,10 +21,32 @@ angular.module('app').config(['$stateProvider', '$locationProvider', '$httpProvi
     var properties = {
         name: 'properties',
         url: '/properties',
+        abstract: true,
         template: '<properties></properties>',
         data: {
             pageTitle: 'Properties'
         }
+    };
+
+    var propertiesUnscheduled = {
+        name: 'properties.unscheduled',
+        template: '<unscheduled properties="$ctrl.properties"></unscheduled>',
+        url: '/unscheduled',
+        title: 'Unscheduled Properties'
+    };
+
+    var propertiesScheduled = {
+        name: 'properties.scheduled',
+        template: '<scheduled properties="$ctrl.properties"></scheduled>',
+        url: '/scheduled',
+        title: 'Scheduled Properties'
+    };
+
+    var propertiesComplete = {
+        name: 'properties.complete',
+        template: '<complete properties="$ctrl.properties"></complete>',
+        url: '/complete',
+        title: 'Complete Properties'
     };
 
     var editProperty = {
@@ -165,7 +187,7 @@ angular.module('app').config(['$stateProvider', '$locationProvider', '$httpProvi
     var home = {
         name: 'default',
         url: '/',
-        template: '<properties></properties>'
+        redirectTo: 'properties.scheduled'
     };
 
     var main = {
@@ -191,13 +213,17 @@ angular.module('app').config(['$stateProvider', '$locationProvider', '$httpProvi
 
     $stateProvider.state(home);
     $stateProvider.state(login);
-    $stateProvider.state(properties);
     $stateProvider.state(editProperty);
     $stateProvider.state(property);
     $stateProvider.state(about);
     $stateProvider.state(main);
     $stateProvider.state(map);
     $stateProvider.state(sketch);
+
+    $stateProvider.state(properties);
+    $stateProvider.state(propertiesUnscheduled);
+    $stateProvider.state(propertiesScheduled);
+    $stateProvider.state(propertiesComplete);
 
     $stateProvider.state(buildingTab);
     $stateProvider.state(selectbuilding);

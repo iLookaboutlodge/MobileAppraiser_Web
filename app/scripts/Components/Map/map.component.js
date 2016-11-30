@@ -1,198 +1,102 @@
-var mapComponent = angular.module('components');
+var components = angular.module('components');
 
-mapComponent.component('mapcomponent',
+components.component('mapcomponent',
 {
     templateUrl: './scripts/components/Map/map.html',
     bindings: {
-        'properties': '=',
-        'filter': '='
+        'properties': '<',
+        'directionscallback': '&'
     },
-    controller: ['$scope', '$state', '$window', '$q', '$filter','NgMap', function ($scope, $state, $window, $q, $filter, NgMap) {
+    controller: ['$scope', '$state', '$window', '$q', '$filter', function ($scope, $state, $window, $q, $filter) {
         var vm = this;
-        
+        vm.markers = [];
+        var defaultLocation = "Toronto";
 
-        navigator.geolocation.getCurrentPosition(function(position){
-            vm.currentLocation = position.coords;
-            vm.currentCoords = [position.coords.latitude, position.coords.longitude]
-        });
-
-        NgMap.getMap().then(function(map) {
-            vm.filteredProperties = $filter('filter')(vm.properties, vm.filter, true);
-            
-            setBounds(map);
-            setWaypoints();
-
-            vm.origin = vm.currentCoords[0] + "," + vm.currentCoords[1];
-            vm.destination = vm.currentCoords[0] + "," + vm.currentCoords[1];
-        });
-
-        vm.getRoute = function(){
-            if(vm.startLoc && vm.startLoc != "") {
-                vm.origin = vm.startLoc;
+        var getCurrentPosition = function() {
+            var deferred = $q.defer();
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(deferred.resolve, deferred.reject, {timeout: 5000});
             }
             else {
-                vm.origin = vm.currentCoords[0] + "," + vm.currentCoords[1];
+                deferred.reject("browser does not support geo location");
             }
 
-            if(vm.endLoc && vm.endLoc != "") {
-                console.log(vm.endLoc);
-                vm.destination = vm.endLoc;
+            return deferred.promise;
+        };
+        
+        var getWaypoint = function(property) {
+            var deferred = $q.defer();
+            deferred.resolve({ location: property.Address.Address, stopover: true});
+            return deferred.promise;
+        };
+
+        var getWaypoints = function() {
+            var promises = [];
+            
+            for (var i = 0; i < vm.properties.length; i++) {
+                 promises.push(getWaypoint(vm.properties[i]));
+            }
+
+            return $q.all(promises);
+        };
+
+        var getDestinations = function() {
+            var destinations = [];
+            for (var i = 0; i < vm.properties.length; i++) {
+                destinations.push(new google.maps.LatLng(vm.properties[i].Location.Latitude, vm.properties[i].Location.Longitude));
+            }
+            return destinations;
+        };
+
+        vm.distancescallback = function(distances){
+            console.log('distances', distances);
+        };
+
+        var getLocation = function(location) {
+            var deferred = $q.defer();
+
+            if (location && location != "") {
+                deferred.resolve(location);
             }
             else {
-                vm.destination = vm.currentCoords[0] + "," + vm.currentCoords[1];
+                getCurrentPosition().then(
+                    function(currentLocation){
+                        deferred.resolve(currentLocation.coords.latitude + "," + currentLocation.coords.longitude);
+                    },
+                    function(){
+                        deferred.resolve(defaultLocation);
+                    }
+                );
             }
-        };
-
-        vm.responseCallback = function(response) {
-            console.log('it worked!', response);
-        };
-
-        var filterProperties = function(){
-            vm.filteredProperties = $filter('filter')(vm.properties, vm.filter, true);
-        };
-
-        var setWaypoints = function(){
-            $scope.wayPoints  = [];
-            for(var i = 0; i < vm.filteredProperties.length; i++){
-                var obj = { 
-                        location: vm.filteredProperties[i].Address.Address
-                    };
-                $scope.wayPoints.push(obj);            
-            }
-        };
-
-        var setBounds = function(map) {
-            var bounds = getBounds();
-            map.setCenter(bounds.getCenter());
-            map.fitBounds(bounds);
-        };
-
-        var getBounds = function(){
-            var bound = new google.maps.LatLngBounds();
-
-            for (var i = 0; i < vm.filteredProperties.length; i++) {
-                bound.extend(new google.maps.LatLng(vm.filteredProperties[i].Location.Latitude, vm.properties[i].Location.Longitude));
-            }
-
-            bound.extend(new google.maps.LatLng(vm.currentLocation.latitude, vm.currentLocation.longitude));
-
-            return bound;
-        };
-
-       
-        $scope.$on('propertiesChanged', function(){
-            filterProperties();
-            setWaypoints();
-        });
-
-        var init = function() {
-            $scope.wayPoints = [];
-        };
-
-
-        // init();
-
-        // vm.markers = [];
-        // vm.map;
-
-        // var removeMarkersNotValid = function(){
-        //     var markerList = vm.markers;
             
-        //     for(var j = 0; j < markerList.length; j++){
-        //         var foundMarker = false;
-        //         for (var i = 0; i < vm.properties.length; i++){
-        //             if(markerList[j].propertyId == vm.properties[i].Id){
-        //                 foundMarker = true;
-        //                 break;
-        //             }
-        //         }
-        //         if(!foundMarker){
-        //             console.log('remove marker:', markerList[j].propertyId);
-        //             var index = vm.markers.indexOf(markerList[j]);
-        //             vm.markers.splice(index, 1);
-        //         }
-        //     }
-        // }
+            return deferred.promise;
+        };
 
-        // var addMarkers = function() {
+        vm.$onChanges = function(changes){
+            console.log('stuff changed');
+            getWaypoints().then(function(waypoints){
+                vm.waypoints = waypoints;
+            });
+            vm.destinations = getDestinations();
+        };
 
-        //     for (var i = 0; i < vm.properties.length; i++){
-        //         var foundProperty = false;
-        //         for(var j = 0; j < vm.markers.length; j++){
-        //             if(vm.markers[j].propertyId == vm.properties[i].Id){
-        //                 foundProperty = true;
-        //                 break;
-        //             }
-        //         }
+        vm.$onInit = function() {
+            vm.map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: {lat: 40.771, lng: -73.974}
+            }); 
 
-        //         if(!foundProperty) {
-        //             vm.markers.push(createMarker(vm.properties[i]));
-        //         }
-        //     }
-        // }
-        
-        // var mapOptions = function() {
-        //     var bound = new google.maps.LatLngBounds();
+            getWaypoints().then(function(waypoints){
+                console.log('waypoints', waypoints);
+                vm.waypoints = waypoints;
+            });
 
-        //     for (var i = 0; i < vm.properties.length; i++) {
-        //         bound.extend(new google.maps.LatLng(vm.properties[i].Location.Latitude, vm.properties[i].Location.Longitude));
-        //     }
+            getLocation().then(function(location){
+                vm.origin = location;
+                vm.destination = location;
+            });
 
-        //     return {
-        //         zoom: 12,
-        //         center: bound.getCenter(),
-        //         mapTypeId: google.maps.MapTypeId.TERRAIN
-        //     };
-        // }
-
-        // var animateMarker = function (pin) {
-        //     // for (var i = 0; i < vm.markers.length; i++) {
-        //     //     if (vm.markers[i].propertyId == pin) {
-        //     //         vm.markers[i].setAnimation(google.maps.Animation.BOUNCE);
-        //     //     } else {
-        //     //         vm.markers[i].setAnimation(null);
-        //     //     }
-        //     // }
-        // }
-
-        // var createMarker = function (info) {
-        //     var marker = new google.maps.Marker({
-        //         map: vm.map,
-        //         position: new google.maps.LatLng(info.Location.Latitude, info.Location.Longitude),
-        //         title: info.Address.Address,
-        //         propertyId: info.Id
-        //     });
-
-            // marker.addListener('click',
-            //     function() {
-            //         // propertyService.setCurrentProperty(info.Pin).then(function(property) {
-            //         //     vm.property = property;
-            //         //     animateMarker(property.Pin);
-            //         // });
-            //     });
-
-            // return marker;
-        // }
-
-        $scope.$on("propertiesChanged", function(event, options){
-                console.log('properties changed');
-
-                if(vm.properties) {
-                    // console.log('here2');
-                    // vm.map.setOptions(mapOptions());
-                    // //removeMarkersNotValid();
-                    // //addMarkers();
-
-                    // console.log(vm.markers);
-                    //vm.map = new google.maps.Map(document.getElementById('map'), mapOptions(vm.properties));
-                    
-                    // for (var i = 0; i < vm.properties.length; i++) {
-                    //     vm.markers.push(createMarker(vm.properties[i]));
-                    // }
-                }
-               //animateMarker(vm.property.Pin);
-        });
-
-        return this;
+            vm.destinations = getDestinations();
+        };
     }]
 });

@@ -2,48 +2,38 @@
 
 propertiesComponent.component('properties', {
     templateUrl: 'Properties/properties.html',
-    controller: ['$rootScope', '$scope', '$state', '$filter', 'propertyService', function($rootScope, $scope, $state, $filter, propertyService) {
+    controller: ['$rootScope', '$scope', '$state', '$filter', '$q', 'propertyService', function($rootScope, $scope, $state, $filter, $q, propertyService) {
         var vm = this;
 
         $rootScope.$watch('updating', function(){
-            //should show loading screen here
-            init();
-        });
-
-        vm.showMap = false;
-
-        vm.filter = {
-            WorkStatus: 'unscheduled'
-        };
-
-        vm.properties = [];
-        
-        vm.goToProperty = function (propertyId) {
-            $state.go("property", {id: propertyId});
-        };
-
-        vm.scheduleProperty = function(property) {
-            property.WorkStatus = 'scheduled';
-            propertyService.update(property);
-        };
-
-        vm.unscheduleProperty = function(property) {
-            property.WorkStatus = 'unscheduled';
-            propertyService.update(property);
-        };
-
-        vm.applyFilter = function(){
-            $scope.$broadcast("propertiesChanged", {newValue: vm.filteredProperties});
-        };
-
-        var init = function () {
             propertyService.getAll()
                 .then(function (result) {
                      vm.properties = result;
                 });
-            vm.applyFilter();
+        });
+
+        $rootScope.$on('$stateChangeSuccess', function() {
+            vm.title = $rootScope.pagetitle;
+        });
+
+        vm.goToUnscheduled = function(){
+            $state.go("properties.unscheduled");
         };
 
-        init();
+        vm.goToScheduled = function() {
+            $state.go("properties.scheduled");
+        };
+
+        vm.goToComplete = function() {
+            $state.go("properties.complete");
+        };
+
+        vm.$onInit = function () {
+            propertyService.getAll()
+                .then(function (result) {
+                     vm.properties = result;
+                });
+            vm.title = $rootScope.pagetitle;
+        }; 
     }]
 });
