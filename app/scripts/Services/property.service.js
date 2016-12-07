@@ -1,6 +1,6 @@
 angular.module('services')
-	.factory('propertyService', ['$q', 'propertyApiRepo', 'propertyDBRepo', 'imageDBRepo', 'sketchDBRepo',
-		function($q, propertyApiRepo, propertyDBRepo, imageDBRepo, sketchDBRepo) {
+	.factory('propertyService', ['$q', '$filter', 'propertyApiRepo', 'propertyDBRepo', 'imageDBRepo', 'sketchDBRepo',
+		function($q, $filter, propertyApiRepo, propertyDBRepo, imageDBRepo, sketchDBRepo) {
 			var factory = {};
 
 			var findNewPropertyIds = function() {
@@ -110,8 +110,17 @@ angular.module('services')
 				return propertyDBRepo.get(id);
 			};
 
-			factory.update = function(property){
+			factory.update = function(property) {
 				return propertyDBRepo.update(property);
+			};
+
+			factory.updateAll = function(properties) {
+				var promises = [];
+				for(var i = 0; i < properties.length; i++){
+					promises.push(factory.update(properties[i]));
+				}
+
+				return $q.all(promises);
 			};
 
 			factory.sendCompletedPropertiesToServer = function() {
@@ -129,6 +138,43 @@ angular.module('services')
 						return getBuilding(property, buildingId);
 					}
 				);
+			};
+
+			var filterWorkStatus = function(workStatus){
+				var deferred = $q.defer();
+				factory.getAll().then(function(properties){
+					 var filtered = $filter('filter')(properties, { WorkStatus: workStatus }, true);
+					 deferred.resolve(filtered);
+				});
+
+				return deferred.promise;
+			}
+
+			factory.getScheduledProperties = function() {
+				return filterWorkStatus("scheduled");
+			};
+
+			factory.getUnscheduledProperties = function() {
+				return filterWorkStatus("unscheduled");
+			};
+
+			factory.getCompleteProperties = function() {
+				return filterWorkStatus("complete");
+			};
+
+			factory.scheduleProperty = function(property) {
+				property.WorkStatus = "scheduled";
+				return factory.update(property);
+			};
+
+			factory.unScheduleProperty = function(property) {
+				property.WorkStatus = "unscheduled";
+				return factory.update(property);
+			};
+
+			factory.completeProperty = function(property) {
+				property.WorkStatus = "complete";
+				return factory.update(property);
 			};
 
 			var getBuildingIndex = function(buildingId, property){

@@ -1,0 +1,14 @@
+
+<h2>Properties <span>{{$ctrl.properties.length}} / 21</span></h2>
+<ul class="propertyList">
+    <li ng-repeat="property in $ctrl.properties | orderBy: 'distance.duration.value' track by $index" ng-click="$ctrl.propertyClick(property)">
+        <article>
+            <span class="address">{{property.Address.Address}}</span>
+            <span>{{property.Buildings.length}} Buildings</span>
+            <div class="distanceWrapper">
+                <span class="time">{{property.distance.duration.text}}</span>
+                <span class="distance">{{property.distance.distance.text}}</span>
+            <div>
+        </article>
+    </li>
+</ul>

@@ -1,30 +1,33 @@
-<div id="scheduledPropertiesPage">
-    <div ng-show="$ctrl.filteredPropertiesExist()">
+<div class="innerPropertiesPage">
+    <section ng-show="!$ctrl.scheduledProperties || $ctrl.scheduledProperties.length == 0" class="noPropertiesMessage">
         <h2>You currently have no scheduled properties to view.</h2>
         <p>To schedule a property, click below and select the properties you want to view.</p>
-        <button ng-click="$ctrl.goToUnscheduled()">View Unscheduled properties</button>
-    </div>
-    <div class="sideColumn">
-        <scheduledpropertylist
-            ng-if="$ctrl.showList"
-            properties="$ctrl.filteredProperties"
-            onpropertyselected="$ctrl.propertyselected(property)"
-            updatelocation="$ctrl.updatelocation(start, end)"
-            >
-        </scheduledpropertylist>
+        <a href="#" ng-click="$ctrl.goToUnscheduled()">View Unscheduled properties</a>
+    </section>
+    <section ng-if="$ctrl.scheduledProperties && $ctrl.scheduledProperties.length > 0">
+        <div class="sideColumn">
+            <maporigindest
+                updatelocation="$ctrl.updatelocation(start, end)">
+            </maporigindest>
 
-        <scheduledproperty
-            ng-if="!$ctrl.showList"
-            property='$ctrl.selectedProperty'
-            selectProperty='$ctrl.toList()'
-            back='$ctrl.tolist()'
-            >
-        </scheduledproperty>
-    </div>
-    <scheduledmap
-        properties='$ctrl.filteredProperties'
-        start='$ctrl.start'
-        end='$ctrl.end'
-        directionscallback='$ctrl.directionscallback(routes)'
-    ></scheduledmap>
+            <scheduledpropertylist
+                ng-if="$ctrl.showList"
+                properties="$ctrl.scheduledProperties"
+                onpropertyselected="$ctrl.propertyselected(property)">
+            </scheduledpropertylist>
+
+            <scheduledproperty
+                ng-if="!$ctrl.showList"
+                property='$ctrl.selectedProperty'
+                update='$ctrl.updatepropertylist()'
+                back='$ctrl.tolist()'>
+            </scheduledproperty>
+        </div>
+        <scheduledmap
+            properties='$ctrl.scheduledProperties'
+            start='$ctrl.start'
+            end='$ctrl.end'
+            directionscallback='$ctrl.directionscallback(routes)'>
+        </scheduledmap>
+    </section>
 </div>

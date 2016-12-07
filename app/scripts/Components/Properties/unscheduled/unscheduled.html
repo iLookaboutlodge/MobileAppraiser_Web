@@ -1,0 +1,31 @@
+<div class="innerPropertiesPage">
+	<section ng-show="!$ctrl.unscheduledProperties || $ctrl.unscheduledProperties.length == 0" class="noPropertiesMessage">
+        <h2>You currently have no unscheduled properties to view.</h2>
+        <p>Please ensure you have an internet connection to upload the latest list.</p>
+		<p>If no properties appear then please contact your manager</p>
+    </section>
+
+	<section ng-if="$ctrl.unscheduledProperties && $ctrl.unscheduledProperties.length > 0">
+		<div class="sideColumn">
+			<unscheduledpropertylist
+				ng-if="$ctrl.unscheduledProperties && $ctrl.unscheduledProperties.length > 0 && $ctrl.showList"
+				properties="$ctrl.unscheduledProperties"
+				onpropertyselected="$ctrl.propertyselected(index)">
+			</unscheduledpropertylist>
+
+			<unscheduledproperty
+				ng-if="!$ctrl.showList"
+				property='$ctrl.selectedProperty'
+				update='$ctrl.updatepropertylist()'
+				back='$ctrl.tolist()'>
+			</unscheduledproperty>
+		</div>
+
+		<unscheduledmap 
+			ng-if="$ctrl.unscheduledProperties && $ctrl.unscheduledProperties.length > 0"
+			properties='$ctrl.unscheduledProperties' 
+			selectedpropertyindex='$ctrl.selectedIndex'
+			propertyselected='$ctrl.propertyselected(index)'>
+		</unscheduledmap>
+	</section>
+</div>

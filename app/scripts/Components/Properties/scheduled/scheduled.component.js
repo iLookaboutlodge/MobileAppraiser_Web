@@ -5,18 +5,15 @@ components.component('scheduled', {
         'properties': '<'
     },
     templateUrl: 'Properties/scheduled/scheduled.html',
-    controller: ['$state', '$filter', '$q', 'imageService', function($state, $filter, $q, imageService) {
+    controller: ['$state', 'propertyService', function($state, propertyService) {
         var vm = this;
-        vm.filteredProperties = [];
         vm.selectedProperty = null;
         vm.showList = true;
 
         var alphabet = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
-        vm.$onChanges = function(changes) {
-            if (vm.properties) {
-                vm.filteredProperties = $filter('filter')(vm.properties, { WorkStatus: "scheduled" }, true);
-            }
+        vm.$onInit = function() {
+           vm.updatepropertylist();
         };
 
         vm.updatelocation = function(start, end){
@@ -38,18 +35,36 @@ components.component('scheduled', {
             $state.go("properties.unscheduled");
         };
 
-        vm.directionscallback = function(routes) {
+        vm.completeProperty = function(property){
+           propertyService.completeProperty
+                .then(getScheduledProperties)
+                .then(setProperties);
+        };
 
+        vm.unscheduleProperty = function(property){
+            propertyService.unScheduleProperty
+                .then(vm.updatepropertylist);
+        };
+
+        vm.directionscallback = function(routes) {
             if (routes && routes.length >= 1) {
 
                 var order = routes[0].waypoint_order;
 
-                for (var i = 0; i < vm.filteredProperties.length; i++) {
-                    vm.filteredProperties[i].order = parseInt(order[i]);
-                    vm.filteredProperties[i].markerLetter = alphabet[order[i]];
+                for (var i = 0; i < vm.scheduledProperties.length; i++) {
+                    vm.scheduledProperties[i].order = parseInt(order[i]);
+                    vm.scheduledProperties[i].markerLetter = alphabet[order[i]];
                 }
             }
+        };
 
+        vm.updatepropertylist = function(){
+             return propertyService.getScheduledProperties()
+                .then(setProperties);
+        };
+
+        var setProperties = function(properties){
+            vm.scheduledProperties = properties;
         };
 
         return vm;

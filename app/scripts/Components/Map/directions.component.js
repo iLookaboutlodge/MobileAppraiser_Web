@@ -15,7 +15,6 @@ components.component('directions',
    	 	var vm = this;
 
         vm.$onInit= function() {
-            console.log('directions init');
             vm.map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 13,
                 center: {lat: 40.771, lng: -73.974}

@@ -1,0 +1,11 @@
+<div class="location">
+    <div class="row">
+        <i class="fa fa-location-arrow" aria-hidden="true"></i>
+        <input ng-model="$ctrl.start" type="text" placeholder="Choose start location">
+    </div>
+    <div class="row">
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+        <input ng-model="$ctrl.end" type="text" placeholder="Choose end location">
+    </div>
+    <button ng-click="$ctrl.locationChanged()" class="update">Re-Calculate</button>
+</div>

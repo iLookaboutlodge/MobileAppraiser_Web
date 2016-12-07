@@ -152,7 +152,7 @@ angular.module('utilities')
 					var request = objectStore.put(value);
 
 					request.onsuccess = function(e){
-					    deferred.resolve();
+					    deferred.resolve(value);
 					}
 
 					request.onerror = function(e){

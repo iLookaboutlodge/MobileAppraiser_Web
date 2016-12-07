@@ -34,7 +34,7 @@
             factory.update = function(property) {
                 var deferred = $q.defer();
 
-                return $http({
+                $http({
                     method: 'POST',
                     url: ENV.apiEndpoint + "/api/propertydetails/Update",
                     data: property

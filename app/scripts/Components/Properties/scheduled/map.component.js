@@ -7,10 +7,10 @@ components.component('scheduledmap', {
         'end': '<',
         'directionscallback': '&'
     },
-    templateUrl: 'Properties/scheduled/scheduled.map.html',
-    controller: ['$q', function($q) {
+    templateUrl: 'Properties/scheduled/map.html',
+    controller: ['$q', 'locationService', function($q, locationService) {
         var vm = this;
-        vm.defaultLocation = 'Toronto';
+        var defaultLocation = 'Toronto';
 
         vm.$onChanges = function(changes) {
 
@@ -43,17 +43,6 @@ components.component('scheduledmap', {
             return vm.properties && vm.properties.length > 0;
         };
 
-        var getCurrentPosition = function() {
-            var deferred = $q.defer();
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(deferred.resolve, deferred.reject, { timeout: 5000 });
-            } else {
-                deferred.reject("browser does not support geo location");
-            }
-
-            return deferred.promise;
-        };
-
         var getWaypoint = function(property) {
             var deferred = $q.defer();
             deferred.resolve({ location: property.Address.Address, stopover: true });
@@ -71,14 +60,13 @@ components.component('scheduledmap', {
             return $q.all(promises);
         };
 
-
         var getLocation = function(location) {
             var deferred = $q.defer();
 
             if (location && location != "") {
                 deferred.resolve(location);
             } else {
-                getCurrentPosition().then(
+                locationService.getCurrentGeoLocation().then(
                     function(currentLocation) {
                         deferred.resolve(currentLocation.coords.latitude + "," + currentLocation.coords.longitude);
                     },

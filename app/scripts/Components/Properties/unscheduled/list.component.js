@@ -1,13 +1,12 @@
 var components = angular.module('components');
 
-components.component('scheduledpropertylist', {
+components.component('unscheduledpropertylist', {
     bindings: {
         'properties': '<',
         'onpropertyselected': '&',
-        'updatelocation': '&'
     },
-    templateUrl: 'Properties/scheduled/scheduled.list.html',
-    controller: ['$state', '$filter', '$q', function($state, $filter, $q) {
+    templateUrl: 'Properties/unscheduled/list.html',
+    controller: [function() {
          var vm = this;
 
          vm.locationChanged = function() {
@@ -15,7 +14,9 @@ components.component('scheduledpropertylist', {
          };
 
          vm.propertyClick = function(property) {
-             vm.onpropertyselected({property: property});
+             var index = vm.properties.indexOf(property);
+             console.log('index', index);
+             vm.onpropertyselected({index: index});
          };
     }]
 });

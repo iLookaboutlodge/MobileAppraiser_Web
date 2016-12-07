@@ -32,156 +32,26 @@ angular.module('app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('Properties/properties.html',
-    "<div id=\"properties\">{{title}}<div class=\"tabs\"><span ng-click=\"$ctrl.goToUnscheduled()\" ng-class=\"{selected: $ctrl.title == 'Unscheduled Properties'}\">Unscheduled </span><span ng-click=\"$ctrl.goToScheduled()\" ng-class=\"{selected: $ctrl.title == 'Scheduled Properties'}\">Scheduled </span><span ng-click=\"$ctrl.goToComplete()\" ng-class=\"{selected: $ctrl.title == 'Complete Properties'}\">Completed</span></div><!--    <div class=\"tabs\">\r" +
-    "\n" +
-    "        <span \r" +
-    "\n" +
-    "            ng-click=\"$ctrl.filter.WorkStatus='unscheduled'; $ctrl.propertiesChanged()\" \r" +
-    "\n" +
-    "            ng-class=\"{selected: $ctrl.filter.WorkStatus == 'unscheduled'}\">\r" +
-    "\n" +
-    "            Unscheduled\r" +
-    "\n" +
-    "        </span>\r" +
-    "\n" +
-    "        <span ng-click=\"$ctrl.filter.WorkStatus ='scheduled'; $ctrl.propertiesChanged()\" ng-class=\"{selected: $ctrl.filter.WorkStatus == 'scheduled'}\">\r" +
-    "\n" +
-    "            Scheduled\r" +
-    "\n" +
-    "        </span>\r" +
-    "\n" +
-    "        <span  ng-click=\"$ctrl.filter.WorkStatus='complete'; $ctrl.propertiesChanged()\" ng-class=\"{selected: $ctrl.filter.WorkStatus == 'complete'}\">\r" +
-    "\n" +
-    "            Completed\r" +
-    "\n" +
-    "        </span>\r" +
-    "\n" +
-    "    </div> --><div id=\"pageContent\"><ui-view></ui-view></div><!-- <div ng-if=\"$ctrl.showMap\" class=\"map\">\r" +
-    "\n" +
-    "        <mapcomponent \r" +
-    "\n" +
-    "            properties='$ctrl.filteredProperties'\r" +
-    "\n" +
-    "            directionscallback='$ctrl.routesChanged(routes)' \r" +
-    "\n" +
-    "            control=\"myGoogleMap\">        \r" +
-    "\n" +
-    "        </mapcomponent>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"pageWrapper\">\r" +
-    "\n" +
-    "        <div class=\"searchWrapper\">\r" +
-    "\n" +
-    "            <input type=\"text\" ng-model=\"$ctrl.filter.$\" ng-change=\"$ctrl.applyFilter()\"/>\r" +
-    "\n" +
-    "            <span>\r" +
-    "\n" +
-    "                <i class=\"fa fa-search\"></i>\r" +
-    "\n" +
-    "            </span>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <span class=\"showHideMap\" ng-click=\"$ctrl.showMap=!$ctrl.showMap;\">\r" +
-    "\n" +
-    "            <i ng-show=\"$ctrl.showMap==false\" class=\"fa fa-angle-double-up\"></i>\r" +
-    "\n" +
-    "            <i ng-show=\"$ctrl.showMap==true\" class=\"fa fa-angle-double-down\"></i>\r" +
-    "\n" +
-    "            <i class=\"fa fa-globe\"></i>\r" +
-    "\n" +
-    "        </span>\r" +
-    "\n" +
-    "        <div class=\"tableWrapper\">\r" +
-    "\n" +
-    "            <table id=\"MAList_Table\">\r" +
-    "\n" +
-    "                <tr class=\"header\">\r" +
-    "\n" +
-    "                    <th></th>\r" +
-    "\n" +
-    "                    <th></th>\r" +
-    "\n" +
-    "                    <th>Property ID</th>\r" +
-    "\n" +
-    "                    <th>Class</th>\r" +
-    "\n" +
-    "                    <th>Buildings</th>\r" +
-    "\n" +
-    "                    <th>Nbhd</th>\r" +
-    "\n" +
-    "                    <th>Address</th>\r" +
-    "\n" +
-    "                    <th>Street</th>\r" +
-    "\n" +
-    "                    <th>City/Province</th>\r" +
-    "\n" +
-    "                    <th></th>\r" +
-    "\n" +
-    "                </tr>\r" +
-    "\n" +
-    "                <tr ng-repeat=\"property in $ctrl.filteredProperties | orderBy: order\">\r" +
-    "\n" +
-    "                    <td><i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i>{{property.markerLetter}}</td>\r" +
-    "\n" +
-    "                    <td ng-show=\"$ctrl.filter.WorkStatus=='unscheduled'\" ng-click=\"$ctrl.scheduleProperty(property); $ctrl.propertiesChanged()\">\r" +
-    "\n" +
-    "                        <span class=\"secondaryButton\">Schedule</span>\r" +
-    "\n" +
-    "                    </td>\r" +
-    "\n" +
-    "                    <td ng-show=\"$ctrl.filter.WorkStatus=='scheduled'\" ng-click=\"$ctrl.unscheduleProperty(property);$ctrl.propertiesChanged()\">\r" +
-    "\n" +
-    "                        <span class=\"secondaryButton\">Unschedule</span>\r" +
-    "\n" +
-    "                    </td>\r" +
-    "\n" +
-    "                    <td ng-show=\"$ctrl.filter.WorkStatus=='complete'\"></td>\r" +
-    "\n" +
-    "                    <td>{{property.Id}}</td>\r" +
-    "\n" +
-    "                    <td>{{property.Type.Dor_CD}}</td>\r" +
-    "\n" +
-    "                    <td>{{property.Buildings.length}}</td>\r" +
-    "\n" +
-    "                    <td>{{property.Details.CD}}</td>\r" +
-    "\n" +
-    "                    <td>{{property.Address.Address}}</td>\r" +
-    "\n" +
-    "                    <td>{{property.Address.FullStreet}}</td>\r" +
-    "\n" +
-    "                    <td>{{property.Address.City}}</td>\r" +
-    "\n" +
-    "                    <td ng-click=\"$ctrl.goToProperty(property.Id)\"><i class=\"fa fa-binoculars view\"></i></td>\r" +
-    "\n" +
-    "                </tr>\r" +
-    "\n" +
-    "            </table>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div> --></div>"
+    "<div id=\"properties\">{{title}}<div class=\"tabs\"><span ng-click=\"$ctrl.goToUnscheduled()\" ng-class=\"{selected: $ctrl.title == 'Unscheduled Properties'}\">Unscheduled </span><span ng-click=\"$ctrl.goToScheduled()\" ng-class=\"{selected: $ctrl.title == 'Scheduled Properties'}\">Scheduled </span><span ng-click=\"$ctrl.goToComplete()\" ng-class=\"{selected: $ctrl.title == 'Complete Properties'}\">Completed</span></div><div id=\"pageContent\"><ui-view></ui-view></div></div>"
   );
 
 
-  $templateCache.put('Properties/scheduled/scheduled.html',
-    "<div id=\"scheduledPropertiesPage\"><div ng-show=\"$ctrl.filteredPropertiesExist()\"><h2>You currently have no scheduled properties to view.</h2><p>To schedule a property, click below and select the properties you want to view.</p><button ng-click=\"$ctrl.goToUnscheduled()\">View Unscheduled properties</button></div><div class=\"sideColumn\"><scheduledpropertylist ng-if=\"$ctrl.showList\" properties=\"$ctrl.filteredProperties\" onpropertyselected=\"$ctrl.propertyselected(property)\" updatelocation=\"$ctrl.updatelocation(start, end)\"></scheduledpropertylist><scheduledproperty ng-if=\"!$ctrl.showList\" property=\"$ctrl.selectedProperty\" selectproperty=\"$ctrl.toList()\" back=\"$ctrl.tolist()\"></scheduledproperty></div><scheduledmap properties=\"$ctrl.filteredProperties\" start=\"$ctrl.start\" end=\"$ctrl.end\" directionscallback=\"$ctrl.directionscallback(routes)\"></scheduledmap></div>"
+  $templateCache.put('Properties/scheduled/list.html',
+    "<div><h2>Properties <span>{{$ctrl.properties.length}} / 21</span></h2><ul class=\"propertyList\"><li ng-repeat=\"property in $ctrl.properties | orderBy: 'order'\" ng-click=\"$ctrl.propertyClick(property)\"><article><header><div>{{property.markerLetter}}</div></header><span class=\"address\">{{property.Address.Address}}</span> <span>{{property.Buildings.length}} Buildings</span></article></li></ul></div>"
   );
 
 
-  $templateCache.put('Properties/scheduled/scheduled.list.html',
-    "<div><div class=\"location\"><div class=\"row\"><i class=\"fa fa-location-arrow\" aria-hidden=\"true\"></i> <input ng-model=\"$ctrl.start\" type=\"text\" placeholder=\"Choose start location\"></div><div class=\"row\"><i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i> <input ng-model=\"$ctrl.end\" type=\"text\" placeholder=\"Choose end location\"></div><button ng-click=\"$ctrl.locationChanged()\" class=\"update\">Re-Calculate</button></div>{{$ctr.properties}}<div><h2>Properties <span>{{$ctrl.filteredProperties.length}} / 21</span></h2><ul class=\"propertyList\"><li ng-repeat=\"property in $ctrl.properties | orderBy: 'order'\" ng-click=\"$ctrl.propertyClick(property)\"><article><header><div>{{property.markerLetter}}</div></header><span class=\"address\">{{property.Address.Address}}</span> <span>{{property.Buildings.length}} Buildings</span></article></li></ul></div></div>"
+  $templateCache.put('Properties/scheduled/location.html',
+    "<div class=\"location\"><div class=\"row\"><i class=\"fa fa-location-arrow\" aria-hidden=\"true\"></i> <input ng-model=\"$ctrl.start\" type=\"text\" placeholder=\"Choose start location\"></div><div class=\"row\"><i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i> <input ng-model=\"$ctrl.end\" type=\"text\" placeholder=\"Choose end location\"></div><button ng-click=\"$ctrl.locationChanged()\" class=\"update\">Re-Calculate</button></div>"
   );
 
 
-  $templateCache.put('Properties/scheduled/scheduled.map.html',
+  $templateCache.put('Properties/scheduled/map.html',
     "<div class=\"mapContainer\"><directions ng-if=\"$ctrl.propertiesExist()\" waypoints=\"$ctrl.waypoints\" directionscallback=\"$ctrl.directionscallback(routes)\" origin=\"$ctrl.origin\" destination=\"$ctrl.destination\" waypointoptimized=\"true\" travelmode=\"DRIVING\"></directions></div>"
   );
 
 
-  $templateCache.put('Properties/scheduled/scheduled.property.html',
+  $templateCache.put('Properties/scheduled/property.html',
     "<div class=\"selectedPropertyWrapper\">\r" +
     "\n" +
     "    <a href=\"#\" ng-click=\"$ctrl.back()\" class=\"back\">\r" +
@@ -242,12 +112,42 @@ angular.module('app').run(['$templateCache', function($templateCache) {
     "\n" +
     "    </div>\r" +
     "\n" +
+    "\r" +
+    "\n" +
+    "    <div>\r" +
+    "\n" +
+    "        <a href=\"#\" class=\"left button\" ng-click=\"$ctrl.onUnschedule()\">Unschedule</a>\r" +
+    "\n" +
+    "        <a href=\"#\" class=\"right button\" ng-click=\"$ctrl.onComplete()\">Complete</a>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
 
-  $templateCache.put('Properties/unscheduled.html',
-    "<ul><li ng-repeat=\"property in $ctrl.filteredProperties\">{{property.Id}} {{property.WorkStatus}}</li></ul>"
+  $templateCache.put('Properties/scheduled/scheduled.html',
+    "<div class=\"innerPropertiesPage\"><section ng-show=\"!$ctrl.scheduledProperties || $ctrl.scheduledProperties.length == 0\" class=\"noPropertiesMessage\"><h2>You currently have no scheduled properties to view.</h2><p>To schedule a property, click below and select the properties you want to view.</p><a href=\"#\" ng-click=\"$ctrl.goToUnscheduled()\">View Unscheduled properties</a></section><section ng-if=\"$ctrl.scheduledProperties && $ctrl.scheduledProperties.length > 0\"><div class=\"sideColumn\"><maporigindest updatelocation=\"$ctrl.updatelocation(start, end)\"></maporigindest><scheduledpropertylist ng-if=\"$ctrl.showList\" properties=\"$ctrl.scheduledProperties\" onpropertyselected=\"$ctrl.propertyselected(property)\"></scheduledpropertylist><scheduledproperty ng-if=\"!$ctrl.showList\" property=\"$ctrl.selectedProperty\" update=\"$ctrl.updatepropertylist()\" back=\"$ctrl.tolist()\"></scheduledproperty></div><scheduledmap properties=\"$ctrl.scheduledProperties\" start=\"$ctrl.start\" end=\"$ctrl.end\" directionscallback=\"$ctrl.directionscallback(routes)\"></scheduledmap></section></div>"
+  );
+
+
+  $templateCache.put('Properties/unscheduled/list.html',
+    "<h2>Properties <span>{{$ctrl.properties.length}} / 21</span></h2><ul class=\"propertyList\"><li ng-repeat=\"property in $ctrl.properties | orderBy: 'distance.duration.value' track by $index\" ng-click=\"$ctrl.propertyClick(property)\"><article><span class=\"address\">{{property.Address.Address}}</span> <span>{{property.Buildings.length}} Buildings</span><div class=\"distanceWrapper\"><span class=\"time\">{{property.distance.duration.text}}</span> <span class=\"distance\">{{property.distance.distance.text}}</span><div></div></div></article></li></ul>"
+  );
+
+
+  $templateCache.put('Properties/unscheduled/map.html',
+    "<div class=\"mapContainer\"><div id=\"map\"></div></div>"
+  );
+
+
+  $templateCache.put('Properties/unscheduled/property.html',
+    "<div class=\"selectedPropertyWrapper\"><a href=\"#\" ng-click=\"$ctrl.back()\" class=\"back\"><span><i class=\"fa fa-arrow-left\"></i> back</span> </a><span class=\"address\">{{$ctrl.property.Address.Address}}</span> <img src=\"{{$ctrl.propertyImages[0]}}\"><ul><li><label>Type</label><span>{{$ctrl.property.Type.Description}}</span></li><li><label>Buildings</label><span>{{$ctrl.property.Buildings.length}}</span></li><li><label>Owner</label><span>{{$ctrl.property.Owner.Name}}</span></li><li><label>Owner Address</label><span>{{$ctrl.property.Owner.AddressLine1}}</span> <span>{{$ctrl.property.Owner.City}}</span></li></ul><div><a href=\"https://www.google.com/maps/dir/current+location/{{$ctrl.property.Address.Address}}\" class=\"left button\" target=\"_blank\">Directions</a> <a href=\"#\" class=\"left button\" ng-click=\"$ctrl.onSchedule()\">Schedule</a></div></div>"
+  );
+
+
+  $templateCache.put('Properties/unscheduled/unscheduled.html',
+    "<div class=\"innerPropertiesPage\"><section ng-show=\"!$ctrl.unscheduledProperties || $ctrl.unscheduledProperties.length == 0\" class=\"noPropertiesMessage\"><h2>You currently have no unscheduled properties to view.</h2><p>Please ensure you have an internet connection to upload the latest list.</p><p>If no properties appear then please contact your manager</p></section><section ng-if=\"$ctrl.unscheduledProperties && $ctrl.unscheduledProperties.length > 0\"><div class=\"sideColumn\"><unscheduledpropertylist ng-if=\"$ctrl.unscheduledProperties && $ctrl.unscheduledProperties.length > 0 && $ctrl.showList\" properties=\"$ctrl.unscheduledProperties\" onpropertyselected=\"$ctrl.propertyselected(index)\"></unscheduledpropertylist><unscheduledproperty ng-if=\"!$ctrl.showList\" property=\"$ctrl.selectedProperty\" update=\"$ctrl.updatepropertylist()\" back=\"$ctrl.tolist()\"></unscheduledproperty></div><unscheduledmap ng-if=\"$ctrl.unscheduledProperties && $ctrl.unscheduledProperties.length > 0\" properties=\"$ctrl.unscheduledProperties\" selectedpropertyindex=\"$ctrl.selectedIndex\" propertyselected=\"$ctrl.propertyselected(index)\"></unscheduledmap></section></div>"
   );
 
 

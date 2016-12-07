@@ -1,0 +1,175 @@
+@import (once) '../../base.less';
+@import (once) '../../elements.less';
+#pageContent {
+    height: 100%;
+    //margin-bottom: 50px;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 89px;
+}
+
+
+
+section {
+    height: 100%;
+}
+
+#properties {
+    height: 100%;
+
+    .innerPropertiesPage {
+        height: 100%;
+    }
+
+    .tabs {
+        overflow: hidden;
+        width: 100%;
+        border-bottom: 1px solid @lightGrey;
+        span {
+            max-width: 200px;
+            padding: 10px 20px;
+            color: @green;
+            display: block;
+            float: left;
+            font-weight: bold;
+            &.selected {
+                background-color: @green;
+                color: #fff;
+            }
+        }
+        span+span {
+            border-left: 1px solid @lightGrey;
+        }
+         :last-child {
+            border-right: 1px solid @lightGrey;
+        }
+    }
+    .pageWrapper {
+        max-width: 1043px;
+        margin: 35px auto 0 auto;
+    }
+    
+    .noPropertiesMessage {
+        text-align: center;
+        margin-top: 5%;
+
+        a {
+            margin: 10px auto;
+            text-decoration: none;
+            background-color: @green;
+            color:#fff;
+            padding: 15px 20px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+    }
+
+    .sideColumn {
+            float: left;
+            width: 350px;
+            height: 100%;
+            border-right: 1px solid @lightGrey;
+            
+            h2 {
+                margin: 20px 10px 10px 10px;
+                color: @green;
+                border-bottom: 1px solid @lightGrey;
+            }
+    }
+
+    .mapContainer {
+        margin-left: 250px;
+        overflow: hidden;
+        height: 100%;
+    }
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+
+    .propertyList {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            padding: 0;
+            margin: 10px;
+            border-bottom: 1px solid @lightGrey;
+            padding-bottom: 10px;
+            overflow: hidden;
+        }
+        article {
+            overflow: hidden;
+            position: relative;
+        }
+    }
+
+    .selectedPropertyWrapper {
+        padding: 10px;
+
+        .back {
+            color: @green;
+            display: block;
+        }
+        .address {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 20px 0 10px;
+            display: block;
+        }
+        img {
+            width: 100%;
+        }
+
+        label {
+            width: 30%;
+            display: block;
+            float:left;
+            text-align: right;
+            padding-right: 10px;
+            font-weight: bold;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        li {
+            padding: 10px 0;
+            overflow:hidden;   
+
+            span {
+                display:block;
+                float:left;
+                width: 70%;
+                border-left:1px solid @lightGrey;
+                padding-left: 10px;
+            }
+        }
+
+        .button {
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: @green;
+            color: #fff;
+            padding: 5px 0;
+            border-radius: 5px;
+            width: 40%;
+            display:block;
+            text-align: center;
+
+            &.left {
+                float:left;
+                margin-left: 5%;
+            }
+
+            &.right {
+                float:right;
+                margin-right: 5%;
+            }
+        }
+    }
+}

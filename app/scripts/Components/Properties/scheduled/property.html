@@ -28,4 +28,9 @@
         <a href="https://www.google.com/maps/dir/current+location/{{$ctrl.property.Address.Address}}" class="left button" target="_blank">Directions</a>
         <a href="#" class="right button" ng-click="$ctrl.goToProperty($ctrl.property.Id)">View Property</a>
     </div>
+
+    <div>
+        <a href="#" class="left button" ng-click="$ctrl.onUnschedule()">Unschedule</a>
+        <a href="#" class="right button" ng-click="$ctrl.onComplete()">Complete</a>
+    </div>
 </div>
