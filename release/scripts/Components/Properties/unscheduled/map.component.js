@@ -11,7 +11,7 @@ components.component('unscheduledmap', {
     controller: ['$q','$rootScope', 'locationService', function($q, $rootScope, locationService) {
         var vm = this;
         vm.markers = [];
-        var defaultZoom = 14;
+        var defaultZoom = 13;
 
         vm.$postLink = function() {
             vm.map = new google.maps.Map(document.getElementById('map'), {

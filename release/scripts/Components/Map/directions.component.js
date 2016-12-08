@@ -5,17 +5,28 @@ components.component('directions',
     bindings: {
         'waypoints': '<',
         'directionscallback': '&',
-        'map': '<',
         'origin': '<',
         'destination': '<',
         'waypointoptimized': '<',
         'travelmode': '<'
     },
+    template: '<div id="map"></div>',
     controller: ['$q', function ($q) {
    	 	var vm = this;
 
+        vm.$onInit= function() {
+            vm.map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: {lat: 40.771, lng: -73.974}
+            });
+
+            vm.directionsDisplay = new google.maps.DirectionsRenderer;
+            vm.directionService = new google.maps.DirectionsService;
+            vm.directionsDisplay.setMap(vm.map);
+        };
+
         var calculateAndDisplayRoute = function() {
-          if(vm.map && vm.waypoints && vm.origin && vm.destination){
+          if(vm.map && vm.waypoints && vm.origin && vm.destination) {
               return getRoute()
                 .then(drawRoute)
                 .then(updateDirectionsCallback);
@@ -75,11 +86,5 @@ components.component('directions',
         vm.$onChanges = function(changes){
             calculateAndDisplayRoute();
         };
-
-        vm.$onInit = function() {
-	        vm.directionsDisplay = new google.maps.DirectionsRenderer;
-	        vm.directionService = new google.maps.DirectionsService;
-    		vm.directionsDisplay.setMap(vm.map);
-        }
     }]
 });

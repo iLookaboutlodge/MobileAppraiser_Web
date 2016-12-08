@@ -127,7 +127,7 @@ angular.module('app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('Properties/scheduled/scheduled.html',
-    "<div class=\"innerPropertiesPage\"><section ng-show=\"!$ctrl.scheduledProperties || $ctrl.scheduledProperties.length == 0\" class=\"noPropertiesMessage\"><h2>You currently have no scheduled properties to view.</h2><p>To schedule a property, click below and select the properties you want to view.</p><a href=\"#\" ng-click=\"$ctrl.goToUnscheduled()\">View Unscheduled properties</a></section><section ng-if=\"$ctrl.scheduledProperties && $ctrl.scheduledProperties.length > 0\"><div class=\"sideColumn\"><maporigindest updatelocation=\"$ctrl.updatelocation(start, end)\"></maporigindest><scheduledpropertylist ng-if=\"$ctrl.showList\" properties=\"$ctrl.scheduledProperties\" onpropertyselected=\"$ctrl.propertyselected(property)\"></scheduledpropertylist><scheduledproperty ng-if=\"!$ctrl.showList\" property=\"$ctrl.selectedProperty\" update=\"$ctrl.updatepropertylist()\" back=\"$ctrl.tolist()\"></scheduledproperty></div><scheduledmap properties=\"$ctrl.scheduledProperties\" start=\"$ctrl.start\" end=\"$ctrl.end\" directionscallback=\"$ctrl.directionscallback(routes)\"></scheduledmap></section></div>"
+    "<div class=\"innerPropertiesPage\"><section ng-show=\"!$ctrl.scheduledProperties || $ctrl.scheduledProperties.length == 0\" class=\"noPropertiesMessage\"><h2>You currently have no scheduled properties to view.</h2><p>To schedule a property, click below and select the properties you want to view.</p><a href=\"#\" ng-click=\"$ctrl.goToUnscheduled()\">View Unscheduled properties</a></section><section ng-if=\"$ctrl.scheduledProperties && $ctrl.scheduledProperties.length > 0\"><div class=\"sideColumn\"><maporigindest ng-if=\"$ctrl.showList\" updatelocation=\"$ctrl.updatelocation(start, end)\"></maporigindest><scheduledpropertylist ng-if=\"$ctrl.showList\" properties=\"$ctrl.scheduledProperties\" onpropertyselected=\"$ctrl.propertyselected(property)\"></scheduledpropertylist><scheduledproperty ng-if=\"!$ctrl.showList\" property=\"$ctrl.selectedProperty\" update=\"$ctrl.updatepropertylist()\" back=\"$ctrl.tolist()\"></scheduledproperty></div><scheduledmap properties=\"$ctrl.scheduledProperties\" start=\"$ctrl.start\" end=\"$ctrl.end\" directionscallback=\"$ctrl.directionscallback(routes)\"></scheduledmap></section></div>"
   );
 
 
@@ -137,7 +137,15 @@ angular.module('app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('Properties/unscheduled/map.html',
-    "<div class=\"mapContainer\"><div id=\"map\"></div></div>"
+    "<div class=\"mapContainer\"><div id=\"map\"></div><!--<markers\r" +
+    "\n" +
+    "        zoom=\"$ctrl.zoom\"\r" +
+    "\n" +
+    "        center=\"$ctrl.center\"\r" +
+    "\n" +
+    "        markers=\"$ctrl.markers\">    \r" +
+    "\n" +
+    "    </markers>--></div>"
   );
 
 

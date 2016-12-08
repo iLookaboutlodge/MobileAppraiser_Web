@@ -9,7 +9,7 @@ loginComponent.component('login',
 
         vm.login = function() {
             authUtility.SetCredentials('simon', 'password');
-            $state.go('properties');
+            $state.go('properties.unscheduled');
         };
     }]
 });

@@ -7,23 +7,11 @@ components.component('mapcomponent',
         'properties': '<',
         'directionscallback': '&'
     },
-    controller: ['$scope', '$state', '$window', '$q', '$filter', function ($scope, $state, $window, $q, $filter) {
+    controller: ['$scope', '$state', '$window', '$q', '$filter','locationService', function ($scope, $state, $window, $q, $filter, locationService) {
         var vm = this;
         vm.markers = [];
         var defaultLocation = "Toronto";
 
-        var getCurrentPosition = function() {
-            var deferred = $q.defer();
-            if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(deferred.resolve, deferred.reject, {timeout: 5000});
-            }
-            else {
-                deferred.reject("browser does not support geo location");
-            }
-
-            return deferred.promise;
-        };
-        
         var getWaypoint = function(property) {
             var deferred = $q.defer();
             deferred.resolve({ location: property.Address.Address, stopover: true});
@@ -59,7 +47,7 @@ components.component('mapcomponent',
                 deferred.resolve(location);
             }
             else {
-                getCurrentPosition().then(
+                locationService.getCurrentGeoLocation().then(
                     function(currentLocation){
                         deferred.resolve(currentLocation.coords.latitude + "," + currentLocation.coords.longitude);
                     },
