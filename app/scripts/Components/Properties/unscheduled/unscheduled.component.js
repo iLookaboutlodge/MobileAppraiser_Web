@@ -21,9 +21,6 @@ components.component('unscheduled',
         };
 
 		vm.propertyselected = function(index) {
-            console.log('properties', vm.properties);
-
-            console.log('index', index);
             vm.showList = false;
             vm.selectedProperty = vm.unscheduledProperties[index];
             vm.selectedIndex = index;
@@ -36,7 +33,6 @@ components.component('unscheduled',
         };
 
         var setProperties = function(properties){
-            console.log(properties);
             vm.unscheduledProperties = properties;
         };
 

@@ -10,46 +10,55 @@ components.component('markers',
     template: '<div id="map"></div>',
     controller: ['$q', function ($q) {
    	 	var vm = this;
-        vm.markers = [];
-            
+        vm.mapMarkers = [];
+
         vm.$postLink = function() {
             vm.map = new google.maps.Map(document.getElementById('map'), {
-                zoom: vm.defaultZoom,
+                zoom: vm.zoom,
                 center: vm.center
             });
         };
 
         vm.$onChanges = function(changes) {
-            if(changes.markers){
-                //remove all markers from map
-                setMarkersMap(vm.markers, null);
-                vm.markers = [];
-
-                //add markers to map
-                setMarkerMap(vm.markers, vm.map);
-                vm.map.fitBounds(getBounds(vm.markers));
-
-                //set default zoom for 1 marker
-                if(vm.markers.length == 1){
-                    vm.map.setZoom(defaultZoom);
-                }
+            if(changes.markers && vm.map){
+                clearCurrentMarkers(vm.mapMarkers);
+                //clone markers - needs to be done as previous markers need to be removed
+                vm.mapMarkers =  vm.markers.slice();
+                addMarkersToMap(vm.mapMarkers);                
             }
 
-            if(changes.center) {
-                vm.map.setCenter(center);
+            if(changes.center && vm.map) {
+                vm.map.setCenter(vm.center);
             }
 
-            if(changes) {
-                vm.map.setZoom(zoom);
+            if(changes.zoom && vm.map) {
+                vm.map.setZoom(vm.zoom);
             }
         };
 
         var setMarkersMap = function(markers, map) {
             for(var i =0; i < markers.length; i++) {
                 markers[i].setMap(map);
-                markers[i] = null;
             }
         }
+
+        var clearCurrentMarkers = function(markers){
+            setMarkersMap(markers, null);
+
+            for(var i=0; i < markers.length; i++){
+                markers[i] = null;
+            }
+        };
+
+        var addMarkersToMap = function(markers) {
+            setMarkersMap(vm.markers, vm.map);
+            vm.map.fitBounds(getBounds(markers));
+
+            //set default zoom for 1 marker
+            if(markers.length == 1){
+                vm.map.setZoom(vm.zoom);
+            }
+        };
 
         var getBounds = function(markers){
             var bounds = new google.maps.LatLngBounds();

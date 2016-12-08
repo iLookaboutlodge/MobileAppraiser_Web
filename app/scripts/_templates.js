@@ -137,15 +137,9 @@ angular.module('app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('Properties/unscheduled/map.html',
-    "<div class=\"mapContainer\"><div id=\"map\"></div><!--<markers\r" +
+    "<div class=\"mapContainer\"><!--<div id=\"map\">\r" +
     "\n" +
-    "        zoom=\"$ctrl.zoom\"\r" +
-    "\n" +
-    "        center=\"$ctrl.center\"\r" +
-    "\n" +
-    "        markers=\"$ctrl.markers\">    \r" +
-    "\n" +
-    "    </markers>--></div>"
+    "    </div>--><markers zoom=\"$ctrl.zoom\" center=\"$ctrl.center\" markers=\"$ctrl.markers\"></markers></div>"
   );
 
 
