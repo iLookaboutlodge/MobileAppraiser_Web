@@ -1,3 +1,5 @@
+<loading ng-if="$ctrl.loading == true"></loading>
+
 <div class="innerPropertiesPage">
     <section ng-show="!$ctrl.scheduledProperties || $ctrl.scheduledProperties.length == 0" class="noPropertiesMessage">
         <h2>You currently have no scheduled properties to view.</h2>
@@ -14,7 +16,7 @@
             <scheduledpropertylist
                 ng-if="$ctrl.showList"
                 properties="$ctrl.scheduledProperties"
-                onpropertyselected="$ctrl.propertyselected(property)">
+                onpropertyselected="$ctrl.propertyselected(index)">
             </scheduledpropertylist>
 
             <scheduledproperty
@@ -28,7 +30,9 @@
             properties='$ctrl.scheduledProperties'
             start='$ctrl.start'
             end='$ctrl.end'
-            directionscallback='$ctrl.directionscallback(routes)'>
+            directionscallback='$ctrl.directionscallback(routes)'
+            onpropertyselected='$ctrl.propertyselected(index)'
+            selectedpropertyindex='$ctrl.selectedIndex'>
         </scheduledmap>
     </section>
 </div>

@@ -15,15 +15,12 @@ components.component('unscheduled',
         };
 
 		vm.updatepropertylist = function(){
+            vm.loading = true;
              return propertyService.getUnscheduledProperties()
-                .then(setProperties)
-                .then(setPropertyDistances)
+                .then(setPropertyDistances);
         };
 
 		vm.propertyselected = function(index) {
-            console.log('properties', vm.properties);
-
-            console.log('index', index);
             vm.showList = false;
             vm.selectedProperty = vm.unscheduledProperties[index];
             vm.selectedIndex = index;
@@ -35,19 +32,13 @@ components.component('unscheduled',
             vm.selectedIndex = null;
         };
 
-        var setProperties = function(properties){
-            console.log(properties);
-            vm.unscheduledProperties = properties;
-        };
-
-        var setPropertyDistances = function(){
-            locationService.updatePropertyDistances(vm.unscheduledProperties).then(
-                function(properties){
-                    vm.unscheduledProperties = properties;
+        var setPropertyDistances = function(properties){
+            return locationService.updatePropertyDistances(properties).then(
+                function(orderedproperties){
+                    vm.unscheduledProperties = orderedproperties;
+                    vm.loading = false;
                 }
             );
         };
-
-
 	}]
 });

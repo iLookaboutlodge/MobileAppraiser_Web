@@ -18,6 +18,14 @@ components.component('scheduledproperty', {
             }
         };
 
+        vm.$onChanges = function(changes){
+            if(changes.property){
+                imageService.getImagesForProperty(vm.property.Id).then(function(images) {
+                    vm.propertyImages = images;
+                });
+            }
+        }
+
         vm.goToProperty = function(propertyId) {
             $state.go("property", { id: propertyId });
         };

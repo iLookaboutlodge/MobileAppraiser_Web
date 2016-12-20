@@ -5,34 +5,51 @@ components.component('markers',
     bindings: {
         'markers': '<',
         'center': '<',
-        'zoom': '<'
+        'zoom': '<',
+        'route': '<'
     },
     template: '<div id="map"></div>',
-    controller: ['$q', function ($q) {
+    controller: ['$q', '$scope', function ($q, $scope) {
    	 	var vm = this;
         vm.mapMarkers = [];
 
-        vm.$postLink = function() {
-            vm.map = new google.maps.Map(document.getElementById('map'), {
-                zoom: vm.zoom,
-                center: vm.center
-            });
+        $scope.$on('resetView', function(e, data){
+            vm.setBounds(vm.mapMarkers);
+        });
+
+        vm.$onInit = function(){
+            if(vm.mapMarkers.length > 0){
+                vm.setBounds(vm.mapMarkers);
+            }
         };
 
-        vm.$onChanges = function(changes) {
-            if(changes.markers && vm.map){
+        vm.$onChanges = function(changes) {          
+
+            if(!vm.map){
+                vm.map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: vm.zoom,
+                    center: vm.center
+                });
+            }
+
+            if(changes.markers && vm.markers){
                 clearCurrentMarkers(vm.mapMarkers);
                 //clone markers - needs to be done as previous markers need to be removed
                 vm.mapMarkers =  vm.markers.slice();
-                addMarkersToMap(vm.mapMarkers);                
+                addMarkersToMap(vm.mapMarkers);              
             }
 
-            if(changes.center && vm.map) {
+            if(changes.center && vm.center) {
                 vm.map.setCenter(vm.center);
             }
 
-            if(changes.zoom && vm.map) {
+            if(changes.zoom && vm.zoom) {
+                console.log('changing zoom', vm.zoom);
                 vm.map.setZoom(vm.zoom);
+            }
+
+            if(changes.route && vm.route){
+                renderDirectionsPolylines(vm.route, vm.map);
             }
         };
 
@@ -51,13 +68,17 @@ components.component('markers',
         };
 
         var addMarkersToMap = function(markers) {
-            setMarkersMap(vm.markers, vm.map);
-            vm.map.fitBounds(getBounds(markers));
+            setMarkersMap(markers, vm.map);
+            vm.setBounds(markers);
 
             //set default zoom for 1 marker
             if(markers.length == 1){
                 vm.map.setZoom(vm.zoom);
             }
+        };
+
+        vm.setBounds = function(markers){
+            vm.map.fitBounds(getBounds(markers));
         };
 
         var getBounds = function(markers){
@@ -69,5 +90,32 @@ components.component('markers',
 
             return bounds;
         };
+
+        var polylineOptions = {
+            strokeColor: '#2A7665',
+            strokeOpacity: 1,
+            strokeWeight: 5
+        };
+
+        var polylines = [];
+
+        var renderDirectionsPolylines = function(response, map) {
+            for (var i=0; i<polylines.length; i++) {
+                polylines[i].setMap(null);
+            }
+            var legs = response.routes[0].legs;
+            for (i = 0; i < legs.length; i++) {
+                var steps = legs[i].steps;
+                for (j = 0; j < steps.length; j++) {
+                    var nextSegment = steps[j].path;
+                    var stepPolyline = new google.maps.Polyline(polylineOptions);
+                    for (k = 0; k < nextSegment.length; k++) {
+                        stepPolyline.getPath().push(nextSegment[k]);
+                    }
+                    stepPolyline.setMap(map);
+                    polylines.push(stepPolyline);
+                }
+            }
+        }
     }]
 });

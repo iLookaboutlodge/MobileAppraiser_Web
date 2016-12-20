@@ -15,9 +15,9 @@ components.component('unscheduled',
         };
 
 		vm.updatepropertylist = function(){
+            vm.loading = true;
              return propertyService.getUnscheduledProperties()
-                .then(setProperties)
-                .then(setPropertyDistances)
+                .then(setPropertyDistances);
         };
 
 		vm.propertyselected = function(index) {
@@ -32,18 +32,16 @@ components.component('unscheduled',
             vm.selectedIndex = null;
         };
 
-        var setProperties = function(properties){
-            vm.unscheduledProperties = properties;
-        };
-
-        var setPropertyDistances = function(){
-            locationService.updatePropertyDistances(vm.unscheduledProperties).then(
-                function(properties){
-                    vm.unscheduledProperties = properties;
+        var setPropertyDistances = function(properties){
+            return locationService.updatePropertyDistances(properties).then(
+                function(orderedproperties){
+                    vm.unscheduledProperties = orderedproperties;
+                    vm.loading = false;
+                },
+                function(){
+                    vm.loading = false;
                 }
             );
         };
-
-
 	}]
 });

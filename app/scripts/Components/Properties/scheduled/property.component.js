@@ -18,6 +18,14 @@ components.component('scheduledproperty', {
             }
         };
 
+        vm.$onChanges = function(changes){
+            if(changes.property){
+                imageService.getImagesForProperty(vm.property.Id).then(function(images) {
+                    vm.propertyImages = images;
+                });
+            }
+        }
+
         vm.goToProperty = function(propertyId) {
             $state.go("property", { id: propertyId });
         };
@@ -25,13 +33,13 @@ components.component('scheduledproperty', {
         vm.onComplete = function(){
             propertyService.completeProperty(vm.property)
                 .then(vm.update())
-                .then(vm.back());
+                .then(vm.back({listUpdated:true}));
         };
 
         vm.onUnschedule = function() {
             propertyService.unScheduleProperty(vm.property)
                 .then(vm.update())
-                .then(vm.back());
+                .then(vm.back({listUpdated:true}));
         };
     }]
 });

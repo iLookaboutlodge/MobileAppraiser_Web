@@ -8,7 +8,7 @@ components.component('unscheduledmap', {
         'propertyselected': '&'
     },
     templateUrl: 'Properties/unscheduled/map.html',
-    controller: ['$q','$rootScope', 'locationService', function($q, $rootScope, locationService) {
+    controller: ['$q','$rootScope', '$scope', 'locationService', function($q, $rootScope, $scope, locationService) {
         var vm = this;
         vm.markers = [];
         vm.zoom = 14;
@@ -22,11 +22,15 @@ components.component('unscheduledmap', {
             }
             
             if(changes.selectedpropertyindex && vm.markers) {
+                console.log('selectedpropertyindex', vm.selectedpropertyindex);
                 disableBounce(vm.markers);
 
                 if(vm.selectedpropertyindex != null && vm.selectedpropertyindex >= 0){
                     google.maps.event.trigger(vm.markers[vm.selectedpropertyindex], 'click');
                     vm.center = vm.markers[vm.selectedpropertyindex].getPosition();
+                }
+                else {
+                   $scope.$broadcast('resetView');
                 }
             }
         };

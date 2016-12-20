@@ -15,7 +15,6 @@ components.component('unscheduledpropertylist', {
 
          vm.propertyClick = function(property) {
              var index = vm.properties.indexOf(property);
-             console.log('index', index);
              vm.onpropertyselected({index: index});
          };
     }]

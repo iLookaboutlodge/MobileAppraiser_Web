@@ -14,8 +14,8 @@ components.component('scheduledpropertylist', {
              vm.updatelocation({start:vm.start, end:vm.end});
          };
 
-         vm.propertyClick = function(property) {
-             vm.onpropertyselected({property: property});
+         vm.propertyClick = function(index) {
+             vm.onpropertyselected({index: index});
          };
     }]
 });
